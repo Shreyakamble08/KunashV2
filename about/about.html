@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="../about/about.css" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=DM+Serif+Text:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <style>
+        * {
+            font-family: "Inter", sans-serif;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        alan: ['"Alan Sans"', "sans-serif"],
+                        dmserif: ['"DM Serif Text"', "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                        notoSans: ['"Noto Sans"', "sans-serif"],
+                        notoSerif: ['"Noto Serif"', "serif"],
+                        poiret: ['"Poiret One"', "cursive"],
+                        quicksand: ["Quicksand", "sans-serif"],
+                        raleway: ["Raleway", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="bg-black text-white">
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <!-- HERO CONTENT -->
+    <section class="relative min-h-[98vh] flex items-center justify-center overflow-hidden about-banner">
+
+        <!-- Background Image -->
+        <div class="absolute inset-0 overflow-hidden">
+            <img src="../images/bannerabout.jfif" alt="About Company" class="w-full h-full object-cover banner-bg">
+        </div>
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/65"></div>
+
+        <!-- Soft Orange Glow -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] 
+                bg-orange-500/20 blur-[140px] rounded-full pointer-events-none glow-animate">
+        </div>
+
+        <!-- CONTENT -->
+        <div class="relative text-center text-white px-6 max-w-4xl mx-auto">
+
+            <!-- Small Top Label -->
+            <p class="text-orange-400 tracking-widest text-sm mb-6 reveal">
+                ABOUT COMPANY
+            </p>
+
+            <!-- Main Heading -->
+            <h1 class="text-5xl md:text-7xl font-quicksand font-light leading-tight reveal delay-1">
+                About <span class="text-orange-400 font-medium font-raleway">Us</span>
+            </h1>
+
+            <!-- Tagline -->
+            <p
+                class="mt-8 max-w-2xl mx-auto text-gray-300 text-lg md:text-xl font-light leading-relaxed reveal delay-2">
+                We craft innovative digital experiences that empower businesses,
+                elevate brands, and drive sustainable growth in the modern world.
+            </p>
+
+            <!-- Button -->
+            <div class="mt-10 reveal delay-3">
+                <a href="#about"
+                    class="inline-flex items-center gap-2 border border-white/40 text-white px-8 py-3 rounded-full text-sm font-light hover:border-orange-400 hover:text-orange-400 transition-all duration-300">
+                    Learn More →
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GLOBAL FIXED BACKGROUND -->
+    <div class="fixed top-0 left-0 w-full h-full -z-10">
+        <!-- Background Image -->
+        <img src="../images/aboutbg.jfif" alt="Background" class="w-full h-full object-cover" />
+
+        <!-- Optional Overlay -->
+        <div class="absolute inset-0 bg-black/60"></div>
+    </div>
+
+
+
+    <!-- SECTION 2 — ABOUT -->
+    <section class="relative text-white py-12 px-6 overflow-hidden" id="about">
+
+        <!-- Soft Orange Glow -->
+        <div
+            class="absolute right-0 top-0 w-[400px] h-[400px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none">
+        </div>
+
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+
+            <!-- LEFT CONTENT -->
+            <div>
+                <p class="text-orange-400 tracking-widest text-sm mb-4 flex items-center gap-2">
+                    <span class="text-2xl font-bold leading-none">*</span>
+                    <span class="leading-none">OUR STORY</span>
+                </p>
+
+                <h2 class="text-4xl lg:text-5xl font-light font-quicksand leading-tight">
+                    <span class="text-orange-400 font-raleway font-medium">
+                        Creativity Meets Technology
+                    </span>
+                </h2>
+
+                <p class="text-gray-300 mt-4 font-light">
+                    Born from a shared passion for creativity and technology, we grew from a
+                    small team of visionary digital experts into a dynamic agency helping
+                    brands thrive in the digital world.
+                </p>
+
+                <p class="text-gray-300 mt-2 font-light">
+                    Guided by innovation, integrity, and a client-first approach, we deliver
+                    marketing solutions that resonate. Your success is our story and we’re
+                    just getting started.
+                </p>
+
+                <!-- CTA -->
+                <div class="flex items-center gap-4 mt-8">
+                    <button
+                        class="border border-white/20 px-6 py-3 rounded-full hover:border-orange-400 hover:text-orange-400 transition backdrop-blur-sm">
+                        Contact Us
+                    </button>
+
+                    <button
+                        class="w-12 h-12 rounded-full bg-orange-500 text-white flex items-center justify-center text-lg hover:scale-110 transition">
+                        ↗
+                    </button>
+                </div>
+            </div>
+
+            <!-- RIGHT IMAGE -->
+            <div class="relative w-full h-[300px] sm:h-[380px] lg:h-[420px]">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978" alt="Creative team working"
+                    class="w-full h-full object-cover rounded-3xl shadow-xl">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- WRAPPER FOR BOTH SECTIONS -->
+    <div class="relative overflow-hidden">
+
+        <!-- Rotating Shape -->
+        <img src="../images/shape-2.png" class="absolute 
+       right-[-120px] lg:right-[-150px] 
+       top-[260px] lg:top-[340px] 
+       w-[200px] sm:w-[320px] lg:w-[520px]
+       opacity-[0.20]
+       animate-spin-slow
+       pointer-events-none
+       select-none
+       -z-10">
+
+        <!-- ================= MISSION & VISION ================= -->
+        <section class="pt-16 pb-20 px-6 relative z-10">
+
+            <div class="max-w-6xl mx-auto text-white">
+
+                <!-- Heading -->
+                <div class="mb-12 md:mb-16">
+                    <p class="text-orange-400 text-xs sm:text-sm tracking-widest mb-3">
+                        OUR PURPOSE
+                    </p>
+
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light">
+                        Mission & <span class="text-orange-400 font-medium">Vision</span>
+                    </h2>
+                </div>
+
+                <!-- Content -->
+                <div class="grid md:grid-cols-2 gap-10 md:gap-16 relative">
+
+                    <!-- Vertical Divider (desktop only) -->
+                    <div class="hidden md:block absolute left-1/2 top-0 h-full w-px bg-white/10"></div>
+
+                    <!-- Mission -->
+                    <div class="md:pr-12 group">
+
+                        <span class="text-orange-400 text-xs tracking-widest">01</span>
+
+                        <div class="flex items-center gap-3 mt-3 mb-4">
+                            <i class="fa-regular fa-paper-plane text-orange-400 text-xl"></i>
+
+                            <h3 class="text-xl sm:text-2xl font-medium group-hover:text-orange-400 transition">
+                                Our Mission
+                            </h3>
+                        </div>
+
+                        <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                            Our objective is to provide cutting-edge digital solutions that enable businesses to reach
+                            their objectives. By comprehending the unique requirements of each client and developing
+                            customized strategies, we concentrate on generating quantifiable outcomes while fostering
+                            enduring partnerships based on transparency, collaboration, and excellence.
+                        </p>
+
+                    </div>
+
+                    <!-- Vision -->
+                    <div class="md:pl-12 group">
+
+                        <span class="text-orange-400 text-xs tracking-widest">02</span>
+
+                        <div class="flex items-center gap-3 mt-3 mb-4">
+                            <i class="fa-regular fa-eye text-orange-400 text-xl"></i>
+
+                            <h3 class="text-xl sm:text-2xl font-medium group-hover:text-orange-400 transition">
+                                Our Vision
+                            </h3>
+                        </div>
+
+                        <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                            Our vision is to reshape the digital landscape by delivering forward-thinking solutions that
+                            strengthen the connection between brands and their audiences. We aim to drive meaningful
+                            digital transformation through innovation, creativity, and a user-centric approach, setting
+                            new standards for impactful and engaging digital experiences.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SERVICES & BENEFITS ================= -->
+        <section class="pt-8 pb-16 sm:pt-10 sm:pb-20 lg:pt-12 lg:pb-24 px-6 relative z-10">
+            <div class="max-w-7xl mx-auto text-white">
+
+                <!-- Heading Row -->
+                <div class="grid lg:grid-cols-2 gap-10 mb-12 lg:mb-16 items-center">
+
+                    <div>
+                        <p class="text-orange-400 text-xs sm:text-sm tracking-widest mb-4 flex items-center gap-2">
+                            <span class="text-lg">*</span> OUR BENEFITS
+                        </p>
+
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light leading-tight">
+                            Driving growth innovative <br>
+                            software <span class="text-orange-400 font-medium">solutions</span>
+                        </h2>
+                    </div>
+
+                    <p class="text-gray-300 max-w-xl text-sm sm:text-base leading-relaxed">
+                        Our innovative software solutions are designed to accelerate business
+                        growth, improve operational efficiency, and deliver measurable digital impact.
+                    </p>
+
+                </div>
+
+
+                <!-- Cards Wrapper -->
+                <div class="max-w-5xl mx-auto mt-12">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                        <!-- Card 1 -->
+                        <div
+                            class="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur-md hover:border-orange-400/60 transition text-center">
+                            <i class="fa-solid fa-gears text-orange-400 text-2xl mb-3"></i>
+                            <h3 class="text-base font-medium">Operational Efficiency</h3>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div
+                            class="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur-md hover:border-orange-400/60 transition text-center">
+                            <i class="fa-regular fa-lightbulb text-orange-400 text-2xl mb-3"></i>
+                            <h3 class="text-base font-medium">Technology Innovation</h3>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div
+                            class="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur-md hover:border-orange-400/60 transition text-center">
+                            <i class="fa-solid fa-chart-line text-orange-400 text-2xl mb-3"></i>
+                            <h3 class="text-base font-medium">Increased Business</h3>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div
+                            class="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur-md hover:border-orange-400/60 transition text-center">
+                            <i class="fa-regular fa-user text-orange-400 text-2xl mb-3"></i>
+                            <h3 class="text-base font-medium">Effective Solutions</h3>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div
+                            class="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur-md hover:border-orange-400/60 transition text-center">
+                            <i class="fa-regular fa-floppy-disk text-orange-400 text-2xl mb-3"></i>
+                            <h3 class="text-base font-medium">System Integration</h3>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div
+                            class="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur-md hover:border-orange-400/60 transition text-center">
+                            <i class="fa-solid fa-layer-group text-orange-400 text-2xl mb-3"></i>
+                            <h3 class="text-base font-medium">Innovative Technology</h3>
+                        </div>
+
+                        <!-- Card 7 -->
+                        <div
+                            class="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur-md hover:border-orange-400/60 transition text-center">
+                            <i class="fa-solid fa-chart-pie text-orange-400 text-2xl mb-3"></i>
+                            <h3 class="text-base font-medium">Real-Time Analytics</h3>
+                        </div>
+
+                        <!-- Card 8 -->
+                        <div
+                            class="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur-md hover:border-orange-400/60 transition text-center">
+                            <i class="fa-solid fa-database text-orange-400 text-2xl mb-3"></i>
+                            <h3 class="text-base font-medium">User Experience</h3>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= FEATURE HIGHLIGHT ================= -->
+    <section class="py-12 sm:py-16 lg:py-20 px-6 -mt-10 sm:-mt-14 relative z-10">
+        <!-- ORANGE GLOW -->
+        <div class="absolute left-[-120px] top-40 w-[400px] h-[400px] bg-orange-500/30 blur-[180px] rounded-full"></div>
+
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
+
+            <!-- IMAGE SIDE -->
+            <div class="relative">
+
+                <!-- main image -->
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692"
+                    class="rounded-2xl w-full h-[420px] object-cover">
+
+                <!-- second decorative image -->
+                <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9"
+                    class="absolute -bottom-10 -right-10 w-40 h-40 object-cover rounded-xl border border-white/10 shadow-xl">
+
+            </div>
+
+
+            <!-- CONTENT -->
+            <div class="bg-black/60 border border-white/10 rounded-2xl p-10 backdrop-blur-md">
+
+                <p class="text-sm tracking-widest text-orange-400 mb-5">
+                    OUR FEATURE
+                </p>
+
+                <h2 class="text-4xl font-light leading-snug mb-6">
+                    Transforming ideas into
+                    <span class="text-orange-400 font-medium">powerful features</span>
+                </h2>
+
+                <p class="text-gray-400 leading-relaxed mb-10">
+                    We turn innovative ideas into impactful software features that deliver
+                    seamless functionality and measurable business results.
+                </p>
+
+                <!-- STATS -->
+                <div class="grid grid-cols-3 border-t border-white/10 pt-8 text-center">
+
+                    <div>
+                        <h3 class="text-3xl text-orange-400 font-semibold">130+</h3>
+                        <p class="text-gray-400 text-sm mt-1">Projects</p>
+                    </div>
+
+                    <div class="border-x border-white/10">
+                        <h3 class="text-3xl text-orange-400 font-semibold">50+</h3>
+                        <p class="text-gray-400 text-sm mt-1">Awards</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-3xl text-orange-400 font-semibold">12K+</h3>
+                        <p class="text-gray-400 text-sm mt-1">Customers</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- Header & Footer JS -->
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+    <script src="../about/about.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Our Finance | Financial Management Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050505;
+            color: #06090f;
+            overflow-x: hidden;
+        }
+
+        /* Deep dark theme with subtle orange glow */
+        .dark-bg {
+            position: relative;
+            background: url('../images/homebg.jfif') center/cover no-repeat fixed;
+        }
+
+        /* Dark overlay for readability */
+        .dark-bg::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.381);
+            /* darkness control */
+            backdrop-filter: blur(4px);
+            z-index: -1;
+        }
+
+        /* Optional subtle orange glow layer */
+        .dark-bg::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(249, 115, 22, 0.08), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(249, 115, 22, 0.05), transparent 40%);
+            z-index: -1;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
+        .glass-card {
+            background: rgba(10, 10, 14, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card-solid {
+            background: rgba(8, 8, 12, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(249, 115, 22, 0.12);
+        }
+
+        .stat-item {
+            background: rgba(12, 12, 16, 0.8);
+            border: 1px solid rgba(249, 115, 22, 0.15);
+            transition: all 0.2s ease;
+        }
+
+        .stat-item:hover {
+            border-color: rgba(249, 115, 22, 0.4);
+            background: rgba(20, 20, 28, 0.9);
+        }
+
+        .feature-tile {
+            background: rgba(8, 8, 12, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .feature-tile:hover {
+            border-color: rgba(249, 115, 22, 0.35);
+            background: rgba(18, 18, 24, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            gap: 0.75rem;
+            color: #f97316;
+        }
+
+        /* Device frame - dark premium */
+        .device-frame {
+            background: linear-gradient(145deg, #121216 0%, #08080c 100%);
+            border-radius: 28px;
+            padding: 10px 10px 18px 10px;
+            box-shadow: 0 25px 45px -18px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        .device-screen {
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-up {
+            animation: fadeSlide 0.45s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.05s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.15s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.2s;
+        }
+
+        .orange-gradient {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+
+<body class="dark-bg">
+
+    <div id="header"></div>
+
+    <main class="pt-20 pb-12 px-4 md:px-6">
+        <div class="max-w-5xl mx-auto">
+
+            <!-- HERO COMBINED SECTION -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16 animate-up">
+
+                <!-- LEFT: IMAGE (BIGGER BUT NATURAL) -->
+                <div class="w-full scale-[1.05] lg:scale-[1.1]">
+                    <div class="device-frame">
+                        <div class="relative device-screen">
+                            <img src="../images/Ojal-proj1.png" alt="Ojal Finance Dashboard"
+                                class="w-full h-auto object-contain rounded-lg">
+                        </div>
+
+                        <!-- Bottom keyboard hint -->
+                        <div class="flex justify-center gap-1 mt-3">
+                            <div class="w-6 h-1 bg-gray-800 rounded-full"></div>
+                            <div class="w-6 h-1 bg-gray-800 rounded-full"></div>
+                            <div class="w-14 h-1 bg-gray-800/60 rounded-full"></div>
+                            <div class="w-6 h-1 bg-gray-800 rounded-full"></div>
+                            <div class="w-6 h-1 bg-gray-800 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: CONTENT -->
+                <div class="space-y-6">
+
+                    <!-- Tag -->
+                    <div
+                        class="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 rounded-full px-4 py-1.5">
+                        <i class="fa-solid fa-bolt text-orange-400 text-xs"></i>
+                        <span class="text-xs tracking-wide text-orange-300 font-medium">
+                            FINANCIAL MANAGEMENT SUITE
+                        </span>
+                    </div>
+
+                    <!-- Title -->
+                    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight leading-tight">
+                        <span class="text-white">Our</span>
+                        <span class="orange-gradient">Finance</span>
+                    </h1>
+
+                    <!-- Short Description -->
+                    <p class="text-gray-400 text-base leading-relaxed max-w-lg">
+                        A powerful financial management platform designed to streamline
+                        <span class="text-orange-400">daily collections</span>,
+                        <span class="text-orange-400">loan processing</span>, and
+                        <span class="text-orange-400">RD/FD operations</span> all in one unified system.
+                    </p>
+
+                    <!-- Compact Quick Highlights -->
+                    <div class="grid grid-cols-2 gap-2 pt-2">
+
+                        <div class="stat-item rounded-md px-2.5 py-2 flex items-center gap-2">
+                            <i class="fa-solid fa-indian-rupee-sign text-orange-400 text-xs"></i>
+                            <div class="leading-tight">
+                                <p class="text-sm font-semibold text-white">₹50K+</p>
+                                <p class="text-[9px] text-gray-500">Transactions</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-item rounded-md px-2.5 py-2 flex items-center gap-2">
+                            <i class="fa-solid fa-users text-orange-400 text-xs"></i>
+                            <div class="leading-tight">
+                                <p class="text-sm font-semibold text-white">1K+</p>
+                                <p class="text-[9px] text-gray-500">Customers</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-item rounded-md px-2.5 py-2 flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high text-orange-400 text-xs"></i>
+                            <div class="leading-tight">
+                                <p class="text-sm font-semibold text-white">99.9%</p>
+                                <p class="text-[9px] text-gray-500">Uptime</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-item rounded-md px-2.5 py-2 flex items-center gap-2">
+                            <i class="fa-solid fa-shield text-orange-400 text-xs"></i>
+                            <div class="leading-tight">
+                                <p class="text-sm font-semibold text-white">Secure</p>
+                                <p class="text-[9px] text-gray-500">System</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Overview -->
+            <div class="mb-10 animate-up delay-2">
+                <div class="glass-card rounded-xl p-4 border-l-2 border-l-orange-500">
+
+                    <!-- Header -->
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fa-regular fa-circle-info text-orange-400 text-xs"></i>
+                        <h2 class="text-sm font-semibold text-white">Overview</h2>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-gray-400 text-xs leading-relaxed mb-3">
+                        <span class="text-orange-300 font-medium">Our Finance</span> is an enterprise-grade
+                        financial operations platform built to streamline
+                        <span class="text-orange-300">daily collections</span>,
+                        <span class="text-orange-300">loan lifecycle management</span>, and
+                        <span class="text-orange-300">RD/FD operations</span>.
+                        It centralizes customer onboarding, transaction tracking, and reporting into a
+                        unified system for financial institutions and field teams.
+                    </p>
+
+                    <!-- Extra Highlights (NEW) -->
+                    <div class="grid grid-cols-2 gap-2 text-[10px] text-gray-500">
+                        <div class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-check text-orange-400 text-[9px]"></i>
+                            Real-time analytics & dashboards
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-check text-orange-400 text-[9px]"></i>
+                            Automated reporting system
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-check text-orange-400 text-[9px]"></i>
+                            Secure KYC & document storage
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-check text-orange-400 text-[9px]"></i>
+                            Multi-user role management
+                        </div>
+                    </div>
+
+                    <!-- Impact Line -->
+                    <div class="mt-3 text-[10px] text-gray-500 border-t border-white/5 pt-2">
+                        Improves operational efficiency with up to
+                        <span class="text-orange-300 font-medium">78% reduction in manual errors</span>
+                        and faster decision-making through data insights.
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Features Grid - Dark Compact -->
+            <div class="mb-10 animate-up delay-3">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-grid-2 text-orange-400 text-sm"></i>
+                        <h2 class="text-sm font-semibold text-white">Core Capabilities</h2>
+                    </div>
+                    <span class="text-[9px] text-gray-600">9 modules</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5">
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-chart-line text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Dashboard</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">Real-time KPIs</p>
+                    </div>
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-user-plus text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Add Customer</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">KYC onboarding</p>
+                    </div>
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-piggy-bank text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Savings Account</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">Interest tracking</p>
+                    </div>
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-calendar-week text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Recurring Deposit</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">Auto-installments</p>
+                    </div>
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-certificate text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Fixed Deposit</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">Maturity mgmt</p>
+                    </div>
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-hand-holding-dollar text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Apply for Loan</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">Digital apps</p>
+                    </div>
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-file-signature text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Loan Sanctions</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">Approval workflow</p>
+                    </div>
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-address-book text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Customer Directory</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">Search & filters</p>
+                    </div>
+                    <div class="feature-tile rounded-lg p-3">
+                        <div class="w-7 h-7 rounded-md bg-orange-500/10 flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-cloud-upload-alt text-orange-400 text-xs"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-xs">Document Upload</h3>
+                        <p class="text-gray-500 text-[9px] mt-0.5">Secure storage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Preview Gallery -->
+            <div class="mb-16">
+                <div class="flex items-center gap-2 mb-5">
+                    <i class="fa-regular fa-images text-orange-400"></i>
+                    <h2 class="text-lg font-semibold text-white">Platform Preview</h2>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Large Preview -->
+                    <div
+                        class="lg:col-span-2 rounded-3xl overflow-hidden border border-white/10 hover:border-orange-500/30 transition-all group">
+                        <img src="../images/Ojal-proj2.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="Dashboard Overview">
+                    </div>
+
+                    <!-- Small Previews -->
+                    <div class="grid grid-rows-2 gap-4">
+                        <div
+                            class="rounded-3xl overflow-hidden border border-white/10 hover:border-orange-500/30 transition-all group">
+                            <img src="../images/Ojal-proj3.png"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                alt="Loan Management">
+                        </div>
+                        <div
+                            class="rounded-3xl overflow-hidden border border-white/10 hover:border-orange-500/30 transition-all group">
+                            <img src="../images/Ojal-proj4.png"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                alt="Customer Management">
+                        </div>
+                    </div>
+
+                    <!-- Additional Previews -->
+                    <div
+                        class="rounded-3xl overflow-hidden border border-white/10 hover:border-orange-500/30 transition-all group">
+                        <img src="../images/Ojal-proj5.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="Recurring Deposits">
+                    </div>
+                    <div
+                        class="rounded-3xl overflow-hidden border border-white/10 hover:border-orange-500/30 transition-all group">
+                        <img src="../images/Ojal-proj6.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="Collections">
+                    </div>
+                    <div
+                        class="rounded-3xl overflow-hidden border border-white/10 hover:border-orange-500/30 transition-all group">
+                        <img src="../images/Ojal-proj7.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="Reports & Analytics">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section - Dark -->
+            <div
+                class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-5 border-t border-white/8 animate-up delay-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-1 h-5 bg-orange-500 rounded-full"></div>
+                    <p class="text-[11px] text-gray-500 tracking-wide">ENTERPRISE FINANCIAL INFRASTRUCTURE</p>
+                </div>
+                <a href="https://ojalfinance.com" target="_blank"
+                    class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium px-5 py-2 rounded-full transition-all duration-200 shadow-md shadow-orange-500/15">
+                    <i class="fa-solid fa-arrow-up-right-from-music text-[10px]"></i> Live Demo
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <!-- Load header and footer -->
+    <script src="../footer/footer.js"></script>
+    <script src="../header/header.js"></script>
+
+    <script>
+        const backBtn = document.getElementById('backToPortfolio');
+        if (backBtn) {
+            backBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.history.back();
+            });
+        }
+
+        // Subtle hover effect on stat items
+        const stats = document.querySelectorAll('.stat-item');
+        stats.forEach(stat => {
+            stat.addEventListener('mouseenter', () => {
+                stat.style.transform = 'translateY(-1px)';
+            });
+            stat.addEventListener('mouseleave', () => {
+                stat.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+
+</html>

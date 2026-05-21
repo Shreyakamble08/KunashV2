@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Kunash Media - Digital Marketing</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #010101;
+            overflow-x: hidden;
+            color: #e5e7eb;
+        }
+
+        /* distinct hero background - abstract gradient + dots pattern */
+        .marketing-hero {
+            background: radial-gradient(circle at 10% 20%, rgba(249, 115, 22, 0.12) 0%, rgba(0, 0, 0, 0.96) 70%),
+                repeating-linear-gradient(45deg, rgba(249, 115, 22, 0.02) 0px, rgba(249, 115, 22, 0.02) 2px, transparent 2px, transparent 8px);
+            min-height: 100vh;
+            position: relative;
+            isolation: isolate;
+        }
+
+        /* animated gradient orb */
+        .hero-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.3) 0%, rgba(249, 115, 22, 0) 70%);
+            filter: blur(80px);
+            bottom: -200px;
+            right: -150px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero-orb {
+                width: 350px;
+                height: 350px;
+                bottom: -100px;
+                right: -80px;
+                filter: blur(60px);
+            }
+        }
+
+        .orange-gradient-text {
+            background: linear-gradient(125deg, #f97316, #ffb86b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* custom card styles - glassmorphism */
+        .glass-card {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(249, 115, 22, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(249, 115, 22, 0.4);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.12);
+        }
+
+        /* grid noise bg for sections */
+        .grid-noise-bg {
+            position: relative;
+            background: #030303;
+            background-image: linear-gradient(rgba(249, 115, 22, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(249, 115, 22, 0.03) 1px, transparent 1px);
+            background-size: 55px 55px;
+        }
+
+        /* Glow UNDER grid */
+        .grid-noise-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(249, 115, 22, 0.12), transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(249, 115, 22, 0.08), transparent 45%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glow ABOVE grid */
+        .grid-noise-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(249, 115, 22, 0.06), transparent 60%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .grid-noise-bg>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            padding: 12px 18px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .badge-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(249, 115, 22, 0.5);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+        }
+
+        @keyframes spinSlow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spinSlow 40s linear infinite;
+        }
+
+        @keyframes spinSlowCustom {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slower {
+            animation: spinSlowCustom 40s linear infinite;
+        }
+
+        /* FAQ styles */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        /* Prevent content visibility issues */
+        .faq-item:not(.active) .faq-content {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .faq-content.open {
+            max-height: 200px;
+        }
+
+        .rotate-45 {
+            transform: rotate(45deg);
+        }
+
+        /* RESPONSIVE FIXES - preserve layout while making adaptive */
+        @media (max-width: 1024px) {
+            .timeline-center-line {
+                left: 30px !important;
+                transform: none !important;
+            }
+
+            .timeline-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .timeline-dot-center {
+                display: flex;
+                justify-content: flex-start;
+                padding-left: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .badge-card {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-badges-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+            }
+
+            .cta-heading {
+                font-size: 2.2rem !important;
+                line-height: 1.2 !important;
+            }
+
+            .cta-button {
+                width: 3.5rem !important;
+                height: 3.5rem !important;
+                font-size: 8px !important;
+            }
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        alan: ['"Alan Sans"', "sans-serif"],
+                        dmserif: ['"DM Serif Text"', "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                        notoSans: ['"Noto Sans"', "sans-serif"],
+                        notoSerif: ['"Noto Serif"', "serif"],
+                        poiret: ['"Poiret One"', "cursive"],
+                        quicksand: ["Quicksand", "sans-serif"],
+                        raleway: ["Raleway", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="bg-black text-gray-200">
+
+    <div id="header"></div>
+
+    <!-- DIGITAL MARKETING HERO - fully responsive preserved layout -->
+    <section class="marketing-hero relative flex items-center pt-32 pb-20 px-4 sm:px-6 lg:px-12 overflow-hidden">
+        <div class="hero-orb"></div>
+        <div class="max-w-7xl mx-auto relative z-10 w-full">
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <!-- LEFT SIDE -->
+                <div class="lg:col-span-7 space-y-5 sm:space-y-6">
+                    <div
+                        class="inline-flex items-center gap-2 bg-orange-500/10 backdrop-blur-sm border border-orange-500/30 rounded-full px-4 py-2 sm:px-5">
+                        <i class="fa-solid fa-chart-simple text-orange-400 text-xs sm:text-sm"></i>
+                        <span class="text-orange-300 text-[10px] sm:text-xs font-semibold tracking-wider">DIGITAL
+                            MARKETING AGENCY</span>
+                    </div>
+                    <h1
+                        class="text-4xl sm:text-5xl lg:text-7xl font-raleway font-bold tracking-tight leading-[1.2] sm:leading-[1.15]">
+                        Scale Your Brand With
+                        <span class="orange-gradient-text">Data-Driven</span> Marketing
+                    </h1>
+                    <p class="text-gray-400 text-sm sm:text-base md:text-lg max-w-xl leading-relaxed">
+                        From SEO to social media, we craft results-driven digital strategies that boost visibility,
+                        engagement, and revenue.
+                    </p>
+                </div>
+
+                <!-- RIGHT SIDE - Marketing Badges (fully responsive grid) -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-3 sm:gap-4 lg:gap-5 mt-6 lg:mt-0">
+                    <div class="badge-card"><i class="fa-brands fa-google text-orange-400"></i><span
+                            class="text-xs sm:text-sm">Google Ads</span></div>
+                    <div class="badge-card"><i class="fa-brands fa-facebook text-blue-400"></i><span
+                            class="text-xs sm:text-sm">Meta Ads</span></div>
+                    <div class="badge-card"><i class="fa-brands fa-linkedin text-blue-500"></i><span
+                            class="text-xs sm:text-sm">LinkedIn Ads</span></div>
+                    <div class="badge-card"><i class="fa-brands fa-instagram text-pink-400"></i><span
+                            class="text-xs sm:text-sm">Instagram Ads</span></div>
+                    <div class="badge-card"><i class="fa-solid fa-magnifying-glass-chart text-green-400"></i><span
+                            class="text-xs sm:text-sm">SEO Strategy</span></div>
+                    <div class="badge-card"><i class="fa-regular fa-envelope text-yellow-400"></i><span
+                            class="text-xs sm:text-sm">Email Marketing</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- main content wrapper -->
+    <div class="grid-noise-bg">
+
+        <!-- SERVICES SECTION -->
+        <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+            <div class="text-center mb-12 sm:mb-16">
+                <span
+                    class="text-orange-400 text-[10px] sm:text-xs font-alan tracking-widest bg-orange-500/10 px-3 py-1 rounded-full">SERVICES</span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-raleway mt-3 sm:mt-4">Marketing solutions
+                    that <span class="orange-gradient-text">drive growth</span></h2>
+                <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mt-3 sm:mt-4 px-2">Data-backed campaigns,
+                    creative strategies, and measurable outcomes.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Service 1 -->
+                <div class="glass-card rounded-2xl p-5 sm:p-7">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4 sm:mb-5">
+                        <i class="fa-solid fa-magnifying-glass-dollar text-orange-400 text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold">SEO & Organic Growth</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm mt-2 sm:mt-3">Dominate search rankings with white-hat
+                        SEO, technical audits, and content strategies that attract quality leads.</p>
+                    <ul class="text-gray-400 text-[11px] sm:text-xs space-y-1 mt-4 sm:mt-5">
+                        <li>✓ Keyword intelligence</li>
+                        <li>✓ Link building</li>
+                        <li>✓ Core Web Vitals optimization</li>
+                    </ul>
+                </div>
+                <!-- Service 2 -->
+                <div class="glass-card rounded-2xl p-5 sm:p-7">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4 sm:mb-5">
+                        <i class="fa-solid fa-chart-simple text-orange-400 text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold">Performance Marketing</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm mt-2 sm:mt-3">Maximize ROI with Google, Meta, TikTok &
+                        LinkedIn ads. Audience targeting, A/B testing, and conversion tracking.</p>
+                    <ul class="text-gray-400 text-[11px] sm:text-xs space-y-1 mt-4 sm:mt-5">
+                        <li>✓ PPC campaigns</li>
+                        <li>✓ Retargeting funnels</li>
+                        <li>✓ Real-time analytics</li>
+                    </ul>
+                </div>
+                <!-- Service 3 -->
+                <div class="glass-card rounded-2xl p-5 sm:p-7">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4 sm:mb-5">
+                        <i class="fa-brands fa-instagram text-orange-400 text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold">Social Media Management</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm mt-2 sm:mt-3">Build communities, increase engagement, and
+                        drive brand loyalty through organic social strategies & content creation.</p>
+                    <ul class="text-gray-400 text-[11px] sm:text-xs space-y-1 mt-4 sm:mt-5">
+                        <li>✓ Content calendars</li>
+                        <li>✓ Influencer collabs</li>
+                        <li>✓ Social listening</li>
+                    </ul>
+                </div>
+                <!-- Service 4 -->
+                <div class="glass-card rounded-2xl p-5 sm:p-7">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4 sm:mb-5">
+                        <i class="fa-regular fa-envelope-open text-orange-400 text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold">Email & Automation</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm mt-2 sm:mt-3">Convert leads with personalized drip
+                        campaigns, segmented newsletters, and high-converting workflows.</p>
+                    <ul class="text-gray-400 text-[11px] sm:text-xs space-y-1 mt-4 sm:mt-5">
+                        <li>✓ Klaviyo & Mailchimp</li>
+                        <li>✓ Automated sequences</li>
+                        <li>✓ ROI tracking</li>
+                    </ul>
+                </div>
+                <!-- Service 5 -->
+                <div class="glass-card rounded-2xl p-5 sm:p-7">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4 sm:mb-5">
+                        <i class="fa-brands fa-linkedin-in text-orange-400 text-lg sm:text-xl"></i>
+                    </div>
+
+                    <h3 class="text-lg sm:text-xl font-bold">LinkedIn Marketing</h3>
+
+                    <p class="text-gray-400 text-xs sm:text-sm mt-2 sm:mt-3">
+                        Build brand authority, generate quality leads, and grow your professional presence with
+                        strategic LinkedIn marketing campaigns.
+                    </p>
+
+                    <ul class="text-gray-400 text-[11px] sm:text-xs space-y-1 mt-4 sm:mt-5">
+                        <li>✓ LinkedIn lead generation</li>
+                        <li>✓ Professional content strategy</li>
+                        <li>✓ Audience targeting & campaigns</li>
+                    </ul>
+                </div>
+                <!-- Service 6 -->
+                <div class="glass-card rounded-2xl p-5 sm:p-7 relative overflow-hidden group">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4 sm:mb-5">
+                        <i class="fa-regular fa-pen-to-square text-orange-400 text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold">Content Marketing</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm mt-2 sm:mt-3">Authority-building blogs, SEO articles,
+                        video scripts, and strategic copy that resonates with your audience.</p>
+                    <div class="mt-4 sm:mt-5 text-[11px] sm:text-xs text-orange-400/70 flex items-center gap-1">
+                        Full-funnel content <i class="fa-solid fa-arrow-trend-up"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS SECTION - responsive grid -->
+        <section class="pt-4 pb-10 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto -mt-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div class="stat-card rounded-xl p-3 sm:p-4">
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-orange-400">150+</p>
+                    <p class="text-gray-400 text-[10px] sm:text-xs mt-1">Campaigns Managed</p>
+                    <div class="mt-auto text-gray-600 pt-2 sm:pt-3"><i
+                            class="fa-solid fa-chart-line text-xs sm:text-sm"></i></div>
+                </div>
+                <div class="stat-card rounded-xl p-3 sm:p-4">
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-orange-400">98%</p>
+                    <p class="text-gray-400 text-[10px] sm:text-xs mt-1">Client Retention</p>
+                    <div class="mt-auto text-gray-600 pt-2 sm:pt-3"><i
+                            class="fa-regular fa-thumbs-up text-xs sm:text-sm"></i></div>
+                </div>
+                <div class="stat-card rounded-xl p-3 sm:p-4">
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-orange-400">+276%</p>
+                    <p class="text-gray-400 text-[10px] sm:text-xs mt-1">Traffic Growth</p>
+                    <div class="mt-auto text-gray-600 pt-2 sm:pt-3"><i
+                            class="fa-solid fa-arrow-up text-xs sm:text-sm"></i></div>
+                </div>
+                <div class="stat-card rounded-xl p-3 sm:p-4">
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-orange-400">24/7</p>
+                    <p class="text-gray-400 text-[10px] sm:text-xs mt-1">Support</p>
+                    <div class="mt-auto text-gray-600 pt-2 sm:pt-3"><i
+                            class="fa-regular fa-clock text-xs sm:text-sm"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROADMAP SECTION - fully responsive timeline (preserved style but mobile-friendly) -->
+        <section class="py-12 px-4 sm:px-6 lg:px-12 max-w-6xl mx-auto relative">
+            <div class="text-center mb-10">
+                <span
+                    class="text-orange-400 text-[10px] sm:text-xs tracking-widest uppercase bg-black/40 px-3 py-1 rounded-full">How
+                    we work</span>
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold font-raleway mt-3 sm:mt-4">Proven <span
+                        class="orange-gradient-text">marketing roadmap</span></h2>
+            </div>
+
+            <!-- Timeline responsive: stack on mobile, center line hidden on mobile -->
+            <div class="relative hidden md:block">
+                <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[2px] h-full bg-orange-500/20"></div>
+                <div class="space-y-8">
+                    <div class="grid grid-cols-[1fr_60px_1fr] items-center">
+                        <div class="text-right pr-6">
+                            <h3 class="font-medium font-alan text-base sm:text-lg">Discovery & Audit</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mt-2">Deep-dive into your market, competitors,
+                                and current performance metrics.</p>
+                        </div>
+                        <div class="flex justify-center">
+                            <div
+                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shadow-[0_0_20px_rgba(249,115,22,0.6)] text-sm sm:text-base">
+                                01</div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="grid grid-cols-[1fr_60px_1fr] items-center">
+                        <div></div>
+                        <div class="flex justify-center">
+                            <div
+                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shadow-[0_0_20px_rgba(249,115,22,0.6)] text-sm sm:text-base">
+                                02</div>
+                        </div>
+                        <div class="pl-6">
+                            <h3 class="font-medium font-alan text-base sm:text-lg">Strategy & Planning</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mt-2">Custom roadmap with channel mix, KPIs, and
+                                creative direction.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-[1fr_60px_1fr] items-center">
+                        <div class="text-right pr-6">
+                            <h3 class="font-medium font-alan text-base sm:text-lg">Execution & Launch</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mt-2">Campaign deployment, content production,
+                                and A/B testing.</p>
+                        </div>
+                        <div class="flex justify-center">
+                            <div
+                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shadow-[0_0_20px_rgba(249,115,22,0.6)] text-sm sm:text-base">
+                                03</div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="grid grid-cols-[1fr_60px_1fr] items-center">
+                        <div></div>
+                        <div class="flex justify-center">
+                            <div
+                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shadow-[0_0_20px_rgba(249,115,22,0.6)] text-sm sm:text-base">
+                                04</div>
+                        </div>
+                        <div class="pl-6">
+                            <h3 class="font-medium font-alan text-base sm:text-lg">Optimize & Scale</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm mt-2">Data analysis, iterative improvements, and
+                                scaling winning strategies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile timeline (stacked without central line) -->
+            <div class="md:hidden space-y-6">
+                <div class="flex gap-4 items-start">
+                    <div
+                        class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shrink-0">
+                        01</div>
+                    <div>
+                        <h3 class="font-medium font-alan text-base">Discovery & Audit</h3>
+                        <p class="text-gray-400 text-sm mt-1">Deep-dive into your market, competitors, and current
+                            performance metrics.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div
+                        class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shrink-0">
+                        02</div>
+                    <div>
+                        <h3 class="font-medium font-alan text-base">Strategy & Planning</h3>
+                        <p class="text-gray-400 text-sm mt-1">Custom roadmap with channel mix, KPIs, and creative
+                            direction.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div
+                        class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shrink-0">
+                        03</div>
+                    <div>
+                        <h3 class="font-medium font-alan text-base">Execution & Launch</h3>
+                        <p class="text-gray-400 text-sm mt-1">Campaign deployment, content production, and A/B testing.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div
+                        class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shrink-0">
+                        04</div>
+                    <div>
+                        <h3 class="font-medium font-alan text-base">Optimize & Scale</h3>
+                        <p class="text-gray-400 text-sm mt-1">Data analysis, iterative improvements, and scaling winning
+                            strategies.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute top-6 right-6 opacity-20 pointer-events-none hidden sm:block"><img
+                    src="../images/shape2.png" class="w-20 sm:w-28 md:w-32 animate-spin-slow" alt="shape"></div>
+        </section>
+
+        <!-- FAQ SECTION --->
+        <section class="py-10 sm:py-14 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-6 lg:gap-8 items-start">
+                <div>
+                    <div
+                        class="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 px-3 sm:px-4 py-1 rounded-full mb-4">
+                        <i class="fa-regular fa-circle-question text-orange-400"></i><span
+                            class="text-[10px] sm:text-xs">FAQ</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-mont leading-tight">Got questions?
+                        <br><span class="orange-gradient-text">We’ve got answers</span>
+                    </h2>
+                    <p class="text-gray-400 mt-3 sm:mt-4 max-w-md text-xs sm:text-sm">Everything you need to know about
+                        our marketing process, timelines, and results.</p>
+                    <div class="mt-6 sm:mt-8 bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5">
+                        <p class="text-xs sm:text-sm text-gray-400">Most clients start seeing measurable improvements
+                            within <span class="text-orange-400">4–8 weeks</span> depending on the strategy.</p>
+                    </div>
+                </div>
+                <div class="space-y-3 sm:space-y-4">
+                    <div class="faq-item bg-black/40 border border-white/10 rounded-xl overflow-hidden"><button
+                            class="faq-toggle w-full flex justify-between items-center p-4 sm:p-5 text-left font-medium text-sm sm:text-base">How
+                            soon can I expect results from SEO?<i
+                                class="fa-solid fa-plus text-orange-400 transition-transform text-xs sm:text-sm"></i></button>
+                        <div class="faq-content px-4 sm:px-5 text-gray-400 text-xs sm:text-sm pb-4 sm:pb-5">SEO
+                            typically shows noticeable improvements within 3–6 months, with early traction possible in
+                            weeks depending on competition.</div>
+                    </div>
+                    <div class="faq-item bg-black/40 border border-white/10 rounded-xl overflow-hidden"><button
+                            class="faq-toggle w-full flex justify-between items-center p-4 sm:p-5 text-left font-medium text-sm sm:text-base">Do
+                            you run ads on all platforms?<i
+                                class="fa-solid fa-plus text-orange-400 transition-transform text-xs sm:text-sm"></i></button>
+                        <div class="faq-content px-4 sm:px-5 text-gray-400 text-xs sm:text-sm pb-4 sm:pb-5">Yes —
+                            Google, Meta, LinkedIn, and more. We choose channels based on your audience and goals.</div>
+                    </div>
+                    <div class="faq-item bg-black/40 border border-white/10 rounded-xl overflow-hidden"><button
+                            class="faq-toggle w-full flex justify-between items-center p-4 sm:p-5 text-left font-medium text-sm sm:text-base">Do
+                            you handle creatives and content?<i
+                                class="fa-solid fa-plus text-orange-400 transition-transform text-xs sm:text-sm"></i></button>
+                        <div class="faq-content px-4 sm:px-5 text-gray-400 text-xs sm:text-sm pb-4 sm:pb-5">Yes, we
+                            create ad creatives, landing pages, email content, and full-funnel copy.</div>
+                    </div>
+                    <div class="faq-item bg-black/40 border border-white/10 rounded-xl overflow-hidden"><button
+                            class="faq-toggle w-full flex justify-between items-center p-4 sm:p-5 text-left font-medium text-sm sm:text-base">How
+                            do you measure success?<i
+                                class="fa-solid fa-plus text-orange-400 transition-transform text-xs sm:text-sm"></i></button>
+                        <div class="faq-content px-4 sm:px-5 text-gray-400 text-xs sm:text-sm pb-4 sm:pb-5">We track
+                            ROAS, conversions, CPA, and engagement through real-time dashboards and reports.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION - fully responsive preserving the original layout -->
+        <section id="contact" class="relative py-16 sm:py-20 px-4 sm:px-6 md:px-12 overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div class="w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] blur-[140px] rounded-full"></div>
+            </div>
+            <div class="absolute top-1/2 -left-48 -translate-y-1/2 opacity-40 hidden sm:block"><img
+                    src="../images/shape-2.png" class="w-[300px] sm:w-[400px] animate-spin-slower" alt="shape" /></div>
+            <div class="relative z-10 text-center">
+                <p class="text-[10px] sm:text-xs tracking-widest text-gray-400 mb-4 sm:mb-6">LET'S COLLABORATE</p>
+                <div class="relative inline-block">
+                    <h2
+                        class="text-4xl sm:text-6xl md:text-7xl lg:text-[100px] xl:text-[120px] font-bold font-montserrat leading-[1.2] tracking-tight px-2">
+                        TURN CLICKS <br /><span class="block mt-4 sm:mt-6 text-white">INTO GROWTH</span>
+                    </h2>
+                    <div class="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+                        <a href="/contact.html"
+                            class="group relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-orange-500 text-white font-medium flex flex-col items-center justify-center text-[8px] sm:text-[9px] md:text-[11px] transition-all duration-300 hover:scale-110 shadow-[0_0_25px_rgba(249,115,22,0.5)] hover:shadow-[0_0_60px_rgba(249,115,22,0.8)]">
+                            <i
+                                class="fa-solid fa-arrow-up rotate-45 mb-1 text-[8px] sm:text-[10px] md:text-xs transition-transform duration-300 group-hover:rotate-90"></i>
+                            Get In Touch
+                            <span class="absolute inset-0 rounded-full border border-orange-400/40 animate-ping"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+
+    <script>
+        // FAQ interactive toggles
+        document.querySelectorAll(".faq-item").forEach(item => {
+            const btn = item.querySelector(".faq-toggle");
+            const content = item.querySelector(".faq-content");
+            const icon = btn.querySelector("i");
+
+            content.style.maxHeight = "0px";
+            content.style.overflow = "hidden";
+
+            btn.addEventListener("click", () => {
+                const isOpen = content.style.maxHeight !== "0px";
+                document.querySelectorAll(".faq-content").forEach(c => c.style.maxHeight = "0px");
+                document.querySelectorAll(".faq-toggle i").forEach(i => i.classList.remove("rotate-45"));
+                if (!isOpen) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.classList.add("rotate-45");
+                } else {
+                    content.style.maxHeight = "0px";
+                    icon.classList.remove("rotate-45");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

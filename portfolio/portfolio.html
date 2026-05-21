@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Kunash Media | Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #010101;
+            overflow-x: hidden;
+            color: #e5e7eb;
+            position: relative;
+        }
+
+        /* Full-page constant background image */
+        .page-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("../images/bgimg.jfif");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        /* Darker overlay for better content readability & premium feel */
+        .page-bg::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.441);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+        }
+
+        /* Ensures all content appears above background */
+        .content-layer {
+            position: relative;
+            z-index: 5;
+        }
+
+        .orange-gradient-text {
+            background: linear-gradient(125deg, #f97316, #ffb86b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .filter-btn {
+            transition: all 0.25s ease;
+            position: relative;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .filter-btn.active {
+            background: #f97316;
+            color: #000000;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+            border-color: #f97316;
+        }
+
+        .filter-btn i {
+            margin-right: 6px;
+            font-size: 0.85rem;
+        }
+
+        .project-card {
+            background: rgba(12, 12, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            /* cursor pointer removed - no longer interactive as a whole card */
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(249, 115, 22, 0.6);
+            box-shadow:
+                0 25px 40px -15px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(249, 115, 22, 0.3);
+            background: rgba(12, 12, 24, 0.9);
+        }
+
+        .category-badge {
+            background: rgba(249, 115, 22, 0.2);
+            border: 1px solid rgba(249, 115, 22, 0.45);
+            color: #f97316;
+            font-weight: 500;
+            font-size: 0.7rem;
+            letter-spacing: 0.3px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* All detail page styles removed - no overlay/detail views */
+
+        /* Header transparency adjustment for bg image */
+        header {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Preserve button styling but make it non-functional placeholder */
+        .project-detail-btn {
+            cursor: default;
+            opacity: 0.8;
+            transition: none;
+        }
+
+        .project-detail-btn:hover {
+            gap: 0.25rem !important;
+            cursor: default;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        alan: ['"Alan Sans"', "sans-serif"],
+                        dmserif: ['"DM Serif Text"', "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                        notoSans: ['"Noto Sans"', "sans-serif"],
+                        notoSerif: ['"Noto Serif"', "serif"],
+                        poiret: ['"Poiret One"', "cursive"],
+                        quicksand: ["Quicksand", "sans-serif"],
+                        raleway: ["Raleway", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="bg-black">
+    <!-- FULL PAGE CONSTANT BACKGROUND IMAGE -->
+    <div class="page-bg"></div>
+
+    <!-- All content wrapped in content-layer -->
+    <div class="content-layer">
+        <div id="header"></div>
+
+        <!-- MAIN APP - Simplified to only show project cards grid (no detail routing) -->
+        <main id="appRoot" class="pt-28 pb-20 px-4 md:px-8 min-h-screen"></main>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="../footer/footer.js"></script>
+    <script src="../header/header.js"></script>
+
+    <script>
+        // ---------- PROJECT DATABASE (simplified: keep only fields needed for cards) ----------
+        const projects = [
+            {
+                id: "ojal-finance-dashboard",
+                numericId: 1,
+                title: "Finance Dashboard",
+                category: "software",
+                categoryLabel: "Software Development",
+                shortDesc: "Manage collections, loans, and repayments in one system.",
+                thumbnail: "../images/Ojal-proj1.png",
+                websiteUrl: "https://ojalfinance.com",
+                projectUrl: "Ojalfinance.html"
+            },
+            {
+                id: "HRMS",
+                numericId: 2,
+                title: "HRMS",
+                category: "software",
+                categoryLabel: "Software Development",
+                shortDesc: "Enterprise recruitment automation software with AI-powered candidate screening.",
+                thumbnail: "../images/Hrms-emp1.png",
+                websiteUrl: "https://hrms.kunashshowcase.online/index.html",
+                projectUrl: "Hrms.html"
+            },
+            {
+                id: "luxury-brand-identity",
+                numericId: 3,
+                title: "Luxury Brand Identity",
+                category: "graphics",
+                categoryLabel: "Graphic Design",
+                shortDesc: "Complete visual identity & packaging design for luxury cosmetics brand.",
+                thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=Brand+Identity",
+                websiteUrl: null,
+                projectUrl: "#"
+            },
+            {
+                id: "growth-pulse-seo",
+                numericId: 4,
+                title: "Growth Pulse SEO Campaign",
+                category: "marketing",
+                categoryLabel: "Digital Marketing",
+                shortDesc: "360° digital marketing & SEO strategy for SaaS brand achieving 3x growth.",
+                thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=Growth+Pulse",
+                websiteUrl: "https://growthpulse.example.com",
+                projectUrl: "#"
+            },
+            {
+                id: "ecoshop-marketplace",
+                numericId: 5,
+                title: "EcoShop Marketplace",
+                category: "webdev",
+                categoryLabel: "Web Development",
+                shortDesc: "Sustainable e-commerce platform with custom cart and Stripe integration.",
+                thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=EcoShop",
+                websiteUrl: "https://ecoshop.example.com",
+                projectUrl: "#"
+            },
+            {
+                id: "taskflow-pro",
+                numericId: 6,
+                title: "TaskFlow Pro",
+                category: "software",
+                categoryLabel: "Software Development",
+                shortDesc: "Cross-platform project management desktop app with real-time sync.",
+                thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=TaskFlow+Pro",
+                websiteUrl: "https://taskflow.example.com",
+                projectUrl: "#"
+            },
+            {
+                id: "cyberpunk-poster-series",
+                numericId: 7,
+                title: "Cyberpunk Poster Series",
+                category: "graphics",
+                categoryLabel: "Graphic Design",
+                shortDesc: "Illustration & 3D motion poster series for gaming festival.",
+                thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=Cyberpunk+Art",
+                websiteUrl: null,
+                projectUrl: "#"
+            },
+            {
+                id: "viral-clout-tiktok",
+                numericId: 8,
+                title: "Viral Clout TikTok Growth",
+                category: "marketing",
+                categoryLabel: "Digital Marketing",
+                shortDesc: "TikTok viral strategy + influencer campaign gaining 500k+ followers.",
+                thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=TikTok+Growth",
+                websiteUrl: "https://viralclout.example.com",
+                projectUrl: "#"
+            },
+        ];
+
+        // Helper: safely check if value exists
+        function hasValue(value) {
+            return value !== null && value !== undefined && value !== "";
+        }
+
+        // Helper: truncate description
+        function truncateText(text, maxLength = 80) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + "...";
+        }
+
+        // Function to handle project navigation
+        function handleProjectNavigation(projectUrl, websiteUrl, projectTitle) {
+            if (projectUrl && projectUrl !== "#" && projectUrl !== "") {
+                // Check if it's an external URL or internal page
+                if (projectUrl.startsWith("http") || projectUrl.startsWith("www")) {
+                    window.open(projectUrl, "_blank");
+                } else {
+                    // For internal pages, navigate to the page
+                    window.location.href = projectUrl;
+                }
+            } else if (websiteUrl && websiteUrl !== "#") {
+                // If no project page but has website URL, open live demo
+                window.open(websiteUrl, "_blank");
+            } else {
+                // Fallback: show alert that page is coming soon
+                alert(`${projectTitle} - Project details page coming soon!`);
+            }
+        }
+
+        // ----- SIMPLIFIED RENDERING: ONLY GRID WITH NO ROUTING OR DETAIL LOGIC -----
+        let currentFilter = "all";
+
+        function renderPortfolioGrid(filter = "all") {
+            const filteredProjects =
+                filter === "all"
+                    ? projects
+                    : projects.filter((p) => p.category === filter);
+
+            const projectsGridHtml = filteredProjects
+                .map(
+                    (project) => `
+<div class="project-card rounded-2xl overflow-hidden group flex flex-col bg-[#0f0f17] border border-white/10 shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-orange-500/30">
+    <!-- MacBook-style Frame Container -->
+    <div class="relative bg-gradient-to-b from-[#1a1a24] to-[#0f0f17]">
+        <!-- Laptop screen bezel -->
+        <div class="relative mx-auto bg-black rounded-xl overflow-hidden shadow-2xl" style="aspect-ratio: 16 / 10; max-width: 100%;">
+            <!-- Top bar with window controls (browser-like) -->
+            <div class="absolute top-0 left-0 right-0 h-7 bg-[#1c1c24] flex items-center px-3 gap-1.5 z-10">
+                <div class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+                <div class="ml-2 text-[10px] text-gray-500 font-mono truncate flex-1 text-center">${project.title}</div>
+            </div>
+            
+            <!-- Project Image -->
+            <img 
+                src="${project.thumbnail}" 
+                alt="${project.title}" 
+                class="w-full h-full object-contain transition-all duration-700 group-hover:scale-105 mt-7"
+                style="height: calc(100% - 28px); object-position: top;"
+                onerror="this.src='https://placehold.co/600x400/1a1a2e/f97316?text=${encodeURIComponent(project.title)}'"
+            >
+            
+            <!-- Hover overlay gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-7"></div>
+            
+            <!-- Live Demo button on hover -->
+            ${project.websiteUrl && project.websiteUrl !== "#"
+                            ? `
+            <button 
+               data-website-url="${project.websiteUrl}"
+               data-project-title="${project.title}"
+               class="live-demo-btn absolute bottom-3 right-3 bg-orange-500 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 hover:bg-orange-600 z-20 shadow-lg cursor-pointer">
+                <i class="fa-solid fa-arrow-up-right-from-music"></i> Live Demo
+            </button>
+            `
+                            : ""
+                        }
+        </div>
+        
+        <!-- Bottom keyboard area hint -->
+        <div class="flex justify-center items-center gap-1 mt-3">
+            <div class="w-1 h-1 rounded-full bg-gray-600/40"></div>
+            <div class="w-1 h-1 rounded-full bg-gray-600/40"></div>
+            <div class="w-1 h-1 rounded-full bg-gray-600/40"></div>
+            <div class="w-8 h-1 rounded-full bg-gray-600/30"></div>
+            <div class="w-1 h-1 rounded-full bg-gray-600/40"></div>
+            <div class="w-1 h-1 rounded-full bg-gray-600/40"></div>
+            <div class="w-1 h-1 rounded-full bg-gray-600/40"></div>
+        </div>
+    </div>
+    
+    <!-- Card Content -->
+    <div class="p-5 flex flex-col flex-grow">
+        <h3 class="text-lg font-bold font-mont tracking-tight text-white leading-tight group-hover:text-orange-400 transition-colors duration-200 mb-2 line-clamp-1">${project.title}</h3>
+        <p class="text-gray-400 text-sm leading-relaxed line-clamp-2 mb-4">${truncateText(project.shortDesc, 85)}</p>
+        
+        <!-- Category Badge & Action -->
+        <div class="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
+            <span class="text-xs font-medium px-3 py-1 bg-orange-500/10 text-orange-400 rounded-full border border-orange-500/20">
+                ${project.categoryLabel}
+            </span>
+            
+            <button 
+                data-project-url="${project.projectUrl}"
+                data-website-url="${project.websiteUrl}"
+                data-project-title="${project.title}"
+                class="explore-btn text-xs font-medium flex items-center gap-1.5 text-orange-400/70 transition-all duration-200 hover:text-orange-400 hover:gap-2 cursor-pointer">
+                Explore <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+        </div>
+    </div>
+</div>
+            `,
+                )
+                .join("");
+
+            const emptyState =
+                filteredProjects.length === 0
+                    ? `<div class="col-span-full text-center py-20"><i class="fa-regular fa-folder-open text-5xl text-gray-500 mb-4"></i><p class="text-gray-400 text-base">No projects match this category.</p></div>`
+                    : "";
+
+            return `
+                <div class="max-w-7xl mx-auto">
+                    <!-- Hero Section -->
+                    <div class="text-center mb-12 md:mb-16">
+                        <div class="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-full px-4 py-1.5 mb-5 backdrop-blur-sm">
+                            <i class="fa-solid fa-briefcase text-orange-400 text-xs"></i>
+                            <span class="text-xs tracking-wider text-orange-300 font-medium">CURATED PORTFOLIO</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-montserrat font-bold tracking-tight leading-tight">
+                            Explore <span class="orange-gradient-text">Featured Projects</span>
+                        </h1>
+                        <p class="text-gray-300 max-w-2xl mx-auto mt-5 text-sm md:text-base">Engineering digital excellence from web applications and enterprise software to visual narratives and data-driven campaigns.</p>
+                    </div>
+
+                    <!-- Filter Buttons -->
+                    <div class="flex flex-wrap justify-center gap-3 mb-12">
+                        <button data-filter="all" class="filter-btn ${filter === "all" ? "active" : ""} px-5 py-2 rounded-full text-sm font-medium transition-all duration-200"><i class="fa-solid fa-layer-group"></i> All Projects</button>
+                        <button data-filter="webdev" class="filter-btn ${filter === "webdev" ? "active" : ""} px-5 py-2 rounded-full text-sm font-medium transition-all duration-200"><i class="fa-solid fa-globe"></i> Web Dev</button>
+                        <button data-filter="software" class="filter-btn ${filter === "software" ? "active" : ""} px-5 py-2 rounded-full text-sm font-medium transition-all duration-200"><i class="fa-solid fa-code"></i> Software</button>
+                        <button data-filter="graphics" class="filter-btn ${filter === "graphics" ? "active" : ""} px-5 py-2 rounded-full text-sm font-medium transition-all duration-200"><i class="fa-solid fa-palette"></i> Graphics</button>
+                        <button data-filter="marketing" class="filter-btn ${filter === "marketing" ? "active" : ""} px-5 py-2 rounded-full text-sm font-medium transition-all duration-200"><i class="fa-solid fa-chart-line"></i> Digital Marketing</button>
+                    </div>
+
+                    <!-- Projects Grid -->
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7" id="projectsGridInner">
+                        ${projectsGridHtml || emptyState}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to attach event listeners for buttons
+        function attachEventListeners() {
+            // Attach filter button listeners
+            const filterBtns = document.querySelectorAll(".filter-btn");
+            filterBtns.forEach((btn) => {
+                btn.removeEventListener("click", handleFilterClick);
+                btn.addEventListener("click", handleFilterClick);
+            });
+
+            // Attach explore button listeners
+            const exploreBtns = document.querySelectorAll(".explore-btn");
+            exploreBtns.forEach((btn) => {
+                btn.removeEventListener("click", handleExploreClick);
+                btn.addEventListener("click", handleExploreClick);
+            });
+
+            // Attach live demo button listeners
+            const demoBtns = document.querySelectorAll(".live-demo-btn");
+            demoBtns.forEach((btn) => {
+                btn.removeEventListener("click", handleLiveDemoClick);
+                btn.addEventListener("click", handleLiveDemoClick);
+            });
+        }
+
+        function handleExploreClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const btn = e.currentTarget;
+            const projectUrl = btn.getAttribute("data-project-url");
+            const websiteUrl = btn.getAttribute("data-website-url");
+            const projectTitle = btn.getAttribute("data-project-title");
+
+            handleProjectNavigation(projectUrl, websiteUrl, projectTitle);
+        }
+
+        function handleLiveDemoClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const btn = e.currentTarget;
+            const websiteUrl = btn.getAttribute("data-website-url");
+            const projectTitle = btn.getAttribute("data-project-title");
+
+            if (websiteUrl && websiteUrl !== "#") {
+                window.open(websiteUrl, "_blank");
+            } else {
+                alert(`${projectTitle} - Live demo coming soon!`);
+            }
+        }
+
+        function handleFilterClick(e) {
+            const filterVal = this.getAttribute("data-filter");
+            if (filterVal === currentFilter) return;
+            currentFilter = filterVal;
+            const appRoot = document.getElementById("appRoot");
+            if (appRoot) {
+                appRoot.innerHTML = renderPortfolioGrid(currentFilter);
+                attachEventListeners();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        }
+
+        // Handler for logo & navigation (just reset filter and re-render)
+        function resetToHome() {
+            currentFilter = "all";
+            const appRoot = document.getElementById("appRoot");
+            if (appRoot) {
+                appRoot.innerHTML = renderPortfolioGrid(currentFilter);
+                attachEventListeners();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        }
+
+        // Initialize the page
+        function init() {
+            const appRoot = document.getElementById("appRoot");
+            if (appRoot) {
+                appRoot.innerHTML = renderPortfolioGrid("all");
+                attachEventListeners();
+            }
+
+            const logoLink = document.getElementById("logoHomeLink");
+            const navHomeLink = document.getElementById("navHomeLink");
+            const navPortfolioLink = document.getElementById("navPortfolioLink");
+
+            if (logoLink) {
+                logoLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    resetToHome();
+                });
+            }
+            if (navHomeLink) {
+                navHomeLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    resetToHome();
+                });
+            }
+            if (navPortfolioLink) {
+                navPortfolioLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    resetToHome();
+                });
+            }
+        }
+
+        // Start the application
+        init();
+    </script>
+</body>
+
+</html>

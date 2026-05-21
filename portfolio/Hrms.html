@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>HRMS</title>
+    <!-- Google Fonts + Tailwind + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=DM+Serif+Text:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- FLATPICKR -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        alan: ['"Alan Sans"', "sans-serif"],
+                        dmserif: ['"DM Serif Text"', "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                        notoSans: ['"Noto Sans"', "sans-serif"],
+                        notoSerif: ['"Noto Serif"', "serif"],
+                        poiret: ['"Poiret One"', "cursive"],
+                        quicksand: ["Quicksand", "sans-serif"],
+                        raleway: ["Raleway", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0c;
+            font-family: "Inter", sans-serif;
+            color: #eef2ff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Common Background */
+        .global-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -20;
+
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.438), rgba(0, 0, 0, 0.758)),
+                url("../images/hrms.jfif");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            opacity: 0.9;
+        }
+
+        /* Optional Grid Overlay */
+        .global-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+
+            background-size: 40px 40px;
+        }
+
+        /* custom orange glow & animations */
+        .glow-orange {
+            text-shadow: 0 0 12px rgba(255, 94, 0, 0.5);
+        }
+
+        .bg-dark-card {
+            background: rgba(18, 20, 27, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 125, 0, 0.2);
+        }
+
+        .glass-premium {
+            background: rgba(20, 22, 32, 0.7);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 122, 0, 0.25);
+            border-radius: 2rem;
+        }
+
+        .orange-glow-border {
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px -8px rgba(255, 70, 0, 0.2);
+        }
+
+        .orange-glow-border:hover {
+            border-color: #ff7a00;
+            box-shadow: 0 15px 30px -12px rgba(255, 122, 0, 0.4);
+        }
+
+        .tab-active {
+            background: linear-gradient(135deg, #ff7a00, #ff4d00);
+            color: white;
+            box-shadow: 0 0 12px rgba(255, 98, 0, 0.6);
+            border: none;
+        }
+
+        .tab-inactive {
+            background: rgba(30, 32, 44, 0.8);
+            color: #b9c3e6;
+            border: 1px solid rgba(255, 122, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff9a44, #ff4d00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .process-connector {
+            background: linear-gradient(90deg, #ff7a00, #ffb347);
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeSlideUp 0.5s ease forwards;
+        }
+
+        .floating-card {
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.3s;
+        }
+
+        .floating-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px -15px rgba(255, 100, 0, 0.3);
+        }
+
+        /*cta section*/
+        @keyframes spinSlow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spinSlow 40s linear infinite;
+        }
+
+        @keyframes spinSlowCustom {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slower {
+            animation: spinSlowCustom 40s linear infinite;
+        }
+
+
+        /* dashboard mockup frame */
+        .dashboard-frame {
+            background: linear-gradient(145deg, #111217, #050508);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 122, 0, 0.5);
+            box-shadow: 0 25px 45px -20px black;
+        }
+
+        .tech-badge {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1.5px solid #ff7a00;
+            color: #ffb26e;
+            transition: 0.2s;
+        }
+
+        .tech-badge:hover {
+            background: #ff7a0011;
+            transform: scale(1.02);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #17171f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff7a00;
+            border-radius: 12px;
+        }
+
+        .dashboard-scroll {
+            animation: autoScroll 22s linear infinite;
+        }
+
+        .dashboard-frame:hover .dashboard-scroll {
+            animation-play-state: paused;
+        }
+
+        @keyframes autoScroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .flatpickr-calendar {
+            background: #121212 !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .flatpickr-day.selected {
+            background: #f97316 !important;
+            border-color: #f97316 !important;
+        }
+
+        .flatpickr-day:hover {
+            background: rgba(249, 115, 22, 0.15) !important;
+        }
+
+        .flatpickr-months,
+        .flatpickr-weekdays {
+            background: #121212 !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div id="header"></div>
+
+    <!-- Global Background -->
+    <div class="global-bg"></div>
+
+    <!-- Hero Section with Laptop Frame + glowing -->
+    <section class="relative px-6 py-16 md:py-18 overflow-hidden">
+        <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-orange-600/20 rounded-full blur-[120px]">
+        </div>
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-14 items-center relative z-10">
+            <div class="flex-1">
+                <div
+                    class="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-full px-4 py-1.5 mb-5 mt-6">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute h-full w-full bg-orange-500 rounded-full"></span>
+
+                        <span class="relative inline-flex h-2 w-2 bg-orange-500 rounded-full"></span>
+                    </span>
+
+                    <span class="text-xs font-mono"> Modern Workforce Management </span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-semibold leading-tight font-alan tracking-tight">
+                    Smart HRMS Platform for
+                    <span class="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">Modern
+                        Workforce</span>
+                    Management
+                </h1>
+                <p class="text-gray-300 text-md mt-6 max-w-lg">
+                    Automate payroll, attendance, recruitment & analytics experience the
+                    future of HR operations with real-time intelligence.
+                </p>
+            </div>
+            <div class="flex-1 relative">
+                <div class="dashboard-frame p-2 bg-black/60 rounded-3xl shadow-2xl">
+                    <img src="../images/Hrms-admin1.png" alt="Dashboard mockup"
+                        class="rounded-2xl w-full border border-white/10" />
+                </div>
+                <div class="absolute -z-10 -bottom-8 -left-8 w-48 h-48 bg-orange-500/30 blur-4xl rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About HRMS -->
+    <section
+        class="relative px-5 py-14 max-w-7xl mx-auto overflow-hidden rounded-[34px] bg-gradient-to-br from-[#1a0d05] via-[#120b08] to-[#070707] border border-orange-500/10">
+        <!-- Glow -->
+        <div
+            class="absolute top-[-100px] right-[-100px] w-[240px] h-[240px] bg-orange-500/20 blur-[100px] rounded-full">
+        </div>
+
+        <div class="relative z-10">
+            <!-- Top -->
+            <div class="grid md:grid-cols-2 gap-10 items-center mb-12">
+                <!-- Left -->
+                <div>
+                    <span class="text-orange-400 text-xs font-semibold font-quicksand tracking-[3px] uppercase">
+                        Intelligent Platform
+                    </span>
+
+                    <h2 class="text-3xl lg:text-4xl font-bold font-raleway mt-3 leading-tight">
+                        All-in-One HR Ecosystem
+                    </h2>
+
+                    <p class="text-gray-400 mt-4 leading-relaxed text-sm lg:text-base max-w-xl">
+                        Kunash HRMS centralizes employee management, payroll, attendance
+                        and analytics into one streamlined workforce platform.
+                    </p>
+                </div>
+
+                <!-- Right -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="glass-premium p-4 rounded-2xl border border-orange-500/10 bg-white/5 text-center">
+                        <i class="fa-solid fa-users text-2xl text-orange-500"></i>
+
+                        <h4 class="font-medium text-sm mt-3">Employee Management</h4>
+                    </div>
+
+                    <div class="glass-premium p-4 rounded-2xl border border-orange-500/10 bg-white/5 text-center">
+                        <i class="fa-solid fa-fingerprint text-2xl text-orange-500"></i>
+
+                        <h4 class="font-medium text-sm mt-3">Biometric</h4>
+                    </div>
+
+                    <div class="glass-premium p-4 rounded-2xl border border-orange-500/10 bg-white/5 text-center">
+                        <i class="fa-solid fa-coins text-2xl text-orange-500"></i>
+
+                        <h4 class="font-medium text-sm mt-3">Payroll</h4>
+                    </div>
+
+                    <div class="glass-premium p-4 rounded-2xl border border-orange-500/10 bg-white/5 text-center">
+                        <i class="fa-solid fa-chart-line text-2xl text-orange-500"></i>
+
+                        <h4 class="font-medium text-sm mt-3">Analytics</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Cards -->
+            <div class="grid md:grid-cols-3 gap-4">
+                <!-- Card -->
+                <div
+                    class="glass-premium p-5 rounded-[24px] border border-orange-500/10 bg-white/5 hover:border-orange-500/30 transition">
+                    <!-- Icon + Title -->
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                            <i class="fa-regular fa-calendar-check text-xl text-orange-500"></i>
+                        </div>
+
+                        <h3 class="text-lg font-semibold">Leave & Attendance</h3>
+                    </div>
+
+                    <p class="text-gray-400 text-sm mt-4 leading-relaxed">
+                        Manage attendance, shifts, leave approvals, and employee
+                        availability with real-time tracking and automated HR workflows.
+                    </p>
+                </div>
+
+                <!-- Card -->
+                <div
+                    class="glass-premium p-5 rounded-[24px] border border-orange-500/10 bg-white/5 hover:border-orange-500/30 transition">
+                    <!-- Icon + Title -->
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-chart-simple text-xl text-orange-500"></i>
+                        </div>
+
+                        <h3 class="text-lg font-semibold">Real-Time Reports</h3>
+                    </div>
+
+                    <p class="text-gray-400 text-sm mt-4 leading-relaxed">
+                        Interactive dashboards with workforce analytics, performance
+                        insights, attendance summaries, and department-wise HR reporting
+                        in real time.
+                    </p>
+                </div>
+
+                <!-- Card -->
+                <div
+                    class="glass-premium p-5 rounded-[24px] border border-orange-500/10 bg-white/5 hover:border-orange-500/30 transition">
+                    <!-- Icon + Title -->
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-user-plus text-xl text-orange-500"></i>
+                        </div>
+
+                        <h3 class="text-lg font-semibold">Recruitment CRM</h3>
+                    </div>
+
+                    <p class="text-gray-400 text-sm mt-4 leading-relaxed">
+                        Streamline candidate hiring, interview tracking, onboarding
+                        processes, and employee document management from one centralized
+                        portal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Process Flow (Animated connectors) -->
+    <section class="relative px-6 py-14 overflow-hidden bg-black/50">
+        <!-- Watermark -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+            <h1
+                class="text-[110px] md:text-[220px] font-black uppercase tracking-[30px] text-white/[0.028] leading-none whitespace-nowrap">
+                KUNASH
+            </h1>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-6xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold font-raleway">
+                Seamless
+                <span class="text-orange-500">Workforce Lifecycle</span>
+            </h2>
+
+            <p class="text-gray-300 mt-3">
+                Automated flow from recruitment to performance reviews
+            </p>
+        </div>
+
+        <!-- Process Flow -->
+        <div class="relative max-w-6xl mx-auto mt-16 flex flex-wrap justify-center gap-6 md:gap-12 z-10">
+            <!-- Connector -->
+            <div
+                class="absolute hidden md:block w-[85%] left-1/2 transform -translate-x-1/2 top-1/2 h-[2px] bg-gradient-to-r from-orange-400/70 via-orange-500 to-orange-400/70">
+            </div>
+
+            <!-- Step -->
+            <div
+                class="relative z-10 flex flex-col items-center bg-black/40 backdrop-blur-sm rounded-2xl px-5 py-3 border border-orange-500/30">
+                <i class="fa-regular fa-file-lines text-3xl text-orange-500"></i>
+
+                <span class="text-sm font-semibold mt-2"> Recruitment </span>
+            </div>
+
+            <!-- Step -->
+            <div
+                class="relative z-10 flex flex-col items-center bg-black/40 backdrop-blur-sm rounded-2xl px-5 py-3 border border-orange-500/30">
+                <i class="fa-solid fa-user-check text-3xl text-orange-500"></i>
+
+                <span class="text-sm font-semibold mt-2"> Onboarding </span>
+            </div>
+
+            <!-- Step -->
+            <div
+                class="relative z-10 flex flex-col items-center bg-black/40 backdrop-blur-sm rounded-2xl px-5 py-3 border border-orange-500/30">
+                <i class="fa-solid fa-fingerprint text-3xl text-orange-500"></i>
+
+                <span class="text-sm font-semibold mt-2"> Attendance </span>
+            </div>
+
+            <!-- Step -->
+            <div
+                class="relative z-10 flex flex-col items-center bg-black/40 backdrop-blur-sm rounded-2xl px-5 py-3 border border-orange-500/30">
+                <i class="fa-solid fa-sack-dollar text-3xl text-orange-500"></i>
+
+                <span class="text-sm font-semibold mt-2"> Payroll </span>
+            </div>
+
+            <!-- Step -->
+            <div
+                class="relative z-10 flex flex-col items-center bg-black/40 backdrop-blur-sm rounded-2xl px-5 py-3 border border-orange-500/30">
+                <i class="fa-solid fa-chart-line text-3xl text-orange-500"></i>
+
+                <span class="text-sm font-semibold mt-2"> Performance </span>
+            </div>
+
+            <!-- Step -->
+            <div
+                class="relative z-10 flex flex-col items-center bg-black/40 backdrop-blur-sm rounded-2xl px-5 py-3 border border-orange-500/30">
+                <i class="fa-solid fa-chart-pie text-3xl text-orange-500"></i>
+
+                <span class="text-sm font-semibold mt-2"> Reports </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Module Showcase -->
+    <section class="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16 overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-black/50"></div>
+
+        <div class="relative max-w-7xl mx-auto z-10">
+            <!-- Heading -->
+            <div class="text-center mb-10">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-raleway leading-tight">
+                    Modern <span class="text-orange-500">HR Management</span> Platform
+                </h2>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-10 lg:mb-14">
+                <button id="tabAdminBtn"
+                    class="tab-active px-5 sm:px-7 py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base shadow-lg flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Admin Module</span>
+                </button>
+
+                <button id="tabEmployeeBtn"
+                    class="tab-inactive px-5 sm:px-7 py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base flex items-center justify-center gap-3">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Employee Dashboard</span>
+                </button>
+            </div>
+
+            <!-- ADMIN MODULE -->
+            <div id="adminContent" class="transition-all duration-500">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                    <!-- LEFT -->
+                    <div class="space-y-3 text-center lg:text-left max-w-[500px]">
+
+                        <!-- Heading -->
+                        <div class="space-y-2">
+                            <h3 class="text-[24px] sm:text-[30px] lg:text-[36px] font-bold leading-tight text-white">
+                                Smart Workforce
+                                <span class="text-orange-500">Control Center</span>
+                            </h3>
+
+                            <p class="text-[13px] text-gray-400 leading-relaxed max-w-md mx-auto lg:mx-0">
+                                Manage payroll, attendance, approvals and workforce analytics from one centralized HR
+                                ecosystem.
+                            </p>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="grid gap-2 pt-1">
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-users text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Employee Management & Organization Structure
+                                </span>
+                            </div>
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-chart-simple text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Payroll Control & Tax Compliance
+                                </span>
+                            </div>
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-calendar-check text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Leave Approval Workflows
+                                </span>
+                            </div>
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-clock text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Attendance Monitoring & Shift Scheduling
+                                </span>
+                            </div>
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-chart-line text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Reports & Workforce Analytics
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="relative mt-4 lg:mt-0">
+                        <!-- Glow -->
+                        <div
+                            class="absolute -top-10 -right-10 w-40 h-40 sm:w-60 sm:h-60 bg-orange-500/15 blur-[80px] sm:blur-[110px] rounded-full">
+                        </div>
+
+                        <!-- MACBOOK -->
+                        <div
+                            class="relative rounded-[20px] sm:rounded-[30px] overflow-hidden border border-white/10 bg-[#0d0d0d] shadow-[0_30px_90px_rgba(0,0,0,0.8)] w-full">
+                            <!-- Top -->
+                            <div
+                                class="flex items-center justify-between px-3 sm:px-5 py-3 border-b border-white/5 bg-[#121212]">
+                                <div class="flex gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                </div>
+
+                                <div class="hidden md:flex items-center gap-2 text-xs text-gray-400">
+                                    <i class="fa-solid fa-briefcase text-orange-500"></i>
+                                    HRMS Enterprise Dashboard
+                                </div>
+
+                                <div
+                                    class="px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[11px]">
+                                    Live
+                                </div>
+                            </div>
+
+                            <!-- Screen -->
+                            <div class="relative overflow-hidden bg-[#0a0a0a]">
+                                <div
+                                    class="dashboard-scroll flex gap-4 sm:gap-6 lg:gap-8 w-max items-center py-4 sm:py-6 px-3 sm:px-5">
+                                    <img src="../images/Hrms-admin2.png" alt="dashboard"
+                                        class="w-[260px] sm:w-[360px] md:w-[500px] lg:w-[560px] object-contain shrink-0 rounded-2xl" />
+
+                                    <img src="../images/Hrms-admin3.png" alt="dashboard"
+                                        class="w-[260px] sm:w-[360px] md:w-[500px] lg:w-[560px] object-contain shrink-0 rounded-2xl" />
+
+                                    <img src="../images/Hrms-admin4.png" alt="dashboard"
+                                        class="w-[260px] sm:w-[360px] md:w-[500px] lg:w-[560px] object-contain shrink-0 rounded-2xl" />
+
+                                    <img src="../images/Hrms-admin5.png" alt="dashboard"
+                                        class="w-[260px] sm:w-[360px] md:w-[500px] lg:w-[560px] object-contain shrink-0 rounded-2xl" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom -->
+                        <div
+                            class="mx-auto w-[70%] sm:w-[60%] md:w-[55%] h-5 bg-gradient-to-b from-[#2b2b2b] to-[#111] rounded-b-[20px] border-x border-b border-white/10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMPLOYEE MODULE -->
+            <div id="employeeContent" class="hidden transition-all duration-500">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                    <!-- LEFT -->
+                    <div class="space-y-3 text-center lg:text-left max-w-[500px]">
+
+                        <!-- Heading -->
+                        <div class="space-y-2">
+                            <h3 class="text-[24px] sm:text-[30px] lg:text-[36px] font-bold leading-tight text-white">
+                                Smart Employee
+                                <span class="text-orange-500">Self-Service Portal</span>
+                            </h3>
+
+                            <p class="text-[13px] text-gray-400 leading-relaxed max-w-md mx-auto lg:mx-0">
+                                Empower employees with attendance, payslips, leave requests and HR tools in one modern
+                                dashboard.
+                            </p>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="grid gap-2 pt-1">
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-user-check text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Daily Attendance & Check-In
+                                </span>
+                            </div>
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-file-invoice-dollar text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Payslips & Salary Records
+                                </span>
+                            </div>
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-calendar-days text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Leave Requests & Approval Status
+                                </span>
+                            </div>
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-bell text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Company Notices & Notifications
+                                </span>
+                            </div>
+
+                            <!-- ITEM -->
+                            <div
+                                class="group flex items-center gap-3 bg-white/[0.03] border border-white/[0.05] hover:border-orange-500/20 px-3 py-2.5 rounded-2xl transition-all duration-300">
+
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                                    <i class="fa-solid fa-mobile-screen text-[13px]"></i>
+                                </div>
+
+                                <span class="text-gray-200 text-[13px] sm:text-sm leading-snug">
+                                    Mobile Friendly Employee Access
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="relative mt-4 lg:mt-0">
+                        <!-- Glow -->
+                        <div
+                            class="absolute -top-10 -right-10 w-40 h-40 sm:w-60 sm:h-60 bg-orange-500/15 blur-[80px] sm:blur-[110px] rounded-full">
+                        </div>
+
+                        <!-- MACBOOK -->
+                        <div
+                            class="relative rounded-[20px] sm:rounded-[30px] overflow-hidden border border-white/10 bg-[#0d0d0d] shadow-[0_30px_90px_rgba(0,0,0,0.8)] w-full">
+                            <!-- Top -->
+                            <div
+                                class="flex items-center justify-between px-3 sm:px-5 py-3 border-b border-white/5 bg-[#121212]">
+                                <div class="flex gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                </div>
+
+                                <div class="hidden md:flex items-center gap-2 text-xs text-gray-400">
+                                    <i class="fa-solid fa-user text-orange-500"></i>
+                                    Employee Self Service Portal
+                                </div>
+
+                                <div
+                                    class="px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[11px]">
+                                    Active
+                                </div>
+                            </div>
+
+                            <!-- Screen -->
+                            <div class="relative overflow-hidden bg-[#0a0a0a]">
+                                <div
+                                    class="dashboard-scroll flex gap-4 sm:gap-6 lg:gap-8 w-max items-center py-4 sm:py-6 px-3 sm:px-5">
+                                    <img src="../images/Hrms-emp1.png" alt="employee dashboard"
+                                        class="w-[260px] sm:w-[360px] md:w-[500px] lg:w-[560px] object-contain shrink-0 rounded-2xl" />
+
+                                    <img src="../images/Hrms-emp2.png" alt="employee dashboard"
+                                        class="w-[260px] sm:w-[360px] md:w-[500px] lg:w-[560px] object-contain shrink-0 rounded-2xl" />
+
+                                    <img src="../images/Hrms-emp3.png" alt="employee dashboard"
+                                        class="w-[260px] sm:w-[360px] md:w-[500px] lg:w-[560px] object-contain shrink-0 rounded-2xl" />
+
+                                    <img src="../images/Hrms-emp4.png" alt="employee dashboard"
+                                        class="w-[260px] sm:w-[360px] md:w-[500px] lg:w-[560px] object-contain shrink-0 rounded-2xl" />
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom -->
+                        <div
+                            class="mx-auto w-[70%] sm:w-[60%] md:w-[55%] h-5 bg-gradient-to-b from-[#2b2b2b] to-[#111] rounded-b-[20px] border-x border-b border-white/10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="relative px-6 py-12 overflow-hidden bg-black/55">
+        <!-- Background Glow -->
+        <div class="absolute top-0 right-0 w-[450px] h-[450px] bg-orange-500/10 blur-[140px] rounded-full"></div>
+
+        <div class="relative max-w-7xl mx-auto z-10">
+            <!-- Top -->
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-12">
+                <div>
+                    <span class="text-orange-400 text-xs uppercase tracking-[3px]">
+                        Enterprise Features
+                    </span>
+
+                    <h2 class="text-3xl md:text-4xl font-bold font-raleway mt-3 leading-tight">
+                        HRMS Built for
+                        <span class="text-orange-500">Modern Workforce</span>
+                    </h2>
+                </div>
+
+                <p class="text-gray-400 text-sm leading-relaxed max-w-lg">
+                    Powerful HR automation tools designed to simplify workforce
+                    management, payroll operations and employee productivity.
+                </p>
+            </div>
+
+            <!-- Layout -->
+            <div class="grid lg:grid-cols-12 gap-5">
+                <!-- Left Large Card -->
+                <div
+                    class="lg:col-span-5 relative overflow-hidden rounded-[30px] border border-orange-500/20 bg-gradient-to-br from-orange-500/10 via-transparent to-transparent p-7">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-orange-500/20 blur-3xl rounded-full"></div>
+
+                    <div class="relative z-10">
+                        <!-- Icon + Title -->
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-14 h-14 shrink-0 rounded-2xl bg-orange-500/15 border border-orange-500/20 flex items-center justify-center text-orange-500 text-2xl">
+                                <i class="fa-solid fa-chart-column"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-bold leading-snug">
+                                Real-Time Workforce Analytics
+                            </h3>
+                        </div>
+
+                        <p class="text-gray-300 text-sm leading-relaxed mt-5 max-w-sm">
+                            Monitor employee activity, attendance, payroll and department
+                            performance through live dashboards.
+                        </p>
+
+                        <!-- Mini Stats -->
+                        <div class="grid grid-cols-2 gap-4 mt-8">
+                            <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-4">
+                                <h4 class="text-2xl font-bold text-orange-500">95%</h4>
+                                <p class="text-xs text-gray-400 mt-1">Payroll Accuracy</p>
+                            </div>
+
+                            <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-4">
+                                <h4 class="text-2xl font-bold text-orange-500">70%</h4>
+                                <p class="text-xs text-gray-400 mt-1">Faster Operations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Features -->
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+                    <!-- Card -->
+                    <div
+                        class="rounded-[26px] border border-white/10 bg-white/[0.03] p-6 hover:border-orange-500/30 transition-all duration-300">
+                        <!-- Icon + Title -->
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 shrink-0">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+
+                            <h3 class="text-lg font-semibold leading-tight">
+                                Attendance Management
+                            </h3>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mt-4">
+                            Track employee attendance, shifts, and working hours
+                            efficiently.
+                        </p>
+                    </div>
+
+                    <!-- Card -->
+                    <div
+                        class="rounded-[26px] border border-white/10 bg-white/[0.03] p-6 hover:border-orange-500/30 transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 shrink-0 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+
+                            <h3 class="text-lg font-semibold">Automated Payroll</h3>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mt-4">
+                            Error-free salary generation with tax compliance automation.
+                        </p>
+                    </div>
+
+                    <!-- Card -->
+                    <div
+                        class="rounded-[26px] border border-white/10 bg-white/[0.03] p-6 hover:border-orange-500/30 transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 shrink-0 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500">
+                                <i class="fa-regular fa-id-card"></i>
+                            </div>
+
+                            <h3 class="text-lg font-semibold">Employee Self Service</h3>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mt-4">
+                            Manage attendance, leave requests and payslips independently.
+                        </p>
+                    </div>
+
+                    <!-- Card -->
+                    <div
+                        class="rounded-[26px] border border-white/10 bg-white/[0.03] p-6 hover:border-orange-500/30 transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 shrink-0 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500">
+                                <i class="fa-solid fa-building"></i>
+                            </div>
+
+                            <h3 class="text-lg font-semibold">Multi-Branch Management</h3>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mt-4">
+                            Centralized control for multiple offices and departments.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOK DEMO SECTION -->
+    <section class="relative px-2 md:px-4 py-12 overflow-hidden">
+        <!-- Glow -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/10 blur-[140px] rounded-full">
+        </div>
+
+        <div class="relative max-w-6xl mx-auto">
+            <div
+                class="grid lg:grid-cols-2 rounded-[30px] overflow-hidden border border-white/10 bg-[#0b0b0b]/95 backdrop-blur-xl">
+                <!-- LEFT -->
+                <div class="relative p-4 lg:p-10 flex flex-col justify-center">
+                    <div class="absolute top-0 right-0 w-56 h-56 bg-orange-500/10 blur-[100px] rounded-full"></div>
+
+                    <div class="relative z-10">
+                        <!-- Tag -->
+                        <div
+                            class="inline-flex items-center gap-2 px-2 py-2 rounded-full border border-orange-500/20 bg-orange-500/10 text-orange-400 text-xs font-medium">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            Live HRMS Demo
+                        </div>
+
+                        <!-- Heading -->
+                        <h2 class="text-3xl md:text-3xl font-raleway font-bold leading-tight mt-5 max-w-md">
+                            Schedule Your
+                            <span class="text-orange-500"> HRMS Demo </span>
+                        </h2>
+
+                        <!-- Description -->
+                        <p class="text-gray-400 text-sm leading-relaxed mt-2 max-w-md">
+                            Explore payroll, attendance, employee portal and analytics
+                            through a personalized walkthrough.
+                        </p>
+
+                        <!-- VIDEO / GIF SECTION -->
+                        <div
+                            class="relative mt-7 rounded-[24px] overflow-hidden border border-white/10 bg-[#111111] group">
+                            <!-- Glow -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-tr from-orange-500/10 via-transparent to-orange-500/5 z-10 pointer-events-none">
+                            </div>
+
+                            <!-- Video -->
+                            <video autoplay muted loop playsinline
+                                class="w-full h-[240px] object-cover group-hover:scale-105 transition duration-700">
+                                <source src="../images/adminvid.mp4" type="video/mp4" />
+                            </video>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="grid sm:grid-cols-2 gap-3 mt-7">
+                            <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                                <div
+                                    class="w-11 h-11 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-video"></i>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-sm font-semibold">Online Demo</h4>
+                                    <p class="text-xs text-gray-400">Zoom / Meet Session</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                                <div
+                                    class="w-11 h-11 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-sm font-semibold">30 Min Session</h4>
+                                    <p class="text-xs text-gray-400">Guided Walkthrough</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="border-t lg:border-t-0 lg:border-l border-white/10 bg-[#0f0f0f] p-5 lg:p-7">
+                    <div class="rounded-[26px] border border-white/10 bg-[#121212] overflow-hidden">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
+                            <div>
+                                <h3 class="font-semibold">Book Your Slot</h3>
+                                <p class="text-xs text-gray-500 mt-1">Choose date & time</p>
+                            </div>
+
+                            <div
+                                class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </div>
+                        </div>
+
+                        <!-- Form -->
+                        <div class="p-5 space-y-4">
+                            <!-- Name -->
+                            <div>
+                                <label class="text-xs text-gray-400 mb-2 block">
+                                    Full Name
+                                </label>
+
+                                <input type="text" id="demoName" placeholder="Enter your name"
+                                    class="w-full h-12 rounded-xl border border-white/10 bg-[#181818] px-4 text-sm text-white outline-none focus:border-orange-500" />
+                            </div>
+
+                            <!-- Date -->
+                            <div>
+                                <label class="text-xs text-gray-400 mb-2 block">
+                                    Select Date
+                                </label>
+
+                                <input type="text" id="demoDate" placeholder="Choose date"
+                                    class="w-full h-12 rounded-xl border border-white/10 bg-[#181818] px-4 text-sm text-white outline-none focus:border-orange-500" />
+                            </div>
+
+                            <!-- Slots -->
+                            <div>
+                                <label class="text-xs text-gray-400 mb-2 block">
+                                    Available Slots
+                                </label>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button
+                                        class="time-slot h-11 rounded-xl border border-white/10 bg-[#181818] text-sm hover:border-orange-500 hover:text-orange-400 transition-all">
+                                        10:00 AM
+                                    </button>
+
+                                    <button
+                                        class="time-slot h-11 rounded-xl border border-white/10 bg-[#181818] text-sm hover:border-orange-500 hover:text-orange-400 transition-all">
+                                        12:30 PM
+                                    </button>
+
+                                    <button
+                                        class="time-slot h-11 rounded-xl border border-white/10 bg-[#181818] text-sm hover:border-orange-500 hover:text-orange-400 transition-all">
+                                        03:00 PM
+                                    </button>
+
+                                    <button
+                                        class="time-slot h-11 rounded-xl border border-white/10 bg-[#181818] text-sm hover:border-orange-500 hover:text-orange-400 transition-all">
+                                        05:30 PM
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Selected -->
+                            <div class="rounded-xl border border-orange-500/20 bg-orange-500/5 p-4">
+                                <p class="text-xs text-gray-400">Selected Schedule</p>
+
+                                <h4 id="selectedSchedule" class="text-sm font-semibold text-orange-400 mt-1">
+                                    No slot selected
+                                </h4>
+                            </div>
+
+                            <!-- CTA -->
+                            <button id="bookDemoBtn"
+                                class="w-full h-12 rounded-xl bg-orange-500 hover:bg-orange-600 transition-all font-medium text-sm text-white flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                Book Demo on WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="relative py-16 sm:py-20 px-4 sm:px-6 md:px-12 overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] blur-[140px] rounded-full"></div>
+        </div>
+        <div class="absolute top-1/2 -left-48 -translate-y-1/2 opacity-40 hidden sm:block">
+            <img src="../images/shape-3.png" class="w-[300px] sm:w-[400px] animate-spin-slower" alt="shape" />
+        </div>
+        <div class="relative z-10 text-center">
+            <p class="text-[10px] sm:text-xs tracking-widest text-gray-400 mb-4 sm:mb-6">
+                CONTACT OUR TEAM
+            </p>
+
+            <div class="relative inline-block">
+                <h2
+                    class="text-4xl sm:text-6xl md:text-7xl lg:text-[100px] xl:text-[120px] font-bold font-montserrat leading-[1.1] tracking-tight px-2">
+
+                    SMARTER <br />
+
+                    <span class="block mt-4 sm:mt-6 text-white">
+                        HRMS SOLUTIONS
+                    </span>
+                </h2>
+
+                <!-- CENTER BUTTON -->
+                <div class="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+
+                    <a href="/contact.html"
+                        class="group relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-orange-500 text-white font-medium flex flex-col items-center justify-center text-[8px] sm:text-[9px] md:text-[11px] transition-all duration-300 hover:scale-110 shadow-[0_0_25px_rgba(249,115,22,0.5)] hover:shadow-[0_0_60px_rgba(249,115,22,0.8)]">
+
+                        <i
+                            class="fa-solid fa-arrow-up rotate-45 mb-1 text-[8px] sm:text-[10px] md:text-xs transition-transform duration-300 group-hover:rotate-90"></i>
+
+                        Contact
+
+                        <span class="absolute inset-0 rounded-full border border-orange-400/40 animate-ping"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- Header & Footer JS -->
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+    <script src="./index.js"></script>
+
+    <script>
+        // Tab switching + animations
+        const adminBtn = document.getElementById("tabAdminBtn");
+        const empBtn = document.getElementById("tabEmployeeBtn");
+        const adminDiv = document.getElementById("adminContent");
+        const empDiv = document.getElementById("employeeContent");
+
+        function setActiveTab(isAdmin) {
+            if (isAdmin) {
+                adminBtn.classList.add("tab-active");
+                adminBtn.classList.remove("tab-inactive");
+                empBtn.classList.add("tab-inactive");
+                empBtn.classList.remove("tab-active");
+                adminDiv.classList.remove("hidden");
+                empDiv.classList.add("hidden");
+            } else {
+                empBtn.classList.add("tab-active");
+                empBtn.classList.remove("tab-inactive");
+                adminBtn.classList.add("tab-inactive");
+                adminBtn.classList.remove("tab-active");
+                empDiv.classList.remove("hidden");
+                adminDiv.classList.add("hidden");
+            }
+        }
+        adminBtn.addEventListener("click", () => setActiveTab(true));
+        empBtn.addEventListener("click", () => setActiveTab(false));
+
+        // animated counters
+        const counters = document.querySelectorAll(".stat-number");
+        const speed = 180;
+        const animateNumbers = () => {
+            counters.forEach((counter) => {
+                const updateCount = () => {
+                    const target = parseInt(counter.getAttribute("data-target"));
+                    let current = parseInt(counter.innerText);
+                    const increment = target / 30;
+                    if (current < target) {
+                        let newVal = Math.ceil(current + increment);
+                        if (newVal > target) newVal = target;
+                        counter.innerText = newVal + "%";
+                        setTimeout(updateCount, 40);
+                    } else {
+                        counter.innerText = target + "%";
+                    }
+                };
+                updateCount();
+            });
+        };
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        animateNumbers();
+                        observer.disconnect();
+                    }
+                });
+            },
+            { threshold: 0.4 },
+        );
+        const statsSection = document.querySelector(".grid.md\\:grid-cols-3");
+        if (statsSection) observer.observe(statsSection);
+
+        // CALENDAR
+        flatpickr("#demoDate", {
+            minDate: "today",
+            dateFormat: "F j, Y",
+            disableMobile: true,
+        });
+
+        // SLOT ACTIVE
+        const slots = document.querySelectorAll(".time-slot");
+        const scheduleText = document.getElementById("selectedSchedule");
+
+        let selectedTime = "";
+
+        slots.forEach((slot) => {
+            slot.addEventListener("click", () => {
+                slots.forEach((btn) => {
+                    btn.classList.remove(
+                        "border-orange-500",
+                        "bg-orange-500/10",
+                        "text-orange-400",
+                    );
+                });
+
+                slot.classList.add(
+                    "border-orange-500",
+                    "bg-orange-500/10",
+                    "text-orange-400",
+                );
+
+                selectedTime = slot.innerText;
+
+                const selectedDate = document.getElementById("demoDate").value;
+
+                scheduleText.innerText = `${selectedDate || "Select Date"} • ${selectedTime}`;
+            });
+        });
+
+        // WHATSAPP BOOKING
+        document.getElementById("bookDemoBtn").addEventListener("click", () => {
+            const name = document.getElementById("demoName").value;
+
+            const date = document.getElementById("demoDate").value;
+
+            if (!name || !date || !selectedTime) {
+                alert("Please complete all details");
+                return;
+            }
+
+            const message = `Hello, I would like to book an HRMS Demo.
+
+• Name: ${name}
+• Preferred Date: ${date}
+• Preferred Time: ${selectedTime}
+
+Please confirm the demo availability.`;
+
+            const phone = "917219713151";
+
+            window.open(
+                `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+                "_blank",
+            );
+        });
+    </script>
+</body>
+
+</html>
