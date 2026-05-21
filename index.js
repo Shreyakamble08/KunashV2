@@ -119,5 +119,95 @@ const timelineObserver = new IntersectionObserver((entries) => {
 
 if (section) timelineObserver.observe(section);
 
+//contact form 
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // ===== Get values =====
+        const data = {
+            name: form.name.value.trim(),
+            phone: form.phone.value.trim(),
+            email: form.email.value.trim(),
+            subject: form.subject.value.trim(),
+            message: form.message.value.trim()
+        };
+
+        // ===== Step 1: Validation =====
+        if (Object.values(data).some(v => !v)) {
+            return showToast("Please fill all fields", "error");
+        }
+
+        if (!/^[A-Za-z ]{3,40}$/.test(data.name)) {
+            return showToast("Invalid name", "error");
+        }
+
+        if (!/^[0-9+ ]{10,15}$/.test(data.phone)) {
+            return showToast("Invalid phone number", "error");
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+            return showToast("Invalid email address", "error");
+        }
+
+        if (data.message.length < 10) {
+            return showToast("Message too short", "error");
+        }
+
+        // ===== Step 2: Loading =====
+        showToast("Sending message...", "info");
+
+        try {
+
+            // ===== Step 3: Send Data (API PLACE) =====
+            await fakeAPI(data); // replace this later with backend
+
+            // ===== Step 4: Success =====
+            showToast("Message sent successfully 🚀", "success");
+            form.reset();
+
+        } catch (err) {
+
+            // ===== Step 5: Error =====
+            showToast("Submission failed. Try again", "error");
+        }
+    });
+
+    // ===== Fake API (replace with real backend later) =====
+    function fakeAPI(data) {
+        console.log("Form Data:", data);
+
+        return new Promise((resolve) => {
+            setTimeout(resolve, 1500);
+        });
+    }
+
+    // ===== Toast Function =====
+    function showToast(msg, type = "info") {
+
+        let bg = "#f97316";
+
+        if (type === "success") bg = "#22c55e";
+        if (type === "error") bg = "#ef4444";
+
+        Toastify({
+            text: msg,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            close: true,
+            style: {
+                background: bg,
+                borderRadius: "12px",
+                fontSize: "13px"
+            }
+        }).showToast();
+    }
+
+});
 
 
