@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Kunash Media - Coming Soon</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=DM+Serif+Text:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #010101;
+            overflow-x: hidden;
+            color: #e5e7eb;
+        }
+
+        .coming-soon-hero {
+            background: radial-gradient(circle at 10% 20%, rgba(249, 115, 22, 0.12) 0%, rgba(0, 0, 0, 0.96) 70%),
+                repeating-linear-gradient(45deg, rgba(249, 115, 22, 0.02) 0px, rgba(249, 115, 22, 0.02) 2px, transparent 2px, transparent 8px);
+            min-height: calc(100vh - 80px);
+            position: relative;
+            isolation: isolate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.3) 0%, rgba(249, 115, 22, 0) 70%);
+            filter: blur(80px);
+            bottom: -200px;
+            right: -150px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-orb-left {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, rgba(249, 115, 22, 0) 70%);
+            filter: blur(90px);
+            top: -150px;
+            left: -100px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orange-gradient-text {
+            background: linear-gradient(125deg, #f97316, #ffb86b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cursor {
+            display: inline-block;
+            color: #f97316;
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        alan: ['"Alan Sans"', "sans-serif"],
+                        dmserif: ['"DM Serif Text"', "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                        notoSans: ['"Noto Sans"', "sans-serif"],
+                        notoSerif: ['"Noto Serif"', "serif"],
+                        poiret: ['"Poiret One"', "cursive"],
+                        quicksand: ["Quicksand", "sans-serif"],
+                        raleway: ["Raleway", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="bg-black text-gray-200">
+
+    <div id="header"></div>
+
+    <!-- COMING SOON SECTION - clean and minimal -->
+    <section class="coming-soon-hero relative px-4 sm:px-6 lg:px-12 
+                min-h-[90vh] flex items-center justify-center overflow-hidden">
+
+        <!-- BACKGROUND ORBS -->
+        <div class="hero-orb"></div>
+        <div class="hero-orb-left"></div>
+
+        <!-- TOP RIGHT IMAGE -->
+        <img src="./images/shape-2.png"
+            class="absolute top-6 right-6 w-40 md:w-56 lg:w-72 opacity-20 animate-spin-slow pointer-events-none"
+            alt="decor" />
+
+        <div class="max-w-4xl mx-auto relative z-10 text-center py-16 md:py-24">
+
+            <!-- decorative icon -->
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full 
+                   bg-orange-500/10 border border-orange-500/30 mb-8 mx-auto">
+                <i class="fa-solid fa-chart-line text-orange-400 text-3xl"></i>
+            </div>
+
+            <!-- main heading -->
+            <h1 class="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-notoSerif font-semibold 
+                   tracking-tight leading-[1.1] mb-6">
+                Coming
+                <span class="orange-gradient-text">Soon</span>
+            </h1>
+
+            <!-- subheading -->
+            <p class="typing-box text-gray-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed px-4">
+                <span id="line1"></span><br>
+                <span id="line2"></span><span class="cursor">|</span>
+            </p>
+
+            <!-- minimal divider -->
+            <div class="w-16 h-0.5 bg-orange-500/40 mx-auto mt-8"></div>
+        </div>
+    </section>
+
+    <div id="footer"></div>
+
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+
+    <script>
+const lines = [
+    "We're working on something new.",
+    "Stay tuned for the launch."
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeLine() {
+    const currentLine = lines[lineIndex];
+    const target = document.getElementById(`line${lineIndex + 1}`);
+
+    if (charIndex < currentLine.length) {
+        target.textContent += currentLine.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeLine, 60);
+    } else {
+        // move to next line
+        lineIndex++;
+        charIndex = 0;
+
+        if (lineIndex < lines.length) {
+            setTimeout(typeLine, 500);
+        } else {
+            // stop cursor at end
+            document.querySelector(".cursor").style.display = "none";
+        }
+    }
+}
+
+typeLine();
+</script>
+</body>
+
+</html>
