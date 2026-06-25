@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kunash Media | Careers</title>
+    <link rel="stylesheet" href="../about/about.css" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png" />
+
+    <!-- Apple devices -->
+    <link rel="apple-touch-icon" href="../images/favicon.png" />
+
+    <!-- favicon sizes -->
+    <link rel="shortcut icon" href="../images/favicon.png" />
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=DM+Serif+Text:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..9₀₀&display=swap"
+        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family:
+                system-ui,
+                -apple-system,
+                sans-serif;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0a0a0a, #111111);
+        }
+
+        .card {
+            background: #111111;
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #f97316;
+            box-shadow:
+                0 20px 25px -5px rgba(0, 0, 0, 0.3),
+                0 10px 10px -5px rgba(249, 115, 22, 0.1);
+        }
+
+        .section-header {
+            font-size: 2.75rem;
+            line-height: 1.1;
+        }
+
+        .btn {
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            min-height: 85vh;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-1 {
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .animate-2 {
+            animation: fadeUp 0.7s ease 0.15s forwards;
+            opacity: 0;
+        }
+
+        .animate-3 {
+            animation: fadeUp 0.7s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .animate-4 {
+            animation: fadeUp 0.7s ease 0.45s forwards;
+            opacity: 0;
+        }
+
+        .animate-5 {
+            animation: fadeUp 0.7s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .feature-card {
+            background: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(249, 115, 22, 0.4);
+        }
+
+        .feature-card i {
+            transition: 0.35s ease;
+        }
+
+        .feature-card:hover i {
+            transform: scale(1.15);
+        }
+
+        .hero-blur {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 350px;
+            height: 350px;
+            background: rgba(249, 115, 22, 0.15);
+            filter: blur(120px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        alan: ['"Alan Sans"', "sans-serif"],
+                        dmserif: ['"DM Serif Text"', "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                        notoSans: ['"Noto Sans"', "sans-serif"],
+                        notoSerif: ['"Noto Serif"', "serif"],
+                        poiret: ['"Poiret One"', "cursive"],
+                        quicksand: ["Quicksand", "sans-serif"],
+                        raleway: ["Raleway", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="min-h-screen">
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[85vh] flex items-center overflow-hidden bg-cover bg-center"
+        style="background-image: url(&quot;./images/careerbg.jfif&quot;)">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50"></div>
+
+        <!-- Orange Glow -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-500/20 blur-[120px] rounded-full"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-16 w-full">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <!-- Left -->
+                <div class="space-y-4">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-alan leading-tight">
+                        Build Your Career With
+                        <span class="block text-orange-500"> Kunash Media </span>
+                    </h1>
+
+                    <p class="text-gray-300 text-base md:text-lg max-w-xl">
+                        Join developers, designers and marketers building innovative
+                        digital experiences and impactful solutions.
+                    </p>
+
+                    <a href="#jobs"
+                        class="inline-flex items-center gap-3 px-7 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 transition-all duration-300 font-medium hover:-translate-y-1">
+                        Explore Open Roles
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Right -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div
+                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                                <i class="fas fa-laptop-code text-orange-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-white">Modern Stack</h3>
+                        </div>
+
+                        <p class="text-sm text-gray-400">
+                            Work with the latest technologies and tools.
+                        </p>
+                    </div>
+
+                    <div
+                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                                <i class="fas fa-chart-line text-orange-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-white">Career Growth</h3>
+                        </div>
+
+                        <p class="text-sm text-gray-400">
+                            Learn, grow and take ownership of projects.
+                        </p>
+                    </div>
+
+                    <div
+                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                                <i class="fas fa-users text-orange-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-white">Team Culture</h3>
+                        </div>
+
+                        <p class="text-sm text-gray-400">
+                            Collaborative environment with supportive teammates.
+                        </p>
+                    </div>
+
+                    <div
+                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                                <i class="fas fa-lightbulb text-orange-500"></i>
+                            </div>
+                            <h3 class="font-semibold text-white">Innovation</h3>
+                        </div>
+
+                        <p class="text-sm text-gray-400">
+                            Build creative solutions and bring ideas to life.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions -->
+    <section id="jobs" class="relative py-8 overflow-hidden bg-cover bg-center bg-no-repeat"
+        style="background-image: url(&quot;./images/aboutpg.jfif&quot;)">
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/20"></div>
+
+        <!-- Optional Orange Glow -->
+        <div class="absolute inset-0 bg-gradient-to-r from-orange-500/5 via-transparent to-orange-500/5"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="section-header font-montserrat font-bold text-white">
+                    Join Our Team
+                </h2>
+
+                <p class="text-gray-300 mt-4 text-md max-w-2xl mx-auto">
+                    We're looking for passionate individuals ready to grow, innovate,
+                    and make a difference.
+                </p>
+            </div>
+
+            <div id="jobGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- General Application CTA -->
+    <section id="general-application" class="relative py-10 sm:py-14 px-4 sm:px-6 md:px-12 overflow-hidden">
+        <!-- Grid Background -->
+        <div class="absolute inset-0 opacity-[0.04]">
+            <div class="absolute inset-0
+        bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
+        bg-[size:50px_50px]">
+            </div>
+        </div>
+
+        <!-- Orange Gradient Glow -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+
+            <div class="w-[500px] sm:w-[800px]
+        h-[500px] sm:h-[800px]
+        rounded-full
+        bg-[radial-gradient(circle,rgba(249,115,22,0.18)_10%,rgba(249,115,22,0.08)_50%,transparent_90%)]
+        blur-[100px]">
+            </div>
+
+        </div>
+
+        <!-- Decorative Shape -->
+        <div class="absolute top-1/2 -left-10 -translate-y-1/2 opacity-40 hidden sm:block">
+            <img src="./images/search.png" class="w-[300px] sm:w-[400px] animate-spin-slower" alt="shape" />
+        </div>
+
+        <div class="relative z-10 text-center">
+
+            <p class="text-[10px] sm:text-xs tracking-widest text-gray-400 mb-4 sm:mb-6">
+                GENERAL APPLICATION
+            </p>
+
+            <div class="relative inline-block">
+
+                <h2
+                    class="text-3xl sm:text-5xl md:text-6xl lg:text-[90px] xl:text-[100px] font-bold font-montserrat leading-[1.1] tracking-tight px-2">
+
+                    CAN'T FIND THE <br />
+
+                    <span class="block mt-4 sm:mt-6 text-white">
+                        RIGHT ROLE?
+                    </span>
+
+                </h2>
+
+                <!-- Center CTA Button -->
+                <div class="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+
+                    <button onclick="applyJob('General Application')"
+                        class="group relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-orange-500 text-white font-medium flex flex-col items-center justify-center text-[8px] sm:text-[9px] md:text-[11px] transition-all duration-300 hover:scale-110 shadow-[0_0_25px_rgba(249,115,22,0.5)] hover:shadow-[0_0_60px_rgba(249,115,22,0.8)]">
+
+                        <i
+                            class="fa-solid fa-paper-plane mb-1 text-[8px] sm:text-[10px] md:text-xs transition-transform duration-300 group-hover:translate-x-1">
+                        </i>
+
+                        Apply Now
+
+                        <span class="absolute inset-0 rounded-full border border-orange-400/40 animate-ping">
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <p class="max-w-2xl mx-auto mt-8 text-gray-400 text-sm sm:text-base">
+                We're always looking for talented developers, designers, marketers,
+                and creative thinkers. Share your profile with us and we'll reach out
+                when the right opportunity becomes available.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- Header & Footer JS -->
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+
+    <script>
+        const jobs = [
+            "Frontend Developer",
+            "Backend Developer",
+            "Full Stack Developer",
+            "UI/UX Designer",
+            "React Developer",
+            "SEO Executive",
+            "Digital Marketing Executive",
+            "Graphic Designer",
+            "Software Development Intern",
+        ];
+
+        const descriptions = {
+            "Frontend Developer":
+                "Build responsive, high-performance user interfaces using modern web technologies.",
+
+            "Backend Developer":
+                "Develop secure APIs, business logic, and scalable server-side applications.",
+
+            "Full Stack Developer":
+                "Work across frontend, backend, and databases to deliver complete software solutions.",
+
+            "UI/UX Designer":
+                "Design intuitive user experiences, wireframes, prototypes, and modern interfaces.",
+
+            "React Developer":
+                "Develop dynamic and reusable frontend components using React and modern JavaScript.",
+
+            "SEO Executive":
+                "Improve website visibility and organic traffic through effective SEO strategies.",
+
+            "Digital Marketing Executive":
+                "Plan and execute digital marketing campaigns across multiple channels.",
+
+            "Graphic Designer":
+                "Create engaging visual content, branding materials, and digital creatives.",
+
+            "Software Development Intern":
+                "Learn and contribute to real-world software projects under experienced mentors.",
+        };
+
+        const grid = document.getElementById("jobGrid");
+
+        jobs.forEach((job) => {
+            grid.innerHTML += `
+                                <div
+                class="group relative overflow-hidden rounded-[30px]
+                border border-orange-500/10
+                p-5
+                transition-all duration-500
+                hover:-translate-y-1">
+
+                        <!-- Background Gradient -->
+                        <div
+                            class="absolute inset-0
+                            bg-gradient-to-b
+                            from-[#050505]
+                            via-[#0b0b0b]
+                            to-[#1a0f08]">
+                        </div>
+
+                        <!-- Soft Bottom Fade -->
+                        <div
+                            class="absolute bottom-0 left-0 right-0 h-24
+                            bg-gradient-to-t
+                            from-orange-500/30
+                            via-orange-500/10
+                            to-transparent">
+                        </div>
+
+                        <div class="relative z-10 h-full flex flex-col">
+
+                        <div class="flex items-center justify-between mb-5">
+
+                    <div class="flex items-center gap-4">
+
+                        <div
+                            class="w-12 h-12 rounded-xl
+                            bg-orange-500/10
+                            flex items-center justify-center">
+
+                            <i class="fas fa-briefcase text-orange-400"></i>
+
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">
+                                ${job}
+                            </h3>
+
+                            <div class="flex items-center gap-1 text-xs text-gray-500 mt-1">
+                                <i class="fas fa-location-dot text-orange-400"></i>
+                                Pune, Maharashtra
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <i class="fas fa-arrow-up-right text-gray-500 group-hover:text-orange-400 transition"></i>
+
+                </div>
+
+            <p class="text-gray-400 text-sm leading-relaxed flex-grow">
+                ${descriptions[job]}
+            </p>
+
+            <button
+                onclick="applyJob('${job}')"
+                class="mt-6 text-orange-400 font-medium flex items-center gap-2">
+
+                Apply Now
+                <i class="fas fa-arrow-right text-xs"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+    `;
+        });
+
+        function applyJob(role) {
+            const subject = encodeURIComponent(
+                `Application for ${role} - Kunash Media Solutions`,
+            );
+            const body = encodeURIComponent(`Dear HR Team,
+
+I would like to apply for the ${role} position.
+
+Candidate Details:
+Name:
+Email:
+Phone Number:
+Current Location:
+Experience:
+LinkedIn:
+
+Please find my resume attached.
+
+Thank you,
+`);
+
+            window.open(
+                `https://mail.google.com/mail/?view=cm&fs=1&to=info@kunashmedia.com,hr@kunashmedia.com&su=${subject}&body=${body}`,
+                "_blank",
+            );
+        }
+    </script>
+</body>
+
+</html>
