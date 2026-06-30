@@ -143,8 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-// hero banner 
+//------------------------------------------------- hero banner -----------------------------------------
   // ----- Image Arrays -----
     const outerImages = [
         "./images/webthumb3.jpg",
