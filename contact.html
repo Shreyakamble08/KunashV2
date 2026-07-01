@@ -252,10 +252,15 @@
                     <p class="text-xs uppercase tracking-wider text-gray-500">
                       Office
                     </p>
-                    <p class="text-sm leading-6 text-white">
-                      Vishwa Parvati Building,<br />
-                      Bijlinagar, Pimpri-Chinchwad, Maharashtra 411033
-                    </p>
+                    <a
+  href="https://www.google.com/maps?q=Vishwa+Parvati+Building,+above+Canara+Bank,+Bijlinagar,+Pimpri-Chinchwad,+Maharashtra+411033"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="text-sm leading-6 text-white hover:text-orange-400 transition duration-300"
+>
+  Vishwa Parvati Building,<br />
+  Bijlinagar, Pimpri-Chinchwad, Maharashtra 411033
+</a>
                   </div>
                 </div>
               </div>
@@ -498,29 +503,30 @@
 
           const whatsappNumber = "918080473916";
 
-          const whatsappMessage = `*New Website Enquiry*
+          const whatsappMessage = `New Website Enquiry
 
-👤 Name: ${name}
+Name: ${name}
 
-📞 Phone: ${phone}
+Phone: ${phone}
 
-📧 Email: ${email}
+Email: ${email}
 
-📝 Subject: ${subject}
+Subject: ${subject}
 
-💬 Message:
+Message:
 ${message}`;
 
-          showToast("Redirecting to WhatsApp...", "success");
-
-          setTimeout(() => {
-            window.open(
-              `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
-              "_blank",
+          // Detect Mobile Device
+          const isMobile =
+            /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
+              navigator.userAgent,
             );
 
-            form.reset();
-          }, 700);
+          // WhatsApp URL
+          const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+          window.open(whatsappURL, "_blank");
+          form.reset();
         });
       });
     </script>
