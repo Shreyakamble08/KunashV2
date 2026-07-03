@@ -1,509 +1,386 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=DM+Serif+Text:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us</title>
 
-    <!-- Material Icons -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <!-- Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=DM+Serif+Text:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./images/favicon.png"
-    />
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 
-    <!-- Apple devices -->
-    <link rel="apple-touch-icon" href="./images/favicon.png" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png" />
 
-    <!-- favicon sizes -->
-    <link rel="shortcut icon" href="./images/favicon.png" />
+  <!-- Apple devices -->
+  <link rel="apple-touch-icon" href="./images/favicon.png" />
 
-    <style>
-      body {
-        font-family: "Montserrat", sans-serif;
-        background: #050505;
-        color: white;
-      }
+  <!-- favicon sizes -->
+  <link rel="shortcut icon" href="./images/favicon.png" />
 
-      .glass-card {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: #050505;
+      color: white;
+    }
 
-      .glass-input {
-        width: 100%;
-        height: 48px;
-        padding: 0 18px;
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        border-radius: 14px;
+    .glass-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 18px;
 
-        border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
 
-        background: linear-gradient(
-          135deg,
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      background: linear-gradient(135deg,
           rgba(255, 255, 255, 0.08),
-          rgba(255, 255, 255, 0.02)
-        );
+          rgba(255, 255, 255, 0.02));
 
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
 
-        color: #fff;
+      color: #fff;
 
-        font-size: 14px;
+      font-size: 14px;
 
-        transition: 0.35s ease;
-      }
+      transition: 0.35s ease;
+    }
 
-      .glass-input::placeholder {
-        color: #8b8b8b;
-      }
+    .glass-input::placeholder {
+      color: #8b8b8b;
+    }
 
-      .glass-input:hover {
-        border-color: rgba(249, 115, 22, 0.25);
+    .glass-input:hover {
+      border-color: rgba(249, 115, 22, 0.25);
 
-        background: linear-gradient(
-          135deg,
+      background: linear-gradient(135deg,
           rgba(255, 255, 255, 0.1),
-          rgba(255, 255, 255, 0.03)
-        );
-      }
+          rgba(255, 255, 255, 0.03));
+    }
 
-      .glass-input:focus {
-        outline: none;
+    .glass-input:focus {
+      outline: none;
 
-        border-color: #f97316;
+      border-color: #f97316;
 
-        background: linear-gradient(
-          135deg,
+      background: linear-gradient(135deg,
           rgba(255, 255, 255, 0.12),
-          rgba(255, 255, 255, 0.04)
-        );
+          rgba(255, 255, 255, 0.04));
 
-        box-shadow:
-          0 0 0 4px rgba(249, 115, 22, 0.08),
-          0 10px 25px rgba(249, 115, 22, 0.08);
-      }
+      box-shadow:
+        0 0 0 4px rgba(249, 115, 22, 0.08),
+        0 10px 25px rgba(249, 115, 22, 0.08);
+    }
 
-      textarea.glass-input {
-        height: 130px;
+    textarea.glass-input {
+      height: 130px;
 
-        padding: 16px 18px;
+      padding: 16px 18px;
 
-        resize: none;
-      }
-    </style>
+      resize: none;
+    }
+  </style>
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              alan: ['"Alan Sans"', "sans-serif"],
-              dmserif: ['"DM Serif Text"', "serif"],
-              montserrat: ["Montserrat", "sans-serif"],
-              notoSans: ['"Noto Sans"', "sans-serif"],
-              notoSerif: ['"Noto Serif"', "serif"],
-              poiret: ['"Poiret One"', "cursive"],
-              quicksand: ["Quicksand", "sans-serif"],
-              raleway: ["Raleway", "sans-serif"],
-            },
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            alan: ['"Alan Sans"', "sans-serif"],
+            dmserif: ['"DM Serif Text"', "serif"],
+            montserrat: ["Montserrat", "sans-serif"],
+            notoSans: ['"Noto Sans"', "sans-serif"],
+            notoSerif: ['"Noto Serif"', "serif"],
+            poiret: ['"Poiret One"', "cursive"],
+            quicksand: ["Quicksand", "sans-serif"],
+            raleway: ["Raleway", "sans-serif"],
           },
         },
-      };
-    </script>
-  </head>
+      },
+    };
+  </script>
+</head>
 
-  <body>
-    <!-- HEADER -->
-    <div id="header"></div>
+<body>
+  <!-- HEADER -->
+  <div id="header"></div>
 
-    <!-- ================= CONTACT SECTION - PREMIUM COMPACT ================= -->
-    <section
-      id="contactForm"
-      class="relative overflow-hidden bg-[#050505] py-6 px-4 sm:px-6"
-    >
-      <div class="max-w-6xl mx-auto mt-14 lg:mt-16">
-        <div
-          class="grid lg:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-2xl border border-white/10 bg-[#0c0c0c]"
-        >
-          <!-- LEFT -->
-          <div
-            class="relative overflow-hidden bg-[#0B0B0B] p-8 lg:p-10 flex flex-col justify-center"
-          >
-            <!-- Glass Glow -->
-            <div
-              class="absolute -top-16 -right-16 h-64 w-64 rounded-full bg-orange-500/50 blur-[100px]"
-            ></div>
-            <div
-              class="absolute bottom-0 left-0 h-56 w-56 rounded-full bg-orange-500/40 blur-[100px]"
-            ></div>
+  <!-- ================= CONTACT SECTION - PREMIUM COMPACT ================= -->
+  <section id="contactForm" class="relative overflow-hidden bg-[#050505] py-6 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto mt-14 lg:mt-16">
+      <div class="grid lg:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-2xl border border-white/10 bg-[#0c0c0c]">
+        <!-- LEFT -->
+        <div class="relative overflow-hidden bg-[#0B0B0B] p-8 lg:p-10 flex flex-col justify-center">
+          <!-- Glass Glow -->
+          <div class="absolute -top-16 -right-16 h-64 w-64 rounded-full bg-orange-500/50 blur-[100px]"></div>
+          <div class="absolute bottom-0 left-0 h-56 w-56 rounded-full bg-orange-500/40 blur-[100px]"></div>
 
-            <div class="relative z-10">
-              <!-- Heading -->
-              <h2 class="text-3xl font-semibold leading-tight text-white">
-                Let's build something amazing together.
-              </h2>
+          <div class="relative z-10">
+            <!-- Heading -->
+            <h2 class="text-3xl font-semibold leading-tight text-white">
+              Let's build something amazing together.
+            </h2>
 
-              <!-- Contact Info -->
-              <div class="mt-8 space-y-4">
-                <!-- Phone -->
-                <div
-                  class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4"
-                >
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400"
-                  >
-                    <i class="fa-solid fa-phone"></i>
-                  </div>
-
-                  <div>
-                    <p class="text-xs uppercase tracking-wider text-gray-500">
-                      Phone
-                    </p>
-                    <a
-                      href="tel:+918080473916"
-                      class="text-sm font-medium text-white hover:text-orange-400 transition"
-                    >
-                      +91 8080 473 916
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Email -->
-                <div
-                  class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4"
-                >
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400"
-                  >
-                    <i class="fa-solid fa-envelope"></i>
-                  </div>
-
-                  <div>
-                    <p class="text-xs uppercase tracking-wider text-gray-500">
-                      Email
-                    </p>
-                    <a
-                      href="mailto:kunashmedia@gmail.com"
-                      class="text-sm font-medium text-white hover:text-orange-400 transition"
-                    >
-                      kunashmedia@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Address -->
-                <div
-                  class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4"
-                >
-                  <div
-                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 shrink-0"
-                  >
-                    <i class="fa-solid fa-location-dot"></i>
-                  </div>
-
-                  <div>
-                    <p class="text-xs uppercase tracking-wider text-gray-500">
-                      Office
-                    </p>
-                    <a
-  href="https://www.google.com/maps?q=Vishwa+Parvati+Building,+above+Canara+Bank,+Bijlinagar,+Pimpri-Chinchwad,+Maharashtra+411033"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="text-sm leading-6 text-white hover:text-orange-400 transition duration-300"
->
-  Vishwa Parvati Building,<br />
-  Bijlinagar, Pimpri-Chinchwad, Maharashtra 411033
-</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- RIGHT -->
-          <div
-            class="relative overflow-hidden rounded-r-2xl border-l border-white/10 bg-gradient-to-br from-[#141414] via-[#111111] to-[#0b0b0b] p-6 lg:p-4"
-          >
-            <!-- ================= Premium Ambient Lighting ================= -->
-            <!-- Main Ambient Light -->
-            <div
-              class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_42%)]"
-            ></div>
-
-            <!-- Secondary Warm Light -->
-            <div
-              class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.08),transparent_48%)]"
-            ></div>
-
-            <!-- Glass Reflection -->
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-orange-500/[0.02]"
-            ></div>
-
-            <div class="relative z-10">
-              <!-- Header -->
-              <div class="mb-6 flex items-center gap-4">
-                <div
-                  class="flex h-11 w-11 items-center justify-center rounded-2xl border border-orange-500/20 bg-orange-500/10 backdrop-blur-xl"
-                >
-                  <i class="fa-solid fa-paper-plane text-orange-400"></i>
+            <!-- Contact Info -->
+            <div class="mt-8 space-y-4">
+              <!-- Phone -->
+              <div
+                class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400">
+                  <i class="fa-solid fa-phone"></i>
                 </div>
 
                 <div>
-                  <span
-                    class="text-[11px] uppercase tracking-[0.25em] text-orange-400"
-                  >
-                    Start a Project
-                  </span>
-
-                  <h3 class="mt-1 text-2xl font-semibold text-white">
-                    Send Message
-                  </h3>
-
-                  <p class="mt-1 text-sm text-gray-400">
-                    We'd love to hear about your next project.
+                  <p class="text-xs uppercase tracking-wider text-gray-500">
+                    Phone
                   </p>
+                  <a href="tel:+918080473916" class="text-sm font-medium text-white hover:text-orange-400 transition">
+                    +91 8080 473 916
+                  </a>
                 </div>
               </div>
 
-              <!-- FORM -->
-              <form id="contact-form" class="space-y-4">
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    class="glass-input"
-                    required
-                  />
-
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    class="glass-input"
-                    required
-                  />
-                </div>
-
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    class="glass-input"
-                    required
-                  />
-
-                  <input
-                    type="text"
-                    name="subject"
-                    placeholder="Subject"
-                    class="glass-input"
-                    required
-                  />
-                </div>
-
-                <textarea
-                  name="message"
-                  rows="4"
-                  placeholder="Tell us about your project..."
-                  class="glass-input resize-none h-32"
-                  required
-                ></textarea>
-
-                <button
-                  type="submit"
-                  class="group flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-orange-500 via-orange-500 to-orange-600 text-white"
-                >
-                  Send Message
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= HERO SECTION ================= -->
-    <section
-      class="relative overflow-hidden bg-[#050505] px-2 sm:px-4 lg:px-6 py-10 lg:py-12"
-    >
-      <!-- Background Glow -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div
-          class="absolute -top-10 left-0 w-[320px] h-[320px] bg-orange-500/10 blur-[120px] rounded-full"
-        ></div>
-
-        <div
-          class="absolute -bottom-10 right-0 w-[320px] h-[320px] bg-orange-500/10 blur-[120px] rounded-full"
-        ></div>
-      </div>
-
-      <div class="relative max-w-7xl mx-auto">
-        <!-- Banner -->
-        <div
-          class="relative overflow-hidden rounded-[24px] border border-white/10 bg-gradient-to-br from-[#111111] via-[#0d0d0d] to-[#080808] px-6 lg:px-10 py-7 lg:py-8"
-        >
-          <!-- Top Gradient Line -->
-          <div
-            class="absolute top-0 left-0 h-[3px] w-full bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600"
-          ></div>
-
-          <!-- Content -->
-          <div
-            class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-10"
-          >
-            <!-- LEFT -->
-            <div class="flex-1 max-w-2xl">
-              <!-- Badge -->
+              <!-- Email -->
               <div
-                class="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/5 backdrop-blur-md px-4 py-1.5"
-              >
-                <span
-                  class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"
-                ></span>
+                class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
 
-                <span
-                  class="text-[11px] uppercase tracking-[0.22em] text-orange-300"
-                >
-                  Let's Connect
-                </span>
+                <div>
+                  <p class="text-xs uppercase tracking-wider text-gray-500">
+                    Email
+                  </p>
+                  <a href="mailto:kunashmedia@gmail.com"
+                    class="text-sm font-medium text-white hover:text-orange-400 transition">
+                    kunashmedia@gmail.com
+                  </a>
+                </div>
               </div>
 
-              <!-- Heading -->
-              <h2
-                class="mt-5 text-3xl md:text-4xl lg:text-[46px] font-semibold leading-[1.08] tracking-tight text-white"
-              >
-                Let's Build Your
+              <!-- Address -->
+              <div
+                class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-4">
+                <div
+                  class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 shrink-0">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
 
-                <span
-                  class="bg-gradient-to-r from-orange-300 via-orange-400 to-orange-500 bg-clip-text text-transparent"
-                >
-                  Next Digital Product
-                </span>
-              </h2>
-
-              <!-- Description -->
-              <p class="mt-4 max-w-xl text-[15px] leading-7 text-gray-400">
-                Whether you need a website, business software, UI/UX design, or
-                digital marketing, our team is ready to help transform your
-                ideas into reality.
-              </p>
-            </div>
-
-            <!-- Divider -->
-            <div
-              class="hidden lg:block h-24 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"
-            ></div>
-
-            <!-- RIGHT -->
-            <div class="flex flex-col items-center lg:items-end gap-3">
-              <!-- Image -->
-              <img
-                src="images/contact.png"
-                alt="Contact Illustration"
-                class="w-44 lg:w-52 object-contain"
-              />
+                <div>
+                  <p class="text-xs uppercase tracking-wider text-gray-500">
+                    Office
+                  </p>
+                  <a href="https://www.google.com/maps?q=Vishwa+Parvati+Building,+above+Canara+Bank,+Bijlinagar,+Pimpri-Chinchwad,+Maharashtra+411033"
+                    target="_blank" rel="noopener noreferrer"
+                    class="text-sm leading-6 text-white hover:text-orange-400 transition duration-300">
+                    Vishwa Parvati Building,<br />
+                    Bijlinagar, Pimpri-Chinchwad, Maharashtra 411033
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- RIGHT -->
+        <div
+          class="relative overflow-hidden rounded-r-2xl border-l border-white/10 bg-gradient-to-br from-[#141414] via-[#111111] to-[#0b0b0b] p-6 lg:p-4">
+          <!-- ================= Premium Ambient Lighting ================= -->
+          <!-- Main Ambient Light -->
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.14),transparent_42%)]">
+          </div>
+
+          <!-- Secondary Warm Light -->
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.08),transparent_48%)]">
+          </div>
+
+          <!-- Glass Reflection -->
+          <div class="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-orange-500/[0.02]"></div>
+
+          <div class="relative z-10">
+            <!-- Header -->
+            <div class="mb-6 flex items-center gap-4">
+              <div
+                class="flex h-11 w-11 items-center justify-center rounded-2xl border border-orange-500/20 bg-orange-500/10 backdrop-blur-xl">
+                <i class="fa-solid fa-paper-plane text-orange-400"></i>
+              </div>
+
+              <div>
+                <span class="text-[11px] uppercase tracking-[0.25em] text-orange-400">
+                  Start a Project
+                </span>
+
+                <h3 class="mt-1 text-2xl font-semibold text-white">
+                  Send Message
+                </h3>
+
+                <p class="mt-1 text-sm text-gray-400">
+                  We'd love to hear about your next project.
+                </p>
+              </div>
+            </div>
+
+            <!-- FORM -->
+            <form id="contact-form" class="space-y-4">
+              <div class="grid gap-4 sm:grid-cols-2">
+                <input type="text" name="name" placeholder="Full Name" class="glass-input" required />
+
+                <input type="tel" name="phone" placeholder="Phone Number" class="glass-input" required />
+              </div>
+
+              <div class="grid gap-4 sm:grid-cols-2">
+                <input type="email" name="email" placeholder="Email Address" class="glass-input" required />
+
+                <input type="text" name="subject" placeholder="Subject" class="glass-input" required />
+              </div>
+
+              <textarea name="message" rows="4" placeholder="Tell us about your project..."
+                class="glass-input resize-none h-32" required></textarea>
+
+              <button type="submit"
+                class="group flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-orange-500 via-orange-500 to-orange-600 text-white">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FOOTER -->
-    <div id="footer"></div>
+  <!-- ================= HERO SECTION ================= -->
+  <section class="relative overflow-hidden bg-[#050505] px-2 sm:px-4 lg:px-6 py-10 lg:py-12">
+    <!-- Background Glow -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute -top-10 left-0 w-[320px] h-[320px] bg-orange-500/10 blur-[120px] rounded-full"></div>
 
-    <!-- Header & Footer JS -->
-    <script src="../header/header.js"></script>
-    <script src="../footer/footer.js"></script>
-    <script src="./index.js"></script>
+      <div class="absolute -bottom-10 right-0 w-[320px] h-[320px] bg-orange-500/10 blur-[120px] rounded-full"></div>
+    </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const form = document.getElementById("contact-form");
+    <div class="relative max-w-7xl mx-auto">
+      <!-- Banner -->
+      <div
+        class="relative overflow-hidden rounded-[24px] border border-white/10 bg-gradient-to-br from-[#111111] via-[#0d0d0d] to-[#080808] px-6 lg:px-10 py-7 lg:py-8">
+        <!-- Top Gradient Line -->
+        <div class="absolute top-0 left-0 h-[3px] w-full bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">
+        </div>
 
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
+        <!-- Content -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-10">
+          <!-- LEFT -->
+          <div class="flex-1 max-w-2xl">
+            <!-- Badge -->
+            <div
+              class="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/5 backdrop-blur-md px-4 py-1.5">
+              <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
 
-          const name = form.name.value.trim();
-          const phone = form.phone.value.trim();
-          const email = form.email.value.trim();
-          const subject = form.subject.value.trim();
-          const message = form.message.value.trim();
+              <span class="text-[11px] uppercase tracking-[0.22em] text-orange-300">
+                Let's Connect
+              </span>
+            </div>
 
-          if (name === "") {
-            return showToast("Please enter your name", "error");
-          }
+            <!-- Heading -->
+            <h2 class="mt-5 text-3xl md:text-4xl lg:text-[46px] font-semibold leading-[1.08] tracking-tight text-white">
+              Let's Build Your
 
-          if (phone.length < 10) {
-            return showToast("Please enter a valid phone number", "error");
-          }
+              <span class="bg-gradient-to-r from-orange-300 via-orange-400 to-orange-500 bg-clip-text text-transparent">
+                Next Digital Product
+              </span>
+            </h2>
 
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            <!-- Description -->
+            <p class="mt-4 max-w-xl text-[15px] leading-7 text-gray-400">
+              Whether you need a website, business software, UI/UX design, or
+              digital marketing, our team is ready to help transform your
+              ideas into reality.
+            </p>
+          </div>
 
-          if (!emailRegex.test(email)) {
-            return showToast("Please enter a valid email", "error");
-          }
+          <!-- Divider -->
+          <div class="hidden lg:block h-24 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
 
-          if (subject === "") {
-            return showToast("Please enter subject", "error");
-          }
+          <!-- RIGHT -->
+          <div class="flex flex-col items-center lg:items-end gap-3">
+            <!-- Image -->
+            <img src="images/contact.png" alt="Contact Illustration" class="w-44 lg:w-52 object-contain" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          if (message.length < 10) {
-            return showToast("Please enter your message", "error");
-          }
+  <!-- FOOTER -->
+  <div id="footer"></div>
 
-          const whatsappNumber = "918080473916";
+  <!-- Header & Footer JS -->
+  <script src="../header/header.js"></script>
+  <script src="../footer/footer.js"></script>
+  <script src="./index.js"></script>
 
-          const whatsappMessage = `New Website Enquiry
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contact-form");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = form.name.value.trim();
+        const phone = form.phone.value.trim();
+        const email = form.email.value.trim();
+        const subject = form.subject.value.trim();
+        const message = form.message.value.trim();
+
+        if (name === "") {
+          return showToast("Please enter your name", "error");
+        }
+
+        if (phone.length < 10) {
+          return showToast("Please enter a valid phone number", "error");
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+          return showToast("Please enter a valid email", "error");
+        }
+
+        if (subject === "") {
+          return showToast("Please enter subject", "error");
+        }
+
+        if (message.length < 10) {
+          return showToast("Please enter your message", "error");
+        }
+
+        const whatsappNumber = "918080473916";
+
+        const whatsappMessage = `New Website Enquiry
 
 Name: ${name}
 
@@ -516,19 +393,20 @@ Subject: ${subject}
 Message:
 ${message}`;
 
-          // Detect Mobile Device
-          const isMobile =
-            /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
-              navigator.userAgent,
-            );
+        // Detect Mobile Device
+        const isMobile =
+          /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
+            navigator.userAgent,
+          );
 
-          // WhatsApp URL
-          const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+        // WhatsApp URL
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
-          window.open(whatsappURL, "_blank");
-          form.reset();
-        });
+        window.open(whatsappURL, "_blank");
+        form.reset();
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
