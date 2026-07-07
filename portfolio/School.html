@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>School Management System</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png" />
+
+    <!-- Apple devices -->
+    <link rel="apple-touch-icon" href="../images/favicon.png" />
+
+    <!-- favicon sizes -->
+    <link rel="shortcut icon" href="../images/favicon.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050505;
+            color: #f0ece8;
+            overflow-x: hidden;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(249, 115, 22, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card-module {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card-module::before {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle,
+                    rgba(249, 115, 22, 0.06),
+                    transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .glass-card-module:hover::before {
+            opacity: 1;
+        }
+
+        .glass-card-module:hover {
+            border-color: rgba(249, 115, 22, 0.3);
+            transform: translateY(-8px);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(249, 115, 22, 0.04);
+        }
+
+        .icon-wrap {
+            width: 52px;
+            height: 52px;
+            background: rgba(249, 115, 22, 0.08);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fdba74;
+            font-size: 1.3rem;
+            border: 1px solid rgba(249, 115, 22, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card-module:hover .icon-wrap {
+            background: rgba(249, 115, 22, 0.15);
+            border-color: rgba(249, 115, 22, 0.2);
+            transform: scale(1.05) rotate(-4deg);
+        }
+
+        .icon-wrap-sm {
+            width: 40px;
+            height: 40px;
+            background: rgba(249, 115, 22, 0.08);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fdba74;
+            border: 1px solid rgba(249, 115, 22, 0.05);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #f97316, #fb923c, #fdba74);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Badge */
+        .badge-premium {
+            background: rgba(249, 115, 22, 0.08);
+            color: #fdba74;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(249, 115, 22, 0.1);
+            text-transform: uppercase;
+        }
+
+        /* Feature Pill */
+        .feature-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 40px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.75rem;
+            color: #a89888;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-pill:hover {
+            background: rgba(249, 115, 22, 0.06);
+            border-color: rgba(249, 115, 22, 0.15);
+            color: #fdba74;
+        }
+
+        .feature-pill i {
+            color: #f97316;
+            font-size: 0.6rem;
+        }
+
+        .dot-orange {
+            width: 5px;
+            height: 5px;
+            background: #f97316;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            background: #050505;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 12px;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Section Glow */
+        .section-glow {
+            background: radial-gradient(ellipse at 50% 20%,
+                    rgba(249, 115, 22, 0.03),
+                    transparent 70%);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .heading-48 {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+
+            .card-title {
+                font-size: 1.1rem !important;
+            }
+
+            .card-desc {
+                font-size: 0.8rem !important;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .heading-48 {
+                font-size: 2.8rem !important;
+            }
+        }
+
+        /*hero section animation */
+
+        /* Floating */
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .animate-float {
+            animation: float 7s ease-in-out infinite;
+        }
+
+        /* Softer Animated Border */
+
+        .animated-border {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+
+        .animated-border::before {
+            content: "";
+            position: absolute;
+            inset: -180%;
+            background: conic-gradient(from 0deg,
+                    transparent,
+                    rgba(249, 115, 22, 0.35),
+                    rgba(251, 191, 36, 0.25),
+                    rgba(249, 115, 22, 0.35),
+                    transparent);
+            animation: rotate 12s linear infinite;
+        }
+
+        .animated-border>div {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Softer Shine */
+
+        .shine {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shine::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -120%;
+            width: 28%;
+            height: 200%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.08),
+                    transparent);
+            transform: rotate(25deg);
+            animation: shine 8s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                left: 170%;
+            }
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        alan: ['"Alan Sans"', "sans-serif"],
+                        dmserif: ['"DM Serif Text"', "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                        notoSans: ['"Noto Sans"', "sans-serif"],
+                        notoSerif: ['"Noto Serif"', "serif"],
+                        poiret: ['"Poiret One"', "cursive"],
+                        quicksand: ["Quicksand", "sans-serif"],
+                        raleway: ["Raleway", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section
+        class="relative min-h-[80vh] flex items-center px-4 sm:px-8 overflow-hidden bg-[radial-gradient(circle_at_20%_20%,rgba(249,115,22,0.05),transparent_30%),radial-gradient(circle_at_80%_70%,rgba(249,115,22,0.03),transparent_35%),linear-gradient(to_bottom,#111111,#0d0d0d,#080808)]">
+        <!-- Tech grid lines -->
+        <div
+            class="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.03)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto w-full py-12 lg:py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-6xl font-semibold font-alan text-white mt-4 leading-tight">
+                        The Complete <br />
+                        <span
+                            class="text-transparent font-raleway bg-clip-text bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 [text-shadow:0_0_40px_rgba(249,115,22,0.3)]">School
+                            Management</span>
+                        <br />
+                        Platform
+                    </h1>
+                    <p class="text-gray-400 text-sm sm:text-base max-w-lg mt-4 leading-relaxed">
+                        A modern, cloud-based solution designed to streamline school
+                        operations, enhance communication, and improve educational
+                        outcomes for institutions of all sizes.
+                    </p>
+                </div>
+
+                <!-- Right - Neon tech stats -->
+                <div class="relative flex justify-center">
+                    <!-- Soft Background Glow -->
+                    <div
+                        class="absolute -inset-6 bg-gradient-to-r from-orange-500/8 via-amber-400/6 to-orange-500/8 rounded-[36px] blur-2xl opacity-50 animate-pulse">
+                    </div>
+
+                    <!-- Animated Border -->
+                    <div class="animated-border rounded-3xl p-[1.5px]">
+                        <div
+                            class="relative bg-[#0d0d0d] rounded-3xl overflow-hidden border border-orange-500/10 shadow-[0_0_20px_rgba(249,115,22,0.08)] animate-float">
+                            <div class="shine"></div>
+
+                            <img src="../images/school.png" alt="School Portal Dashboard"
+                                class="w-full rounded-3xl transition-transform duration-700 hover:scale-[1.015]" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCT OVERVIEW SECTION ===== -->
+    <section class="relative py-6 sm:py-8 px-2 sm:px-2 lg:px-4 overflow-hidden bg-[#050505] isolate">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <!-- Center Orange Glow -->
+            <div
+                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-orange-500/10 blur-[180px]">
+            </div>
+
+            <!-- Top Left Glow -->
+            <div class="absolute -top-40 -left-40 w-[450px] h-[450px] rounded-full bg-orange-600/10 blur-[140px]"></div>
+
+            <!-- Bottom Right Glow -->
+            <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-orange-500/10 blur-[150px]">
+            </div>
+
+            <!-- Large Background Text -->
+            <div class="absolute inset-0 flex items-center justify-center">
+                <h1
+                    class="text-[130px] lg:text-[220px] font-black uppercase tracking-[0.2em] text-white/[0.02] select-none">
+                    SCHOOL ERP
+                </h1>
+            </div>
+        </div>
+        <div class="relative max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-4">
+
+                <h2 class="mt-5 text-3xl md:text-4xl lg:text-5xl font-bold font-alan text-white leading-tight">
+                    Smart School ERP
+                    <span class="text-orange-400 font-semibold font-raleway"> Built for Modern Institutions </span>
+                </h2>
+            </div>
+
+            <!-- Main Overview Card -->
+            <div class="relative overflow-hidden rounded-3xl border border-orange-500/10 bg-gradient-to-br from-[#131313] via-[#0e0e0e] to-[#171717] backdrop-blur-xl shadow-[0_40px_80px_rgba(0,0,0,0.45)] p-6 lg:p-8"
+                class="relative overflow-hidden rounded-3xl border border-orange-500/10
+                bg-[linear-gradient(135deg,#050505_0%,#0d0d0d_55%,#1a120c_100%)]
+                backdrop-blur-xl
+                shadow-[0_40px_80px_rgba(0,0,0,0.55)]
+                p-6 lg:p-8">
+                <!-- Orange Glow -->
+                <div class="absolute -top-24 -right-16 w-80 h-80 rounded-full bg-orange-500/10 blur-[140px]"></div>
+
+                <!-- Bottom Glow -->
+                <div class="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-orange-400/5 blur-[130px]"></div>
+
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <!-- Left -->
+                    <div>
+                        <span class="text-orange-400 uppercase tracking-[0.2em] text-xs font-medium">
+                            Why Choose School ERP
+                        </span>
+
+                        <h3 class="text-3xl font-bold text-white mt-3">
+                            Everything Your Institution Needs in One Platform
+                        </h3>
+
+                        <p class="mt-5 text-gray-400 leading-8">
+                            From admissions and attendance to examinations, academics,
+                            reports, and administration, School ERP brings every essential
+                            operation into a single intelligent platform. It eliminates
+                            manual processes, improves collaboration across departments, and
+                            helps institutions operate more efficiently.
+                        </p>
+                    </div>
+
+                    <!-- Right -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5">
+
+                        <!-- Card -->
+                        <div
+                            class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 hover:border-orange-500/20 hover:bg-white/[0.05] transition-all duration-300">
+                            <i class="fas fa-user-graduate text-orange-400 text-xl sm:text-2xl mb-4"></i>
+
+                            <h4 class="text-white font-semibold text-base sm:text-lg">
+                                Student Management
+                            </h4>
+
+                            <p class="text-gray-400 text-sm leading-6 mt-2">
+                                Admissions, profiles, attendance and academic records.
+                            </p>
+                        </div>
+
+                        <!-- Card -->
+                        <div
+                            class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 hover:border-orange-500/20 hover:bg-white/[0.05] transition-all duration-300">
+                            <i class="fas fa-chalkboard-teacher text-orange-400 text-xl sm:text-2xl mb-4"></i>
+
+                            <h4 class="text-white font-semibold text-base sm:text-lg">
+                                Teacher Portal
+                            </h4>
+
+                            <p class="text-gray-400 text-sm leading-6 mt-2">
+                                Staff management, attendance and classroom activities.
+                            </p>
+                        </div>
+
+                        <!-- Card -->
+                        <div
+                            class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 hover:border-orange-500/20 hover:bg-white/[0.05] transition-all duration-300">
+                            <i class="fas fa-chart-line text-orange-400 text-xl sm:text-2xl mb-4"></i>
+
+                            <h4 class="text-white font-semibold text-base sm:text-lg">
+                                Real-time Analytics
+                            </h4>
+
+                            <p class="text-gray-400 text-sm leading-6 mt-2">
+                                Powerful dashboards with actionable insights and reports.
+                            </p>
+                        </div>
+
+                        <!-- Card -->
+                        <div
+                            class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 hover:border-orange-500/20 hover:bg-white/[0.05] transition-all duration-300">
+                            <i class="fas fa-shield-alt text-orange-400 text-xl sm:text-2xl mb-4"></i>
+
+                            <h4 class="text-white font-semibold text-base sm:text-lg">
+                                Secure & Scalable
+                            </h4>
+
+                            <p class="text-gray-400 text-sm leading-6 mt-2">
+                                Role-based access with enterprise-grade security.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Highlights -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+
+                <!-- Card -->
+                <div
+                    class="group relative overflow-hidden rounded-2xl border border-orange-500/10 bg-white/[0.03] backdrop-blur-xl px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-[0_0_30px_rgba(249,115,22,0.18)]">
+
+                    <!-- Glow -->
+                    <div
+                        class="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-orange-500/15 blur-3xl opacity-70 group-hover:opacity-100 transition">
+                    </div>
+
+                    <!-- Texture -->
+                    <div class="absolute inset-0 opacity-[0.04]"
+                        style="background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:18px 18px;">
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <h3 class="text-3xl font-bold text-orange-400">10+</h3>
+                        <p class="text-gray-300 text-xs uppercase tracking-wider mt-1">
+                            Core Modules
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card -->
+                <div
+                    class="group relative overflow-hidden rounded-2xl border border-orange-500/10 bg-white/[0.03] backdrop-blur-xl px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-[0_0_30px_rgba(249,115,22,0.18)]">
+
+                    <div
+                        class="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-orange-500/15 blur-3xl opacity-70 group-hover:opacity-100 transition">
+                    </div>
+
+                    <div class="absolute inset-0 opacity-[0.04]"
+                        style="background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:18px 18px;">
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <h3 class="text-3xl font-bold text-orange-400">100%</h3>
+                        <p class="text-gray-300 text-xs uppercase tracking-wider mt-1">
+                            Cloud Ready
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card -->
+                <div
+                    class="group relative overflow-hidden rounded-2xl border border-orange-500/10 bg-white/[0.03] backdrop-blur-xl px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-[0_0_30px_rgba(249,115,22,0.18)]">
+
+                    <div
+                        class="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-orange-500/15 blur-3xl opacity-70 group-hover:opacity-100 transition">
+                    </div>
+
+                    <div class="absolute inset-0 opacity-[0.04]"
+                        style="background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:18px 18px;">
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <h3 class="text-3xl font-bold text-orange-400">24/7</h3>
+                        <p class="text-gray-300 text-xs uppercase tracking-wider mt-1">
+                            Availability
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card -->
+                <div
+                    class="group relative overflow-hidden rounded-2xl border border-orange-500/10 bg-white/[0.03] backdrop-blur-xl px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-[0_0_30px_rgba(249,115,22,0.18)]">
+
+                    <div
+                        class="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-orange-500/15 blur-3xl opacity-70 group-hover:opacity-100 transition">
+                    </div>
+
+                    <div class="absolute inset-0 opacity-[0.04]"
+                        style="background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:18px 18px;">
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <h3 class="text-3xl font-bold text-orange-400">Multi</h3>
+                        <p class="text-gray-300 text-xs uppercase tracking-wider mt-1">
+                            Role Access
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MODULES SECTION ===== -->
+    <section class="section-glow relative py-10 sm:py-12 lg:py-10 px-2 sm:px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- Watermark -->
+            <div class="absolute top-0 right-0 pointer-events-none select-none overflow-hidden">
+                <img src="../images/shape-3.png" alt=""
+                    class="w-56 sm:w-72 lg:w-[420px] opacity-[0.20] object-contain translate-x-12 -translate-y-8" />
+            </div>
+            <!-- Header -->
+            <div class="text-center max-w-4xl mx-auto mb-4 lg:mb-6">
+                <div class="inline-flex items-center gap-2 badge-premium mb-4">
+                    <i class="fas fa-cube text-[10px]"></i>
+                    Core Modules
+                </div>
+                <h2 class="heading-48 text-3xl sm:text-4xl lg:text-5xl font-bold font-alan text-white leading-tight">
+                    Everything Your School Needs,<br />
+                    <span class="gradient-text font-raleway font-semibold">All in One Platform</span>
+                </h2>
+                <p class="text-gray-400 text-sm max-w-2xl mx-auto mt-3 leading-relaxed">
+                    Digitize admissions, academics, attendance, examinations, teachers,
+                    and administration through one centralized School ERP system
+                    designed for modern educational institutions.
+                </p>
+            </div>
+
+            <!-- Modules Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                <!-- Module 1 -->
+                <div class="glass-card-module p-5 sm:p-6 animate-fade-up" style="animation-delay: 0.05s">
+                    <div class="icon-wrap mb-4"><i class="fas fa-chart-pie"></i></div>
+                    <h3 class="card-title text-lg font-bold text-white mb-1.5">
+                        Dashboard
+                    </h3>
+                    <p class="card-desc text-gray-400 text-sm leading-relaxed mb-4">
+                        Monitor school activities with real-time insights and performance
+                        analytics.
+                    </p>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Student Overview
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Attendance Summary
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Fee Overview
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Recent Activities
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="glass-card-module p-5 sm:p-6 animate-fade-up" style="animation-delay: 0.1s">
+                    <div class="icon-wrap mb-4">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="card-title text-lg font-bold text-white mb-1.5">
+                        Student Management
+                    </h3>
+                    <p class="card-desc text-gray-400 text-sm leading-relaxed mb-4">
+                        Manage the complete student lifecycle from admission to
+                        graduation.
+                    </p>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Student Profiles
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Admissions
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Parent Details
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Search &amp; Filters
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="glass-card-module p-5 sm:p-6 animate-fade-up" style="animation-delay: 0.15s">
+                    <div class="icon-wrap mb-4">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="card-title text-lg font-bold text-white mb-1.5">
+                        Teacher Management
+                    </h3>
+                    <p class="card-desc text-gray-400 text-sm leading-relaxed mb-4">
+                        Manage teachers, staff records, attendance, and departments
+                        efficiently.
+                    </p>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Teacher Directory
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Attendance
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Leave Records
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Department Management
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="glass-card-module p-5 sm:p-6 animate-fade-up" style="animation-delay: 0.2s">
+                    <div class="icon-wrap mb-4"><i class="fas fa-book-open"></i></div>
+                    <h3 class="card-title text-lg font-bold text-white mb-1.5">
+                        Academic Management
+                    </h3>
+                    <p class="card-desc text-gray-400 text-sm leading-relaxed mb-4">
+                        Organize academic structure, classes, sections, and curriculum.
+                    </p>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Create Classes
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Subjects
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Sections
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Academic Sessions
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="glass-card-module p-5 sm:p-6 animate-fade-up" style="animation-delay: 0.25s">
+                    <div class="icon-wrap mb-4">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="card-title text-lg font-bold text-white mb-1.5">
+                        Attendance Management
+                    </h3>
+                    <p class="card-desc text-gray-400 text-sm leading-relaxed mb-4">
+                        Digitally manage attendance for students and teachers.
+                    </p>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Student Attendance
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Teacher Attendance
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Daily Reports
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Monthly Summary
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="glass-card-module p-5 sm:p-6 animate-fade-up" style="animation-delay: 0.3s">
+                    <div class="icon-wrap mb-4">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3 class="card-title text-lg font-bold text-white mb-1.5">
+                        Examination &amp; Results
+                    </h3>
+                    <p class="card-desc text-gray-400 text-sm leading-relaxed mb-4">
+                        Simplify examinations and generate report cards effortlessly.
+                    </p>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Exam Scheduling
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Marks Entry
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Grades
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Report Cards
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 7 -->
+                <div class="glass-card-module p-5 sm:p-6 animate-fade-up" style="animation-delay: 0.35s">
+                    <div class="icon-wrap mb-4"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="card-title text-lg font-bold text-white mb-1.5">
+                        Reports &amp; Analytics
+                    </h3>
+                    <p class="card-desc text-gray-400 text-sm leading-relaxed mb-4">
+                        Gain valuable insights through detailed reports and performance
+                        analytics.
+                    </p>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Academic Reports
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Attendance Reports
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Performance Analysis
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Export Reports
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 8 -->
+                <div class="glass-card-module p-5 sm:p-6 animate-fade-up" style="animation-delay: 0.4s">
+                    <div class="icon-wrap mb-4"><i class="fas fa-school"></i></div>
+                    <h3 class="card-title text-lg font-bold text-white mb-1.5">
+                        Class Management
+                    </h3>
+                    <p class="card-desc text-gray-400 text-sm leading-relaxed mb-4">
+                        Manage classes, sections, and classroom allocations with ease.
+                    </p>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Create Classes
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Student Allocation
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Section Management
+                        </div>
+                        <div class="flex items-center gap-2.5 text-gray-400 text-sm">
+                            <span class="dot-orange"></span> Timetable Setup
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <div id="footer"></div>
+
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mobile Menu Toggle
+            const toggleBtn = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            if (toggleBtn && mobileMenu) {
+                toggleBtn.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle("hidden");
+                    const icon = this.querySelector("i");
+                    if (icon) {
+                        icon.className = mobileMenu.classList.contains("hidden")
+                            ? "fas fa-bars"
+                            : "fas fa-times";
+                    }
+                });
+
+                mobileMenu.querySelectorAll("a, button").forEach((link) => {
+                    link.addEventListener("click", function () {
+                        if (!mobileMenu.classList.contains("hidden")) {
+                            mobileMenu.classList.add("hidden");
+                            const icon = toggleBtn.querySelector("i");
+                            if (icon) icon.className = "fas fa-bars";
+                        }
+                    });
+                });
+            }
+
+            // Intersection Observer for fade-up animations
+            const cards = document.querySelectorAll(".glass-card-module");
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = "1";
+                            entry.target.style.transform = "translateY(0)";
+                        }
+                    });
+                },
+                {
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -50px 0px",
+                },
+            );
+
+            cards.forEach((card) => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(30px)";
+                card.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+
+</html>
