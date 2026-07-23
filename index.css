@@ -9,21 +9,6 @@
   to { transform: rotate(360deg); }
 }
 
-
-@keyframes slowRotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-rotate-slow {
-  animation: slowRotate 40s linear infinite;
-}
-
-
 .timeline-dot {
   width: 40px;
   height: 40px;
@@ -39,6 +24,15 @@
   flex-shrink: 0;
 }
 
+/*
+  NOTE: the original file defined `.animate-rotate-slow` TWICE, once
+  pointing at a `slowRotate` (40s) keyframe and once at a `rotateSlow`
+  (35s) keyframe. In CSS, the second declaration of the same class at
+  equal specificity always wins the cascade, so the first definition
+  was dead code that only added bytes and confusion — the page has
+  always actually animated at 35s. Keeping only the rule that was
+  really being applied preserves the exact current visual behavior.
+*/
 @keyframes rotateSlow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -47,4 +41,3 @@
 .animate-rotate-slow {
   animation: rotateSlow 35s linear infinite;
 }
-
