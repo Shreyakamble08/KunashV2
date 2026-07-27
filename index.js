@@ -126,30 +126,43 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================================
+// ============================================================
 // Hero orbit animation
 //
-// Performance changes vs. the original:
-// 1. DOM nodes are queried ONCE per create*Orbit() call and cached
-//    in arrays (outerItemsDesktop / innerItemsDesktop / outerItemsMobile).
-//    The previous version ran document.querySelectorAll() inside the
-//    rAF loop -> a full DOM query + style read/write cycle 60 times a
-//    second, which is one of the biggest avoidable causes of main-thread
-//    work (TBT/INP) on this page.
-// 2. When an orbit is "paused" (mouse hover / touch), the loop now
-//    skips ALL style writes entirely instead of recomputing and
-//    re-applying identical inline styles to every item every frame.
-// 3. An IntersectionObserver fully starts/stops each rAF loop
-//    (cancelAnimationFrame) when its section scrolls out of view, so
-//    the animation costs nothing while the user is reading the rest
-//    of the page.
-// 4. Touch listeners are marked { passive: true } since they never
-//    call preventDefault(), so the browser doesn't have to wait on
-//    them before starting a scroll/touch response.
-// 5. Initialization runs on DOMContentLoaded instead of window 'load',
-//    so the decorative orbit doesn't sit idle waiting for every image
-//    on the entire page (including below-the-fold sections) to finish
-//    downloading before it appears — layout metrics only depend on
-//    CSS, not on images having loaded.
+// STABILITY FIX (this revision):
+// The previous version advanced each orbit's angle by a fixed amount
+// EVERY requestAnimationFrame callback (e.g. `angleOuterDesktop +=
+// OUTER_SPEED`). rAF does not guarantee a fixed interval — it fires at
+// whatever the display's actual refresh rate is (60Hz vs 120Hz/144Hz
+// screens), and drops frames under main-thread load (scrolling, other
+// scripts, tab throttling). Since the code assumed every callback = the
+// same slice of time, the orbit visibly sped up, slowed down, or
+// stuttered depending on frame timing — exactly the "unstable /
+// fluctuating" symptom described.
+//
+// Fix: motion is now driven by elapsed wall-clock time (delta-time)
+// via the timestamp requestAnimationFrame already provides, instead of
+// a fixed per-callback step. Degrees/second is calibrated from the
+// original degrees/frame constants assuming a 60fps baseline, so the
+// animation's speed, duration, and easing feel are unchanged on a
+// normal 60Hz display — it's simply now correct (not frame-count
+// dependent) on any refresh rate, and stays perfectly smooth when
+// frames are dropped instead of jumping or stalling.
+//
+// A single-frame delta is also clamped (MAX_DELTA_MS) so that resuming
+// from a paused/hidden/off-screen state (where potentially seconds have
+// passed since the last real update) doesn't cause the orbit to "jump"
+// forward — it simply continues at normal speed from where it left off.
+//
+// PERSISTENCE (new):
+// The current angle of each orbit is periodically saved to
+// localStorage (throttled, and also on tab-hide/unload) and restored
+// on the next load/visit, so a reload continues the orbit from
+// roughly where it left off instead of always snapping back to its
+// start position. This doesn't change the animation itself (same
+// speed/direction/easing) — it only changes the starting angle on a
+// fresh page load, matching what a continuously-running orbit would
+// look like across a reload.
 // ============================================================
 
 const outerImages = [
@@ -178,23 +191,84 @@ const innerImages = [
   './images/webthumb20.jpg'
 ];
 
+// ----- Persistence -----
+const ORBIT_STORAGE_KEY = 'heroOrbitAngles:v1';
+const ORBIT_SAVE_INTERVAL_MS = 1000;
+
+function loadOrbitState() {
+  try {
+    const raw = localStorage.getItem(ORBIT_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (
+      parsed &&
+      typeof parsed.outerDesktop === 'number' &&
+      typeof parsed.innerDesktop === 'number' &&
+      typeof parsed.outerMobile === 'number'
+    ) {
+      return parsed;
+    }
+    return null;
+  } catch (err) {
+    // Storage disabled (private browsing), quota exceeded, or corrupt
+    // JSON — animation just starts from 0 as before, no functional
+    // change beyond that.
+    return null;
+  }
+}
+
+function saveOrbitState() {
+  try {
+    localStorage.setItem(
+      ORBIT_STORAGE_KEY,
+      JSON.stringify({
+        outerDesktop: angleOuterDesktop,
+        innerDesktop: angleInnerDesktop,
+        outerMobile: angleOuterMobile
+      })
+    );
+  } catch (err) {
+    // Ignore — persistence is a nice-to-have, never allowed to break
+    // or throw into the animation loop.
+  }
+}
+
+// Restore any previously saved angles up front so both orbits start
+// from the same continued position regardless of which layout
+// (desktop/mobile) initializes first.
+const savedOrbitState = loadOrbitState();
+
 // Desktop orbit state
-let angleOuterDesktop = 0;
-let angleInnerDesktop = 0;
+let angleOuterDesktop = savedOrbitState ? savedOrbitState.outerDesktop : 0;
+let angleInnerDesktop = savedOrbitState ? savedOrbitState.innerDesktop : 0;
 let pausedDesktop = false;
 let animationIdDesktop = null;
 let outerItemsDesktop = [];
 let innerItemsDesktop = [];
+let lastTimestampDesktop = null;
 
 // Mobile orbit state
-let angleOuterMobile = 0;
+let angleOuterMobile = savedOrbitState ? savedOrbitState.outerMobile : 0;
 let pausedMobile = false;
 let animationIdMobile = null;
 let outerItemsMobile = [];
+let lastTimestampMobile = null;
 
-const OUTER_SPEED = 0.25;
+// Original constants were "degrees per rAF callback" tuned by eye
+// against a 60fps baseline. Converted to degrees/second so motion is
+// now time-based rather than frame-based; the visual speed at 60Hz is
+// identical to before.
+const BASE_FPS = 60;
+const OUTER_SPEED = 0.25;   // degrees/frame @60fps (kept for reference)
 const INNER_SPEED = 0.38;
 const MOBILE_SPEED = 0.28;
+const OUTER_DEG_PER_SEC = OUTER_SPEED * BASE_FPS;
+const INNER_DEG_PER_SEC = INNER_SPEED * BASE_FPS;
+const MOBILE_DEG_PER_SEC = MOBILE_SPEED * BASE_FPS;
+
+// Guard against huge jumps after a tab was backgrounded/throttled or
+// the loop was fully stopped and just resumed (IntersectionObserver).
+const MAX_DELTA_MS = 100;
 
 function createDesktopOrbit() {
   const container = document.getElementById('dual-orbital-desktop');
@@ -260,7 +334,7 @@ function createDesktopOrbit() {
     item.style.borderRadius = Math.max(10, Math.min(16, outerSize * 0.16)) + 'px';
     item.innerHTML = `<img src="${src}" alt="Team member ${i + 1}" loading="lazy" decoding="async">`;
     item.addEventListener('mouseenter', () => { pausedDesktop = true; });
-    item.addEventListener('mouseleave', () => { pausedDesktop = false; });
+    item.addEventListener('mouseleave', () => { pausedDesktop = false; lastTimestampDesktop = null; });
     outerFrag.appendChild(item);
   });
   outerContainer.appendChild(outerFrag);
@@ -275,7 +349,7 @@ function createDesktopOrbit() {
     item.style.borderRadius = Math.max(10, Math.min(16, innerSize * 0.16)) + 'px';
     item.innerHTML = `<img src="${src}" alt="Team member ${i + 1}" loading="lazy" decoding="async">`;
     item.addEventListener('mouseenter', () => { pausedDesktop = true; });
-    item.addEventListener('mouseleave', () => { pausedDesktop = false; });
+    item.addEventListener('mouseleave', () => { pausedDesktop = false; lastTimestampDesktop = null; });
     innerFrag.appendChild(item);
   });
   innerContainer.appendChild(innerFrag);
@@ -285,17 +359,23 @@ function createDesktopOrbit() {
   innerItemsDesktop = Array.from(innerContainer.children);
 }
 
-function animateDesktopOrbit() {
+function animateDesktopOrbit(timestamp) {
   const container = document.getElementById('dual-orbital-desktop');
 
   if (!container || (!outerItemsDesktop.length && !innerItemsDesktop.length)) {
+    lastTimestampDesktop = null;
     animationIdDesktop = requestAnimationFrame(animateDesktopOrbit);
     return;
   }
 
-  // Skip all reads/writes while paused — position is already correct,
-  // no need to recompute and re-apply identical styles every frame.
   if (!pausedDesktop) {
+    // Compute a clamped, frame-rate-independent delta.
+    let deltaMs = lastTimestampDesktop === null ? 1000 / BASE_FPS : timestamp - lastTimestampDesktop;
+    if (deltaMs < 0) deltaMs = 0;
+    if (deltaMs > MAX_DELTA_MS) deltaMs = MAX_DELTA_MS;
+    lastTimestampDesktop = timestamp;
+    const deltaSec = deltaMs / 1000;
+
     const outerRadiusX = parseFloat(container.dataset.outerRadiusX) || 400;
     const outerRadiusY = parseFloat(container.dataset.outerRadiusY) || 160;
     const innerRadiusX = parseFloat(container.dataset.innerRadiusX) || 220;
@@ -346,8 +426,10 @@ function animateDesktopOrbit() {
       item.style.zIndex = zIndex;
     });
 
-    angleOuterDesktop += OUTER_SPEED;
-    angleInnerDesktop -= INNER_SPEED;
+    angleOuterDesktop += OUTER_DEG_PER_SEC * deltaSec;
+    angleInnerDesktop -= INNER_DEG_PER_SEC * deltaSec;
+  } else {
+    lastTimestampDesktop = null;
   }
 
   animationIdDesktop = requestAnimationFrame(animateDesktopOrbit);
@@ -389,9 +471,9 @@ function createMobileOrbit() {
     item.style.borderRadius = Math.max(10, Math.min(16, outerSize * 0.16)) + 'px';
     item.innerHTML = `<img src="${src}" alt="Team member ${i + 1}" loading="lazy" decoding="async">`;
     item.addEventListener('touchstart', () => { pausedMobile = true; }, { passive: true });
-    item.addEventListener('touchend', () => { setTimeout(() => { pausedMobile = false; }, 300); }, { passive: true });
+    item.addEventListener('touchend', () => { setTimeout(() => { pausedMobile = false; lastTimestampMobile = null; }, 300); }, { passive: true });
     item.addEventListener('mouseenter', () => { pausedMobile = true; });
-    item.addEventListener('mouseleave', () => { pausedMobile = false; });
+    item.addEventListener('mouseleave', () => { pausedMobile = false; lastTimestampMobile = null; });
     outerFrag.appendChild(item);
   });
   outerContainer.appendChild(outerFrag);
@@ -399,15 +481,22 @@ function createMobileOrbit() {
   outerItemsMobile = Array.from(outerContainer.children);
 }
 
-function animateMobileOrbit() {
+function animateMobileOrbit(timestamp) {
   const container = document.getElementById('dual-orbital-mobile');
 
   if (!container || !outerItemsMobile.length) {
+    lastTimestampMobile = null;
     animationIdMobile = requestAnimationFrame(animateMobileOrbit);
     return;
   }
 
   if (!pausedMobile) {
+    let deltaMs = lastTimestampMobile === null ? 1000 / BASE_FPS : timestamp - lastTimestampMobile;
+    if (deltaMs < 0) deltaMs = 0;
+    if (deltaMs > MAX_DELTA_MS) deltaMs = MAX_DELTA_MS;
+    lastTimestampMobile = timestamp;
+    const deltaSec = deltaMs / 1000;
+
     const outerRadiusX = parseFloat(container.dataset.outerRadiusX) || 129;
     const outerRadiusY = parseFloat(container.dataset.outerRadiusY) || 237;
     const centerX = parseFloat(container.dataset.centerX) || 190;
@@ -434,7 +523,9 @@ function animateMobileOrbit() {
       item.style.zIndex = zIndex;
     });
 
-    angleOuterMobile += MOBILE_SPEED;
+    angleOuterMobile += MOBILE_DEG_PER_SEC * deltaSec;
+  } else {
+    lastTimestampMobile = null;
   }
 
   animationIdMobile = requestAnimationFrame(animateMobileOrbit);
@@ -449,8 +540,9 @@ function initDesktopOrbit() {
     cancelAnimationFrame(animationIdDesktop);
     animationIdDesktop = null;
   }
+  lastTimestampDesktop = null;
   createDesktopOrbit();
-  animateDesktopOrbit();
+  animateDesktopOrbit(performance.now());
   isDesktopInitialized = true;
 }
 
@@ -459,8 +551,9 @@ function initMobileOrbit() {
     cancelAnimationFrame(animationIdMobile);
     animationIdMobile = null;
   }
+  lastTimestampMobile = null;
   createMobileOrbit();
-  animateMobileOrbit();
+  animateMobileOrbit(performance.now());
   isMobileInitialized = true;
 }
 
@@ -502,13 +595,25 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     pausedDesktop = true;
     pausedMobile = true;
+    saveOrbitState();
   } else {
     setTimeout(() => {
       pausedDesktop = false;
       pausedMobile = false;
+      lastTimestampDesktop = null;
+      lastTimestampMobile = null;
     }, 500);
   }
 });
+
+// Belt-and-suspenders: also save right before the page actually unloads.
+window.addEventListener('pagehide', saveOrbitState);
+
+// Throttled periodic save — independent of the rAF loop so it keeps
+// working even while paused, and cheap enough (one JSON.stringify +
+// one localStorage write per second) to have no measurable effect on
+// TBT/INP.
+setInterval(saveOrbitState, ORBIT_SAVE_INTERVAL_MS);
 
 // Fully stop the rAF loops (not just skip position updates) once the
 // Hero has scrolled well out of view, and resume when it's back —
@@ -517,13 +622,14 @@ document.addEventListener('visibilitychange', () => {
 const heroOrbitDesktopEl = document.getElementById('dual-orbital-desktop');
 const heroOrbitMobileEl = document.getElementById('dual-orbital-mobile');
 
-function observeHeroVisibility(el, getAnimId, setAnimId, animateFn) {
+function observeHeroVisibility(el, getAnimId, setAnimId, animateFn, resetTimestamp) {
   if (!el) return;
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const currentId = getAnimId();
       if (entry.isIntersecting) {
         if (!currentId) {
+          resetTimestamp();
           setAnimId(requestAnimationFrame(animateFn));
         }
       } else if (currentId) {
@@ -539,11 +645,13 @@ observeHeroVisibility(
   heroOrbitDesktopEl,
   () => animationIdDesktop,
   (id) => { animationIdDesktop = id; },
-  animateDesktopOrbit
+  animateDesktopOrbit,
+  () => { lastTimestampDesktop = null; }
 );
 observeHeroVisibility(
   heroOrbitMobileEl,
   () => animationIdMobile,
   (id) => { animationIdMobile = id; },
-  animateMobileOrbit
+  animateMobileOrbit,
+  () => { lastTimestampMobile = null; }
 );
