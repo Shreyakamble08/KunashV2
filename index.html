@@ -32,31 +32,13 @@
   <link rel="apple-touch-icon" href="./images/favicon.png">
   <link rel="shortcut icon" href="./images/favicon.png">
 
-  <!--
-    Google Fonts — TRIMMED to only the families/weights actually used by the
-    classes present in this page (font-alan font-semibold, font-quicksand
-    font-light/font-semibold, font-montserrat font-light/normal/medium,
-    font-raleway font-light/normal + inherited font-semibold on the counters).
-    Removed: DM Serif Text, Noto Sans, Noto Serif, Poiret One (no matching
-    classes exist on this page) and all italic axes (no italic utility is used).
-    display=swap added so text paints immediately in a fallback font instead of
-    staying invisible while the webfont downloads (fixes FOIT -> better FCP/LCP).
-    NOTE: if other pages on the site share this exact <head>, don't copy this
-    trimmed link to those pages until you've checked which classes they use —
-    verified only against index.html.
-  -->
+ 
   <link
     href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@600&family=Montserrat:wght@300;400;500&family=Quicksand:wght@300;400;600&family=Raleway:wght@300;400;600&display=swap"
     rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <!--
-    Font Awesome + Material Icons are not used anywhere in the Hero (first
-    viewport). Loading them as normal render-blocking stylesheets delays FCP
-    for content that isn't needed yet. This preload+swap pattern fetches them
-    at high priority in parallel with everything else, but doesn't block
-    rendering; the <noscript> fallback keeps them working with JS disabled.
-  -->
+
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -260,14 +242,6 @@
 
   <!-- GLOBAL FIXED BACKGROUND -->
   <div class="fixed top-0 left-0 w-full h-full -z-10">
-    <!--
-      This image is pinned behind everything (-z-10) and is fully covered by
-      the opaque Hero section above it for the entire height of the initial
-      viewport (Hero is min-h-screen), so it is NOT visible until the user
-      scrolls past the Hero. It's safe to lazy-load without any visual
-      change, which frees up bandwidth/connections for the truly critical
-      Hero image and fonts during the initial render.
-    -->
     <img src="images/homebg.jfif" alt="Background" class="w-full h-full object-cover" loading="lazy"
       decoding="async" />
     <div class="absolute inset-0 bg-black/60"></div>
