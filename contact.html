@@ -104,6 +104,77 @@
 
       resize: none;
     }
+
+    /* ============================================
+       CUSTOM TOAST STYLES - MATCHING DARK THEME
+       ============================================ */
+    .toast-success {
+      background: rgba(34, 197, 94, 0.12) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border: 1px solid rgba(34, 197, 94, 0.25) !important;
+      border-radius: 14px !important;
+      color: #4ade80 !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 14px !important;
+      padding: 14px 22px !important;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 40px rgba(34, 197, 94, 0.05) !important;
+    }
+
+    .toast-success .toast-close {
+      color: #4ade80 !important;
+      opacity: 0.6 !important;
+    }
+
+    .toast-success .toast-close:hover {
+      opacity: 1 !important;
+    }
+
+    .toast-error {
+      background: rgba(239, 68, 68, 0.12) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border: 1px solid rgba(239, 68, 68, 0.25) !important;
+      border-radius: 14px !important;
+      color: #f87171 !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 14px !important;
+      padding: 14px 22px !important;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 40px rgba(239, 68, 68, 0.05) !important;
+    }
+
+    .toast-error .toast-close {
+      color: #f87171 !important;
+      opacity: 0.6 !important;
+    }
+
+    .toast-error .toast-close:hover {
+      opacity: 1 !important;
+    }
+
+    /* Toastify icon wrapper */
+    .toastify .toast-icon {
+      display: none !important;
+    }
+
+    /* Toast message alignment */
+    .toastify-content {
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+
+    .toastify-content .toast-icon-custom {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Toast container position */
+    #toast-container {
+      top: 24px !important;
+      right: 24px !important;
+      max-width: 400px !important;
+    }
   </style>
 
   <script>
@@ -264,7 +335,7 @@
                 class="glass-input resize-none h-32" required></textarea>
 
               <button type="submit"
-                class="group flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-orange-500 via-orange-500 to-orange-600 text-white">
+                class="group flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-orange-500 via-orange-500 to-orange-600 text-white hover:opacity-90 transition">
                 Send Message
               </button>
             </form>
@@ -347,15 +418,17 @@
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("contact-form");
 
-      form.addEventListener("submit", function (e) {
+      form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
+        // ====== GET FORM DATA ======
         const name = form.name.value.trim();
         const phone = form.phone.value.trim();
         const email = form.email.value.trim();
         const subject = form.subject.value.trim();
         const message = form.message.value.trim();
 
+        // ====== VALIDATION ======
         if (name === "") {
           return showToast("Please enter your name", "error");
         }
@@ -365,7 +438,6 @@
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
         if (!emailRegex.test(email)) {
           return showToast("Please enter a valid email", "error");
         }
@@ -375,37 +447,118 @@
         }
 
         if (message.length < 10) {
-          return showToast("Please enter your message", "error");
+          return showToast("Please enter your message (minimum 10 characters)", "error");
         }
 
-        const whatsappNumber = "918080473916";
+        // ====== PREPARE DATA FOR BACKEND ======
+        const formData = {
+          name: name,
+          phone: phone,
+          email: email,
+          subject: subject,
+          message: message
+        };
 
-        const whatsappMessage = `New Website Enquiry
+        // ====== SHOW LOADING STATE ======
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
 
-Name: ${name}
+        try {
+          // ====== SEND TO BACKEND ======
+          const response = await fetch('http://localhost:8080/api/contact/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
 
-Phone: ${phone}
+          const result = await response.json();
 
-Email: ${email}
-
-Subject: ${subject}
-
-Message:
-${message}`;
-
-        // Detect Mobile Device
-        const isMobile =
-          /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
-            navigator.userAgent,
-          );
-
-        // WhatsApp URL
-        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-
-        window.open(whatsappURL, "_blank");
-        form.reset();
+          // ====== HANDLE RESPONSE ======
+          if (result.success) {
+            showToast("Thank you for reaching out! We'll get back to you within 24 hours.", "success");
+            form.reset(); // Clear the form
+          } else {
+            showToast(result.message || "Something went wrong. Please try again.", "error");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          showToast("Network error. Please check your connection and try again.", "error");
+        } finally {
+          // ====== RESET BUTTON STATE ======
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }
       });
     });
+
+    // ====== TOAST NOTIFICATION FUNCTION ======
+    function showToast(message, type) {
+      // Close any existing toast first
+      const existingToasts = document.querySelectorAll('.toastify');
+      existingToasts.forEach(toast => {
+        // Check if it has the toastify class
+        if (toast.classList.contains('toastify')) {
+          // Remove the toast after a short delay
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(-20px)';
+          setTimeout(() => {
+            if (toast.parentNode) {
+              toast.parentNode.removeChild(toast);
+            }
+          }, 300);
+        }
+      });
+
+      // Small delay before showing new toast
+      setTimeout(() => {
+        const isSuccess = type === "success";
+
+        // Create the toast with minimal styling
+        Toastify({
+          text: message,
+          duration: 4000,
+          gravity: "top",
+          position: "right",
+          className: isSuccess ? "toast-success" : "toast-error",
+          style: {
+            background: "transparent",
+            boxShadow: "none",
+            padding: "0",
+            fontFamily: "Montserrat, sans-serif",
+            borderRadius: "0",
+          },
+          onClick: function() {} // No action on click
+        }).showToast();
+
+        // Clean up any leftover toast styles
+        setTimeout(() => {
+          const toastContainer = document.querySelector('.toastify');
+          if (toastContainer) {
+            // Make sure our styles are applied
+            toastContainer.style.background = "transparent";
+            toastContainer.style.boxShadow = "none";
+          }
+        }, 50);
+
+        // Remove toast after duration
+        setTimeout(() => {
+          const toast = document.querySelector('.toastify');
+          if (toast) {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+              if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+              }
+            }, 300);
+          }
+        }, 4500);
+      }, 100);
+    }
   </script>
 </body>
 
