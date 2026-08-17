@@ -2,526 +2,1450 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kunash Media | Careers</title>
-    <link rel="stylesheet" href="../about/about.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kunash Media | Careers</title>
+  <link rel="stylesheet" href="../about/about.css" />
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png" />
 
-    <!-- Apple devices -->
-    <link rel="apple-touch-icon" href="../images/favicon.png" />
+  <!-- Apple devices -->
+  <link rel="apple-touch-icon" href="../images/favicon.png" />
 
-    <!-- favicon sizes -->
-    <link rel="shortcut icon" href="../images/favicon.png" />
+  <!-- favicon sizes -->
+  <link rel="shortcut icon" href="../images/favicon.png" />
 
-    <!-- Google Fonts - Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=DM+Serif+Text:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..9₀₀&display=swap"
-        rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=DM+Serif+Text:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poiret+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <style>
-        body {
-            background: #0a0a0a;
-            color: white;
-            font-family:
-                system-ui,
-                -apple-system,
-                sans-serif;
-        }
+  <style>
+    body {
+      background: #0a0a0a;
+      color: white;
+      font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+    }
 
-        .hero {
-            background: linear-gradient(135deg, #0a0a0a, #111111);
-        }
+    .hero {
+      background: linear-gradient(135deg, #0a0a0a, #111111);
+    }
 
-        .card {
-            background: #111111;
-            border: 1px solid rgba(249, 115, 22, 0.2);
-            transition: all 0.3s ease;
-        }
+    .card {
+      background: #111111;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      transition: all 0.3s ease;
+    }
 
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: #f97316;
-            box-shadow:
-                0 20px 25px -5px rgba(0, 0, 0, 0.3),
-                0 10px 10px -5px rgba(249, 115, 22, 0.1);
-        }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #f97316;
+      box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 10px 10px -5px rgba(249, 115, 22, 0.1);
+    }
 
-        .section-header {
-            font-size: 2.75rem;
-            line-height: 1.1;
-        }
+    .section-header {
+      font-size: 2.75rem;
+      line-height: 1.1;
+    }
 
-        .btn {
-            transition: all 0.3s ease;
-        }
+    .btn {
+      transition: all 0.3s ease;
+    }
 
-        .btn:hover {
-            transform: translateY(-2px);
-        }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
 
-        .hero {
-            min-height: 85vh;
-        }
+    .hero {
+      min-height: 85vh;
+    }
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .animate-1 {
-            animation: fadeUp 0.7s ease forwards;
-        }
+    .animate-1 {
+      animation: fadeUp 0.7s ease forwards;
+    }
 
-        .animate-2 {
-            animation: fadeUp 0.7s ease 0.15s forwards;
-            opacity: 0;
-        }
+    .animate-2 {
+      animation: fadeUp 0.7s ease 0.15s forwards;
+      opacity: 0;
+    }
 
-        .animate-3 {
-            animation: fadeUp 0.7s ease 0.3s forwards;
-            opacity: 0;
-        }
+    .animate-3 {
+      animation: fadeUp 0.7s ease 0.3s forwards;
+      opacity: 0;
+    }
 
-        .animate-4 {
-            animation: fadeUp 0.7s ease 0.45s forwards;
-            opacity: 0;
-        }
+    .animate-4 {
+      animation: fadeUp 0.7s ease 0.45s forwards;
+      opacity: 0;
+    }
 
-        .animate-5 {
-            animation: fadeUp 0.7s ease 0.6s forwards;
-            opacity: 0;
-        }
+    .animate-5 {
+      animation: fadeUp 0.7s ease 0.6s forwards;
+      opacity: 0;
+    }
 
-        .feature-card {
-            background: #121212;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.35s ease;
-        }
+    .feature-card {
+      background: #121212;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.35s ease;
+    }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(249, 115, 22, 0.4);
-        }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(249, 115, 22, 0.4);
+    }
 
-        .feature-card i {
-            transition: 0.35s ease;
-        }
+    .feature-card i {
+      transition: 0.35s ease;
+    }
 
-        .feature-card:hover i {
-            transform: scale(1.15);
-        }
+    .feature-card:hover i {
+      transform: scale(1.15);
+    }
 
-        .hero-blur {
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 350px;
-            height: 350px;
-            background: rgba(249, 115, 22, 0.15);
-            filter: blur(120px);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-    </style>
+    .hero-blur {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 350px;
+      height: 350px;
+      background: rgba(249, 115, 22, 0.15);
+      filter: blur(120px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        alan: ['"Alan Sans"', "sans-serif"],
-                        dmserif: ['"DM Serif Text"', "serif"],
-                        montserrat: ["Montserrat", "sans-serif"],
-                        notoSans: ['"Noto Sans"', "sans-serif"],
-                        notoSerif: ['"Noto Serif"', "serif"],
-                        poiret: ['"Poiret One"', "cursive"],
-                        quicksand: ["Quicksand", "sans-serif"],
-                        raleway: ["Raleway", "sans-serif"],
-                    },
-                },
-            },
-        };
-    </script>
+    /* =========================================================
+       JOB DESCRIPTION PREVIEW - LINE CLAMP + WORD BREAK
+       Ensures multiline, bullets and long text display correctly
+       while limiting visible height to ~2 lines
+    ========================================================= */
+    .job-description-preview {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: pre-line;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.5;
+      max-height: 3em;
+      /* approx 2 lines */
+    }
+
+    /* Full description inside View More modal */
+    .job-description-full {
+      white-space: pre-line;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.6;
+    }
+
+    /* Job card action buttons row */
+    /* Button Container */
+    .job-card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(249, 115, 22, 0.12);
+    }
+
+    /* Common Button Style */
+    .job-card-actions .view-more-btn,
+    .job-card-actions .apply-now-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 12px;
+      /* Smaller height & width */
+      font-size: 0.8rem;
+      /* Smaller text */
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    /* View More */
+    .job-card-actions .view-more-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: #d1d5db;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .job-card-actions .view-more-btn:hover {
+      color: #fff;
+      background: rgba(249, 115, 22, 0.12);
+      border-color: rgba(249, 115, 22, 0.35);
+    }
+
+    /* Apply Now */
+    .job-card-actions .apply-now-btn {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      color: #fff;
+      border: none;
+    }
+
+    .job-card-actions .apply-now-btn:hover {
+      background: linear-gradient(135deg, #fb923c, #f97316);
+    }
+
+    /* Small icon */
+    .job-card-actions i {
+      font-size: 0.7rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .job-card-actions {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .job-card-actions .view-more-btn,
+      .job-card-actions .apply-now-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+      }
+    }
+
+    /* =========================================================
+       JOB DETAILS (VIEW MORE) MODAL
+    ========================================================= */
+    #jobDetailsModal {
+      animation: jobDetailsFade 0.25s ease forwards;
+    }
+
+    @keyframes jobDetailsFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    #jobDetailsModal .job-details-panel {
+      animation: jobDetailsUp 0.3s ease forwards;
+    }
+
+    @keyframes jobDetailsUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 640px) {
+      #jobDetailsModal {
+        padding: 0;
+      }
+
+      #jobDetailsModal .job-details-wrapper {
+        padding: 12px;
+      }
+
+      #jobDetailsModal .job-details-panel {
+        border-radius: 22px;
+      }
+    }
+
+    /* =========================================================
+       APPLICATION FORM
+    ========================================================= */
+
+    .application-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #d1d5db;
+    }
+
+    .application-label span {
+      color: #f97316;
+    }
+
+    .application-input {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 12px;
+      background: #171717;
+      border: 1px solid rgba(255, 255, 255, .08);
+      color: #fff;
+      font-size: 14px;
+      transition: .25s;
+    }
+
+    .application-input:focus {
+      border-color: #f97316;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, .12);
+    }
+
+    textarea.application-input {
+      min-height: 110px;
+      padding-top: 12px;
+    }
+
+    .application-input::placeholder {
+      color: #6b7280;
+    }
+
+    .application-input:hover {
+      border-color: rgba(249, 115, 22, 0.25);
+    }
+
+
+    .application-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      color: #f97316;
+
+      font-size: 0.85rem;
+
+      pointer-events: none;
+    }
+
+    #resumeDropZone.drag-over {
+      border-color: #f97316;
+      background: rgba(249, 115, 22, 0.08);
+
+      box-shadow: 0 0 35px rgba(249, 115, 22, 0.08);
+    }
+
+    #applicationModal {
+      animation: applicationModalFade 0.25s ease forwards;
+    }
+
+    @keyframes applicationModalFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    #applicationModal>div>div {
+      animation: applicationModalUp 0.3s ease forwards;
+    }
+
+    @keyframes applicationModalUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 640px) {
+      #applicationModal {
+        padding: 0;
+      }
+
+      #applicationModal>div {
+        padding: 12px;
+      }
+
+      #applicationModal>div>div {
+        border-radius: 22px;
+      }
+    }
+
+    /* Loading Spinner */
+    #loadingState .loading-spinner {
+      border: 3px solid rgba(249, 115, 22, 0.1);
+      border-top-color: #f97316;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            alan: ['"Alan Sans"', "sans-serif"],
+            dmserif: ['"DM Serif Text"', "serif"],
+            montserrat: ["Montserrat", "sans-serif"],
+            notoSans: ['"Noto Sans"', "sans-serif"],
+            notoSerif: ['"Noto Serif"', "serif"],
+            poiret: ['"Poiret One"', "cursive"],
+            quicksand: ["Quicksand", "sans-serif"],
+            raleway: ["Raleway", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
 </head>
 
 <body class="min-h-screen">
-    <!-- HEADER -->
-    <div id="header"></div>
+  <!-- HEADER -->
+  <div id="header"></div>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-[85vh] flex items-center overflow-hidden bg-cover bg-center"
-        style="background-image: url(&quot;./images/careerbg.jfif&quot;)">
-        <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/50"></div>
+  <!-- Hero Section -->
+  <section class="relative min-h-[85vh] flex items-center overflow-hidden bg-cover bg-center"
+    style="background-image: url(&quot;./images/careerbg.jfif&quot;)">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/50"></div>
 
+    <!-- Orange Glow -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-orange-500/20 blur-[120px] rounded-full"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-16 w-full">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <!-- Left -->
+        <div class="space-y-4">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-alan leading-tight">
+            Build Your Career With
+            <span class="block text-orange-500"> Kunash Media </span>
+          </h1>
+
+          <p class="text-gray-300 text-base md:text-lg max-w-xl">
+            Join developers, designers and marketers building innovative
+            digital experiences and impactful solutions.
+          </p>
+
+          <a href="#jobs"
+            class="inline-flex items-center gap-3 px-7 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 transition-all duration-300 font-medium hover:-translate-y-1">
+            Explore Open Roles
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Right -->
+        <div class="grid grid-cols-2 gap-4">
+          <div
+            class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                <i class="fas fa-laptop-code text-orange-500"></i>
+              </div>
+              <h3 class="font-semibold text-white">Modern Stack</h3>
+            </div>
+
+            <p class="text-sm text-gray-400">
+              Work with the latest technologies and tools.
+            </p>
+          </div>
+
+          <div
+            class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                <i class="fas fa-chart-line text-orange-500"></i>
+              </div>
+              <h3 class="font-semibold text-white">Career Growth</h3>
+            </div>
+
+            <p class="text-sm text-gray-400">
+              Learn, grow and take ownership of projects.
+            </p>
+          </div>
+
+          <div
+            class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                <i class="fas fa-users text-orange-500"></i>
+              </div>
+              <h3 class="font-semibold text-white">Team Culture</h3>
+            </div>
+
+            <p class="text-sm text-gray-400">
+              Collaborative environment with supportive teammates.
+            </p>
+          </div>
+
+          <div
+            class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                <i class="fas fa-lightbulb text-orange-500"></i>
+              </div>
+              <h3 class="font-semibold text-white">Innovation</h3>
+            </div>
+
+            <p class="text-sm text-gray-400">
+              Build creative solutions and bring ideas to life.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Positions -->
+  <section id="jobs" class="relative py-8 overflow-hidden bg-cover bg-center bg-no-repeat"
+    style="background-image: url(&quot;./images/aboutpg.jfif&quot;)">
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/20"></div>
+
+    <!-- Optional Orange Glow -->
+    <div class="absolute inset-0 bg-gradient-to-r from-orange-500/5 via-transparent to-orange-500/5"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="section-header font-montserrat font-bold text-white">
+          Join Our Team
+        </h2>
+
+        <p class="text-gray-300 mt-4 text-md max-w-2xl mx-auto">
+          We're looking for passionate individuals ready to grow, innovate,
+          and make a difference.
+        </p>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="flex justify-center py-20">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorState" class="text-center py-20 hidden">
+        <i class="fas fa-exclamation-circle text-4xl text-red-500 mb-4"></i>
+        <p class="text-gray-400">Failed to load jobs. Please try again later.</p>
+        <button onclick="fetchJobs()"
+          class="mt-4 px-6 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-medium transition">
+          Retry
+        </button>
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="text-center py-20 hidden">
+        <i class="fas fa-briefcase text-4xl text-gray-600 mb-4"></i>
+        <p class="text-gray-400">No job openings available at the moment.</p>
+        <p class="text-gray-500 text-sm mt-2">Check back later for new opportunities!</p>
+      </div>
+
+      <!-- Job Grid -->
+      <div id="jobGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- General Application CTA -->
+  <section id="general-application" class="relative py-10 sm:py-14 px-4 sm:px-6 md:px-12 overflow-hidden">
+    <!-- Grid Background -->
+    <div class="absolute inset-0 opacity-[0.04]">
+      <div
+        class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:50px_50px]">
+      </div>
+    </div>
+
+    <!-- Orange Gradient Glow -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div
+        class="w-[500px] sm:w-[800px] h-[500px] sm:h-[800px] rounded-full bg-[radial-gradient(circle,rgba(249,115,22,0.18)_10%,rgba(249,115,22,0.08)_50%,transparent_90%)] blur-[100px]">
+      </div>
+    </div>
+
+    <div class="relative z-10 text-center">
+      <p class="text-[10px] sm:text-xs tracking-widest text-gray-400 mb-4 sm:mb-6">
+        GENERAL APPLICATION
+      </p>
+
+      <div class="relative inline-block">
+        <h2
+          class="text-3xl sm:text-5xl md:text-6xl lg:text-[90px] xl:text-[100px] font-bold font-montserrat leading-[1.1] tracking-tight px-2">
+          CAN'T FIND THE <br />
+
+          <span class="block mt-4 sm:mt-6 text-white"> RIGHT ROLE? </span>
+        </h2>
+
+        <!-- Center CTA Button -->
+        <div class="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+          <button onclick="openGeneralApplication()"
+            class="group relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-orange-500 text-white font-medium flex flex-col items-center justify-center text-[8px] sm:text-[9px] md:text-[11px] transition-all duration-300 hover:scale-110 shadow-[0_0_25px_rgba(249,115,22,0.5)] hover:shadow-[0_0_60px_rgba(249,115,22,0.8)]">
+            <i
+              class="fa-solid fa-paper-plane mb-1 text-[8px] sm:text-[10px] md:text-xs transition-transform duration-300 group-hover:translate-x-1">
+            </i>
+
+            Apply Now
+
+            <span class="absolute inset-0 rounded-full border border-orange-400/40 animate-ping">
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <p class="max-w-2xl mx-auto mt-8 text-gray-400 text-sm sm:text-base">
+        We're always looking for talented developers, designers, marketers,
+        and creative thinkers. Share your profile with us and we'll reach out
+        when the right opportunity becomes available.
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       JOB DETAILS (VIEW MORE) MODAL
+       Displays full job title, location and complete description
+       while preserving line breaks, paragraphs and bullet points.
+       Backend data and openApplicationModal remain unchanged.
+  ========================================================= -->
+  <div id="jobDetailsModal" class="fixed inset-0 z-[9998] hidden overflow-y-auto">
+    <!-- Backdrop - closes on outside click -->
+    <div id="jobDetailsBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
+
+    <!-- Modal Wrapper -->
+    <div class="job-details-wrapper relative min-h-screen flex items-center justify-center p-4 sm:p-6">
+      <div
+        class="job-details-panel relative w-full max-w-2xl rounded-[28px] border border-orange-500/20 bg-[#0d0d0d] shadow-[0_30px_100px_rgba(0,0,0,0.7)] overflow-hidden">
         <!-- Orange Glow -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-500/20 blur-[120px] rounded-full"></div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 py-16 w-full">
-            <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                <!-- Left -->
-                <div class="space-y-4">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-alan leading-tight">
-                        Build Your Career With
-                        <span class="block text-orange-500"> Kunash Media </span>
-                    </h1>
-
-                    <p class="text-gray-300 text-base md:text-lg max-w-xl">
-                        Join developers, designers and marketers building innovative
-                        digital experiences and impactful solutions.
-                    </p>
-
-                    <a href="#jobs"
-                        class="inline-flex items-center gap-3 px-7 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 transition-all duration-300 font-medium hover:-translate-y-1">
-                        Explore Open Roles
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- Right -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div
-                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
-                                <i class="fas fa-laptop-code text-orange-500"></i>
-                            </div>
-                            <h3 class="font-semibold text-white">Modern Stack</h3>
-                        </div>
-
-                        <p class="text-sm text-gray-400">
-                            Work with the latest technologies and tools.
-                        </p>
-                    </div>
-
-                    <div
-                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
-                                <i class="fas fa-chart-line text-orange-500"></i>
-                            </div>
-                            <h3 class="font-semibold text-white">Career Growth</h3>
-                        </div>
-
-                        <p class="text-sm text-gray-400">
-                            Learn, grow and take ownership of projects.
-                        </p>
-                    </div>
-
-                    <div
-                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
-                                <i class="fas fa-users text-orange-500"></i>
-                            </div>
-                            <h3 class="font-semibold text-white">Team Culture</h3>
-                        </div>
-
-                        <p class="text-sm text-gray-400">
-                            Collaborative environment with supportive teammates.
-                        </p>
-                    </div>
-
-                    <div
-                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
-                                <i class="fas fa-lightbulb text-orange-500"></i>
-                            </div>
-                            <h3 class="font-semibold text-white">Innovation</h3>
-                        </div>
-
-                        <p class="text-sm text-gray-400">
-                            Build creative solutions and bring ideas to life.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div
+          class="absolute -top-32 -right-32 w-72 h-72 rounded-full bg-orange-500/20 blur-[100px] pointer-events-none">
         </div>
-    </section>
+        <div
+          class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-orange-600/10 blur-[120px] pointer-events-none">
+        </div>
 
-    <!-- Open Positions -->
-    <section id="jobs" class="relative py-8 overflow-hidden bg-cover bg-center bg-no-repeat"
-        style="background-image: url(&quot;./images/aboutpg.jfif&quot;)">
-        <!-- Dark Overlay -->
-        <div class="absolute inset-0 bg-black/20"></div>
+        <!-- Header -->
+        <div class="relative z-10 flex items-start justify-between px-6 sm:px-8 py-6 border-b border-white/10">
+          <div class="pr-4 min-w-0">
+            <p class="text-xs tracking-[0.25em] text-orange-500 uppercase mb-2">
+              Job Details
+            </p>
+            <h2 id="jobDetailsTitle" class="text-xl sm:text-2xl font-bold text-white font-montserrat leading-snug">
+              <!-- Job title injected by JS -->
+            </h2>
+            <div class="flex items-center gap-1.5 text-sm text-gray-400 mt-2">
+              <i class="fas fa-location-dot text-orange-400"></i>
+              <span id="jobDetailsLocation"><!-- Location injected by JS --></span>
+            </div>
+          </div>
 
-        <!-- Optional Orange Glow -->
-        <div class="absolute inset-0 bg-gradient-to-r from-orange-500/5 via-transparent to-orange-500/5"></div>
+          <button type="button" onclick="closeJobDetailsModal()"
+            class="w-10 h-10 shrink-0 rounded-full border border-white/10 bg-white/5 text-gray-400 hover:text-white hover:bg-orange-500/10 hover:border-orange-500/30 transition-all">
+            <i class="fas fa-xmark"></i>
+          </button>
+        </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4">
-            <div class="text-center mb-10">
-                <h2 class="section-header font-montserrat font-bold text-white">
-                    Join Our Team
-                </h2>
+        <!-- Body - scrollable when description is long -->
+        <div class="relative z-10 px-6 sm:px-8 py-6 max-h-[60vh] overflow-y-auto">
+          <p id="jobDetailsDescription" class="job-description-full text-gray-300 text-sm sm:text-base">
+            <!-- Full description injected by JS -->
+          </p>
+        </div>
 
-                <p class="text-gray-300 mt-4 text-md max-w-2xl mx-auto">
-                    We're looking for passionate individuals ready to grow, innovate,
-                    and make a difference.
+        <!-- Footer with Apply Now (keeps original openApplicationModal call) -->
+        <div class="relative z-10 px-6 sm:px-8 py-4 border-t border-orange-500/10 bg-white/[0.02] backdrop-blur-sm">
+          <div class="flex justify-end">
+            <button id="jobDetailsApplyBtn" type="button"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white text-sm font-semibold shadow-lg shadow-orange-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-orange-500/40 active:scale-95">
+              <span>Apply Now</span>
+              <i class="fas fa-arrow-right text-[11px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION MODAL -->
+  <div id="applicationModal" class="fixed inset-0 z-[9999] hidden overflow-y-auto">
+    <!-- Backdrop -->
+    <div id="applicationBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
+
+    <!-- Modal Wrapper -->
+    <div class="relative min-h-screen flex items-center justify-center p-4 sm:p-6">
+      <div
+        class="relative w-full max-w-3xl rounded-[28px] border border-orange-500/20 bg-[#0d0d0d] shadow-[0_30px_100px_rgba(0,0,0,0.7)] overflow-hidden">
+        <!-- Orange Glow -->
+        <div
+          class="absolute -top-32 -right-32 w-72 h-72 rounded-full bg-orange-500/20 blur-[100px] pointer-events-none">
+        </div>
+
+        <div
+          class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-orange-600/10 blur-[120px] pointer-events-none">
+        </div>
+
+        <!-- Header -->
+        <div class="relative z-10 flex items-center justify-between px-5 py-4 border-b border-white/10">
+
+          <div>
+            <p class="text-[11px] uppercase tracking-[0.18em] text-orange-500">
+              Career Application
+            </p>
+
+            <h2 class="text-xl font-semibold text-white mt-1">
+              Apply for Position
+            </h2>
+
+            <p class="text-sm text-gray-400 mt-1">
+              Fill out the details below.
+            </p>
+          </div>
+
+          <button type="button" onclick="closeApplicationModal()"
+            class="w-9 h-9 rounded-lg bg-white/5 hover:bg-orange-500/10 text-gray-400 hover:text-white transition">
+            <i class="fas fa-xmark"></i>
+          </button>
+
+        </div>
+
+        <!-- Form -->
+        <form id="applicationForm" class="relative z-10 p-5 space-y-4" enctype="multipart/form-data">
+          <!-- Hidden Job ID -->
+          <input type="hidden" id="jobId" name="jobId" />
+
+          <!-- Selected Role -->
+          <div>
+            <label class="application-label"> Applying For </label>
+
+            <div class="relative">
+              <i class="fas fa-briefcase application-icon"></i>
+
+              <input type="text" id="applicationRole" name="role" readonly
+                class="application-input pl-11 bg-orange-500/[0.04] text-orange-400 cursor-not-allowed" />
+            </div>
+          </div>
+
+          <!-- Name + Email -->
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="application-label">
+                Full Name <span>*</span>
+              </label>
+
+              <div class="relative">
+                <i class="fas fa-user application-icon"></i>
+
+                <input type="text" id="applicantName" name="name" required placeholder="Enter your full name"
+                  class="application-input pl-11" />
+              </div>
+              <div id="nameError" class="text-red-400 text-xs mt-1 hidden">Please enter your full name</div>
+            </div>
+
+            <div>
+              <label class="application-label">
+                Email Address <span>*</span>
+              </label>
+
+              <div class="relative">
+                <i class="fas fa-envelope application-icon"></i>
+
+                <input type="email" id="applicantEmail" name="email" required placeholder="you@example.com"
+                  class="application-input pl-11" />
+              </div>
+              <div id="emailError" class="text-red-400 text-xs mt-1 hidden">Please enter a valid email</div>
+            </div>
+          </div>
+
+          <!-- Phone + Location -->
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="application-label">
+                Phone Number <span>*</span>
+              </label>
+
+              <div class="relative">
+                <i class="fas fa-phone application-icon"></i>
+
+                <input type="tel" id="applicantPhone" name="phone" required placeholder="+91 98765 43210"
+                  class="application-input pl-11" />
+              </div>
+              <div id="phoneError" class="text-red-400 text-xs mt-1 hidden">Please enter a valid phone number</div>
+            </div>
+
+            <div>
+              <label class="application-label"> Current Location </label>
+
+              <div class="relative">
+                <i class="fas fa-location-dot application-icon"></i>
+
+                <input type="text" id="applicantLocation" name="location" placeholder="Pune, Maharashtra"
+                  class="application-input pl-11" />
+              </div>
+            </div>
+          </div>
+
+          <!-- LinkedIn -->
+          <div>
+            <label class="application-label"> LinkedIn Profile </label>
+
+            <div class="relative">
+              <i class="fab fa-linkedin application-icon"></i>
+
+              <input type="url" id="applicantLinkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile"
+                class="application-input pl-11" />
+            </div>
+          </div>
+
+          <!-- Resume Upload -->
+          <div>
+            <label class="application-label"> Resume <span>*</span> </label>
+
+            <label for="resumeInput" id="resumeDropZone"
+              class="relative flex flex-col items-center justify-center min-h-[110px] px-6 py-8 rounded-2xl border border-dashed border-orange-500/30 bg-white/[0.025] hover:bg-orange-500/[0.04] hover:border-orange-500/60 transition-all duration-300 cursor-pointer">
+              <div id="resumeDefault" class="flex flex-col items-center text-center">
+                <div
+                  class="w-10 h-10 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-2">
+                  <i class="fas fa-cloud-arrow-up text-xl text-orange-500">
+                  </i>
+                </div>
+
+                <p class="text-sm font-medium text-white">
+                  Upload your resume
                 </p>
-            </div>
 
-            <div id="jobGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Populated by JS -->
-            </div>
-        </div>
-    </section>
+                <p class="text-xs text-gray-500 mt-2">
+                  PDF · Maximum 5MB
+                </p>
 
-    <!-- General Application CTA -->
-    <section id="general-application" class="relative py-10 sm:py-14 px-4 sm:px-6 md:px-12 overflow-hidden">
-        <!-- Grid Background -->
-        <div class="absolute inset-0 opacity-[0.04]">
-            <div class="absolute inset-0
-        bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
-        bg-[size:50px_50px]">
-            </div>
-        </div>
+                <span
+                  class="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-gray-300">
+                  <i class="fas fa-folder-open text-orange-500"></i>
+                  Browse File
+                </span>
+              </div>
 
-        <!-- Orange Gradient Glow -->
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <!-- Selected File -->
+              <div id="resumeSelected" class="hidden w-full">
+                <div class="flex items-center gap-4 rounded-xl bg-orange-500/[0.06] border border-orange-500/20 p-4">
+                  <div class="w-11 h-11 shrink-0 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                    <i class="fas fa-file-pdf text-orange-500"></i>
+                  </div>
 
-            <div class="w-[500px] sm:w-[800px]
-        h-[500px] sm:h-[800px]
-        rounded-full
-        bg-[radial-gradient(circle,rgba(249,115,22,0.18)_10%,rgba(249,115,22,0.08)_50%,transparent_90%)]
-        blur-[100px]">
-            </div>
+                  <div class="min-w-0 flex-1">
+                    <p id="resumeFileName" class="text-sm font-medium text-white truncate"></p>
 
-        </div>
+                    <p id="resumeFileSize" class="text-xs text-gray-500 mt-1"></p>
+                  </div>
 
-        <!-- Decorative Shape -->
-        <div class="absolute top-1/2 -left-10 -translate-y-1/2 opacity-40 hidden sm:block">
-            <img src="./images/search.png" class="w-[300px] sm:w-[400px] animate-spin-slower" alt="shape" />
-        </div>
-
-        <div class="relative z-10 text-center">
-
-            <p class="text-[10px] sm:text-xs tracking-widest text-gray-400 mb-4 sm:mb-6">
-                GENERAL APPLICATION
-            </p>
-
-            <div class="relative inline-block">
-
-                <h2
-                    class="text-3xl sm:text-5xl md:text-6xl lg:text-[90px] xl:text-[100px] font-bold font-montserrat leading-[1.1] tracking-tight px-2">
-
-                    CAN'T FIND THE <br />
-
-                    <span class="block mt-4 sm:mt-6 text-white">
-                        RIGHT ROLE?
-                    </span>
-
-                </h2>
-
-                <!-- Center CTA Button -->
-                <div class="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
-
-                    <button onclick="applyJob('General Application')"
-                        class="group relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-orange-500 text-white font-medium flex flex-col items-center justify-center text-[8px] sm:text-[9px] md:text-[11px] transition-all duration-300 hover:scale-110 shadow-[0_0_25px_rgba(249,115,22,0.5)] hover:shadow-[0_0_60px_rgba(249,115,22,0.8)]">
-
-                        <i
-                            class="fa-solid fa-paper-plane mb-1 text-[8px] sm:text-[10px] md:text-xs transition-transform duration-300 group-hover:translate-x-1">
-                        </i>
-
-                        Apply Now
-
-                        <span class="absolute inset-0 rounded-full border border-orange-400/40 animate-ping">
-                        </span>
-
-                    </button>
-
+                  <button type="button" onclick="removeResume(event)"
+                    class="w-9 h-9 rounded-lg bg-white/5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition">
+                    <i class="fas fa-trash"></i>
+                  </button>
                 </div>
+              </div>
 
-            </div>
+              <input type="file" id="resumeInput" name="resume" accept=".pdf" required class="hidden" />
+            </label>
 
-            <p class="max-w-2xl mx-auto mt-8 text-gray-400 text-sm sm:text-base">
-                We're always looking for talented developers, designers, marketers,
-                and creative thinkers. Share your profile with us and we'll reach out
-                when the right opportunity becomes available.
-            </p>
+            <p id="resumeError" class="hidden mt-2 text-xs text-red-400"></p>
+          </div>
 
-        </div>
+          <!-- Message -->
+          <div>
+            <label class="application-label"> Cover Message </label>
 
-    </section>
+            <textarea id="applicantMessage" name="message" rows="4"
+              placeholder="Tell us briefly why you'd be a great fit..."
+              class="application-input resize-none"></textarea>
+          </div>
 
-    <!-- FOOTER -->
-    <div id="footer"></div>
+          <!-- Submit -->
+          <div class="pt-2">
+            <button type="submit" id="applicationSubmit"
+              class="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-[0_10px_35px_rgba(249,115,22,0.2)] hover:shadow-[0_15px_45px_rgba(249,115,22,0.35)]">
+              <i class="fas fa-paper-plane"></i>
 
-    <!-- Header & Footer JS -->
-    <script src="../header/header.js"></script>
-    <script src="../footer/footer.js"></script>
-
-    <script>
-        const jobs = [
-            "Frontend Developer",
-            "Backend Developer",
-            "Full Stack Developer",
-            "UI/UX Designer",
-            "React Developer",
-            "SEO Executive",
-            "Digital Marketing Executive",
-            "Graphic Designer",
-            "Software Development Intern",
-        ];
-
-        const descriptions = {
-            "Frontend Developer":
-                "Build responsive, high-performance user interfaces using modern web technologies.",
-
-            "Backend Developer":
-                "Develop secure APIs, business logic, and scalable server-side applications.",
-
-            "Full Stack Developer":
-                "Work across frontend, backend, and databases to deliver complete software solutions.",
-
-            "UI/UX Designer":
-                "Design intuitive user experiences, wireframes, prototypes, and modern interfaces.",
-
-            "React Developer":
-                "Develop dynamic and reusable frontend components using React and modern JavaScript.",
-
-            "SEO Executive":
-                "Improve website visibility and organic traffic through effective SEO strategies.",
-
-            "Digital Marketing Executive":
-                "Plan and execute digital marketing campaigns across multiple channels.",
-
-            "Graphic Designer":
-                "Create engaging visual content, branding materials, and digital creatives.",
-
-            "Software Development Intern":
-                "Learn and contribute to real-world software projects under experienced mentors.",
-        };
-
-        const grid = document.getElementById("jobGrid");
-
-        jobs.forEach((job) => {
-            grid.innerHTML += `
-                                <div
-                class="group relative overflow-hidden rounded-[30px]
-                border border-orange-500/10
-                p-5
-                transition-all duration-500
-                hover:-translate-y-1">
-
-                        <!-- Background Gradient -->
-                        <div
-                            class="absolute inset-0
-                            bg-gradient-to-b
-                            from-[#050505]
-                            via-[#0b0b0b]
-                            to-[#1a0f08]">
-                        </div>
-
-                        <!-- Soft Bottom Fade -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 h-24
-                            bg-gradient-to-t
-                            from-orange-500/30
-                            via-orange-500/10
-                            to-transparent">
-                        </div>
-
-                        <div class="relative z-10 h-full flex flex-col">
-
-                        <div class="flex items-center justify-between mb-5">
-
-                    <div class="flex items-center gap-4">
-
-                        <div
-                            class="w-12 h-12 rounded-xl
-                            bg-orange-500/10
-                            flex items-center justify-center">
-
-                            <i class="fas fa-briefcase text-orange-400"></i>
-
-                        </div>
-
-                        <div>
-                            <h3 class="text-lg font-semibold text-white">
-                                ${job}
-                            </h3>
-
-                            <div class="flex items-center gap-1 text-xs text-gray-500 mt-1">
-                                <i class="fas fa-location-dot text-orange-400"></i>
-                                Pune, Maharashtra
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <i class="fas fa-arrow-up-right text-gray-500 group-hover:text-orange-400 transition"></i>
-
-                </div>
-
-            <p class="text-gray-400 text-sm leading-relaxed flex-grow">
-                ${descriptions[job]}
-            </p>
-
-            <button
-                onclick="applyJob('${job}')"
-                class="mt-6 text-orange-400 font-medium flex items-center gap-2">
-
-                Apply Now
-                <i class="fas fa-arrow-right text-xs"></i>
-
+              <span>Send Application</span>
             </button>
 
-        </div>
-
+            <p class="text-center text-xs text-gray-500 mt-4">
+              Your information will be kept confidential and used only for
+              recruitment purposes.
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
-    `;
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <!-- Header & Footer JS -->
+  <script src="../header/header.js"></script>
+  <script src="../footer/footer.js"></script>
+
+  <!-- ==========================================
+    MAIN APPLICATION JAVASCRIPT
+    ========================================== -->
+  <script>
+    // ==========================================
+    // API CONFIGURATION
+    // ==========================================
+    const API_BASE_URL = 'http://localhost:8080/api';
+
+    // ==========================================
+    // STATE
+    // ==========================================
+    let jobs = [];
+    let selectedJobId = null;
+    let isSubmitting = false;
+
+    // Threshold used to decide whether to show "View More".
+    // Approximately 2 lines / 120-150 characters of plain text.
+    const DESCRIPTION_PREVIEW_LIMIT = 100;
+
+    // ==========================================
+    // 1. FETCH JOBS FROM BACKEND
+    // ==========================================
+    async function fetchJobs() {
+      const grid = document.getElementById('jobGrid');
+      const loadingState = document.getElementById('loadingState');
+      const errorState = document.getElementById('errorState');
+      const emptyState = document.getElementById('emptyState');
+
+      // Show loading
+      grid.style.display = 'none';
+      loadingState.style.display = 'flex';
+      errorState.style.display = 'none';
+      emptyState.style.display = 'none';
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/jobs`);
+        const result = await response.json();
+
+        if (result.success && result.data && result.data.length > 0) {
+          jobs = result.data;
+          renderJobs(jobs);
+          grid.style.display = 'grid';
+          loadingState.style.display = 'none';
+        } else {
+          emptyState.style.display = 'block';
+          loadingState.style.display = 'none';
+          grid.style.display = 'none';
+        }
+      } catch (error) {
+        console.error('Error fetching jobs:', error);
+        errorState.style.display = 'block';
+        loadingState.style.display = 'none';
+        grid.style.display = 'none';
+      }
+    }
+
+    // ==========================================
+    // 2. RENDER JOBS
+    //    - Preserves multiline / bullet formatting via CSS
+    //    - Shows only ~2 lines of description (line-clamp)
+    //    - Automatically shows "View More" only when description is long
+    //    - Keeps openApplicationModal(job.id, job.title) unchanged
+    // ==========================================
+    function renderJobs(jobs) {
+      const grid = document.getElementById('jobGrid');
+      grid.innerHTML = '';
+
+      jobs.forEach(job => {
+        const card = document.createElement('div');
+        card.className = 'group relative overflow-hidden rounded-[30px] border border-orange-500/10 p-5 transition-all duration-500 hover:-translate-y-1';
+
+        // Determine whether description is long enough to need "View More"
+        const rawDescription = job.description || '';
+        const isLongDescription = rawDescription.trim().length > DESCRIPTION_PREVIEW_LIMIT;
+
+        // Build View More button only when needed (no backend flag required)
+        const viewMoreButtonHtml = isLongDescription
+          ? `<button type="button"
+                      class="view-more-btn"
+                      onclick="openJobDetailsModal(${job.id})">
+                 View More
+                 <i class="fas fa-eye text-xs"></i>
+               </button>`
+          : '';
+
+        card.innerHTML = `
+            <div class="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#0b0b0b] to-[#1a0f08]"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-orange-500/30 via-orange-500/10 to-transparent"></div>
+            
+            <div class="relative z-10 h-full flex flex-col">
+              <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                    <i class="fas fa-briefcase text-orange-400"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-semibold text-white">${escapeHtml(job.title)}</h3>
+                    <div class="flex items-center gap-1 text-xs text-gray-500 mt-1">
+                      <i class="fas fa-location-dot text-orange-400"></i>
+                      ${escapeHtml(job.location)}
+                    </div>
+                  </div>
+                </div>
+                <i class="fas fa-arrow-up-right text-gray-500 group-hover:text-orange-400 transition"></i>
+              </div>
+              
+              <!-- Description preview: line-clamped to ~2 lines, preserves line breaks -->
+              <p class="job-description-preview text-gray-400 text-sm leading-relaxed flex-grow">${escapeHtml(job.description)}</p>
+              
+              <!-- Action buttons: View More (conditional) + Apply Now on the same row -->
+              <div class="job-card-actions">
+                ${viewMoreButtonHtml}
+                <button type="button"
+                        class="apply-now-btn"
+                        onclick="openApplicationModal(${job.id}, '${escapeHtml(job.title)}')">
+                  Apply Now
+                  <i class="fas fa-arrow-right text-xs"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        grid.appendChild(card);
+      });
+    }
+
+    // ==========================================
+    // 3. ESCAPE HTML
+    // ==========================================
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ==========================================
+    // 3b. JOB DETAILS (VIEW MORE) MODAL HELPERS
+    //     Opens a clean overlay with full title, location and description.
+    //     Description keeps line breaks / bullets via white-space: pre-line.
+    //     Apply Now still calls the original openApplicationModal.
+    // ==========================================
+    function openJobDetailsModal(jobId) {
+      const job = jobs.find(j => j.id === jobId);
+      if (!job) return;
+
+      const modal = document.getElementById('jobDetailsModal');
+      const titleEl = document.getElementById('jobDetailsTitle');
+      const locationEl = document.getElementById('jobDetailsLocation');
+      const descriptionEl = document.getElementById('jobDetailsDescription');
+      const applyBtn = document.getElementById('jobDetailsApplyBtn');
+
+      if (!modal || !titleEl || !locationEl || !descriptionEl || !applyBtn) return;
+
+      titleEl.textContent = job.title || '';
+      locationEl.textContent = job.location || '';
+      // textContent + CSS white-space: pre-line preserves newlines and bullets from backend
+      descriptionEl.textContent = job.description || '';
+
+      // Wire Apply Now to the existing integration (unchanged signature)
+      applyBtn.onclick = function () {
+        closeJobDetailsModal();
+        openApplicationModal(job.id, job.title);
+      };
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeJobDetailsModal() {
+      const modal = document.getElementById('jobDetailsModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      // Only remove overflow lock if application modal is also closed
+      const appModal = document.getElementById('applicationModal');
+      if (!appModal || appModal.classList.contains('hidden')) {
+        document.body.classList.remove('overflow-hidden');
+      }
+    }
+
+    // ==========================================
+    // 4. OPEN APPLICATION MODAL
+    // ==========================================
+    function openApplicationModal(jobId, jobTitle) {
+      selectedJobId = jobId;
+
+      const modal = document.getElementById('applicationModal');
+      if (!modal) return;
+
+      // Reset the form first
+      document.getElementById('applicationForm').reset();
+
+      // Set dynamic values
+      document.getElementById('jobId').value = jobId;
+      document.getElementById('applicationRole').value = jobTitle;
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+
+      document.getElementById('resumeSelected').classList.add('hidden');
+      document.getElementById('resumeDefault').classList.remove('hidden');
+      document.getElementById('resumeError').classList.add('hidden');
+    }
+
+    // ==========================================
+    // 5. OPEN GENERAL APPLICATION
+    // ==========================================
+    function openGeneralApplication() {
+      openApplicationModal(0, 'General Application');
+    }
+
+    // ==========================================
+    // 6. CLOSE APPLICATION MODAL
+    // ==========================================
+    function closeApplicationModal() {
+      const modal = document.getElementById('applicationModal');
+      if (!modal) return;
+
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      isSubmitting = false;
+    }
+
+    // ==========================================
+    // 7. SUBMIT APPLICATION
+    // ==========================================
+    async function submitApplication(event) {
+      event.preventDefault();
+
+      if (isSubmitting) return;
+
+      const form = document.getElementById('applicationForm');
+      const submitBtn = document.getElementById('applicationSubmit');
+      const formData = new FormData(form);
+
+      // Reset errors
+      document.querySelectorAll('.text-red-400').forEach(el => el.classList.add('hidden'));
+
+      // Validate
+      let isValid = true;
+
+      const name = formData.get('name');
+      if (!name || name.trim().length < 2) {
+        document.getElementById('nameError').classList.remove('hidden');
+        isValid = false;
+      }
+
+      const email = formData.get('email');
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        document.getElementById('emailError').classList.remove('hidden');
+        isValid = false;
+      }
+
+      const phone = formData.get('phone');
+      if (!phone || phone.replace(/[\s+()-]/g, '').length < 10) {
+        document.getElementById('phoneError').classList.remove('hidden');
+        isValid = false;
+      }
+
+      const resume = formData.get('resume');
+      if (!resume || resume.size === 0) {
+        document.getElementById('resumeError').textContent = 'Please upload your resume';
+        document.getElementById('resumeError').classList.remove('hidden');
+        isValid = false;
+      }
+
+      if (!isValid) return;
+
+      // Submit
+      isSubmitting = true;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/applications`, {
+          method: 'POST',
+          body: formData
         });
 
-        function applyJob(role) {
-            const subject = encodeURIComponent(
-                `Application for ${role} - Kunash Media Solutions`,
-            );
-            const body = encodeURIComponent(`Dear HR Team,
+        const result = await response.json();
 
-I would like to apply for the ${role} position.
+        if (result.success) {
+          submitBtn.innerHTML = '<i class="fas fa-check"></i> Application Submitted!';
+          submitBtn.className = 'w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-green-500 text-white font-semibold';
 
-Candidate Details 
-Name:
-Email:
-Phone Number:
-Current Location:
-LinkedIn:
-
-Please find my resume attached.
-
-Thank you,
-`);
-
-            window.open(
-                `https://mail.google.com/mail/?view=cm&fs=1&to=info@kunashmedia.com,hr@kunashmedia.com&su=${subject}&body=${body}`,
-                "_blank",
-            );
+          setTimeout(() => {
+            closeApplicationModal();
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Application';
+            submitBtn.className = 'w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-[0_10px_35px_rgba(249,115,22,0.2)] hover:shadow-[0_15px_45px_rgba(249,115,22,0.35)]';
+            form.reset();
+            isSubmitting = false;
+            showToast('Application submitted successfully! We\'ll review your profile.', 'success');
+          }, 2000);
+        } else {
+          throw new Error(result.message || 'Application submission failed');
         }
-    </script>
+      } catch (error) {
+        console.error('Error submitting application:', error);
+        submitBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed - Try Again';
+        submitBtn.className = 'w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-red-500 text-white font-semibold';
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Application';
+          submitBtn.className = 'w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-[0_10px_35px_rgba(249,115,22,0.2)] hover:shadow-[0_15px_45px_rgba(249,115,22,0.35)]';
+          isSubmitting = false;
+          showToast('Failed to submit application. Please try again.', 'error');
+        }, 3000);
+      }
+    }
+
+    // ==========================================
+    // 8. TOAST NOTIFICATION
+    // ==========================================
+    function showToast(message, type) {
+      const existingToast = document.getElementById('toast');
+      if (existingToast) existingToast.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'toast';
+      toast.className = `fixed bottom-8 left-1/2 -translate-x-1/2 z-[10000] px-6 py-4 rounded-xl shadow-lg transition-all duration-500 ${type === 'success' ? 'bg-green-500/90 text-white' : 'bg-red-500/90 text-white'
+        }`;
+      toast.innerHTML = `
+          <div class="flex items-center gap-3">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+            <span>${message}</span>
+          </div>
+        `;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+        setTimeout(() => toast.remove(), 500);
+      }, 5000);
+    }
+
+    // ==========================================
+    // 9. FILE UPLOAD HANDLING
+    // ==========================================
+    const resumeInput = document.getElementById('resumeInput');
+    const resumeDropZone = document.getElementById('resumeDropZone');
+    const resumeDefault = document.getElementById('resumeDefault');
+    const resumeSelected = document.getElementById('resumeSelected');
+    const resumeFileName = document.getElementById('resumeFileName');
+    const resumeFileSize = document.getElementById('resumeFileSize');
+    const resumeError = document.getElementById('resumeError');
+
+    function handleResume(file) {
+      if (!file) return;
+
+      // ==========================================
+      // 1. ALLOWED FILE TYPES - PDF ONLY
+      // ==========================================
+      const allowedTypes = [
+        'application/pdf'
+      ];
+
+      // Also check by extension
+      const allowedExtensions = ['.pdf'];
+      const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
+      // ==========================================
+      // 2. FILE SIZE LIMITS (10KB - 5MB)
+      // ==========================================
+      const minSize = 10 * 1024;      // 10KB minimum
+      const maxSize = 5 * 1024 * 1024; // 5MB maximum
+
+      // Reset error
+      resumeError.classList.add('hidden');
+      resumeError.textContent = '';
+
+      // ==========================================
+      // 3. VALIDATE FILE TYPE - PDF ONLY
+      // ==========================================
+      const isValidType = allowedTypes.includes(file.type) || allowedExtensions.includes(fileExtension);
+
+      if (!isValidType) {
+        showResumeError('Only PDF files are allowed. Please upload a PDF file.');
+        resumeInput.value = '';
+        return;
+      }
+
+      // ==========================================
+      // 4. VALIDATE FILE SIZE
+      // ==========================================
+      if (file.size < minSize) {
+        showResumeError('Resume file is too small. Minimum size is 10KB.');
+        resumeInput.value = '';
+        return;
+      }
+
+      if (file.size > maxSize) {
+        showResumeError('Resume file is too large. Maximum size is 5MB.');
+        resumeInput.value = '';
+        return;
+      }
+
+      // ==========================================
+      // 5. ALL VALIDATION PASSED - ACCEPT FILE
+      // ==========================================
+      resumeFileName.textContent = file.name;
+      resumeFileSize.textContent = formatFileSize(file.size);
+      resumeDefault.classList.add('hidden');
+      resumeSelected.classList.remove('hidden');
+
+      console.log('Resume validated (PDF only):', {
+        name: file.name,
+        type: file.type,
+        size: formatFileSize(file.size)
+      });
+    }
+
+    function showResumeError(message) {
+      resumeError.textContent = message;
+      resumeError.classList.remove('hidden');
+    }
+
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const units = ['Bytes', 'KB', 'MB'];
+      const index = Math.floor(Math.log(bytes) / Math.log(1024));
+      return parseFloat((bytes / Math.pow(1024, index)).toFixed(2)) + ' ' + units[index];
+    }
+
+    function removeResume(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      resumeInput.value = '';
+      resumeSelected.classList.add('hidden');
+      resumeDefault.classList.remove('hidden');
+      resumeError.classList.add('hidden');
+      resumeFileName.textContent = '';
+      resumeFileSize.textContent = '';
+    }
+
+    // File input change
+    if (resumeInput) {
+      resumeInput.addEventListener('change', function () {
+        const file = this.files[0];
+        handleResume(file);
+      });
+    }
+
+    // Drag & drop
+    if (resumeDropZone) {
+      resumeDropZone.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        this.classList.add('drag-over');
+      });
+
+      resumeDropZone.addEventListener('dragleave', function () {
+        this.classList.remove('drag-over');
+      });
+
+      resumeDropZone.addEventListener('drop', function (e) {
+        e.preventDefault();
+        this.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if (!file) return;
+        handleResume(file);
+        try {
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          resumeInput.files = dataTransfer.files;
+        } catch (error) {
+          console.warn('Could not assign dropped file.', error);
+        }
+      });
+    }
+
+    // ==========================================
+    // 10. MODAL EVENTS
+    // ==========================================
+    const applicationModal = document.getElementById('applicationModal');
+    const applicationBackdrop = document.getElementById('applicationBackdrop');
+
+    if (applicationBackdrop) {
+      applicationBackdrop.addEventListener('click', closeApplicationModal);
+    }
+
+    // Job details modal - close on backdrop click
+    const jobDetailsBackdrop = document.getElementById('jobDetailsBackdrop');
+    if (jobDetailsBackdrop) {
+      jobDetailsBackdrop.addEventListener('click', closeJobDetailsModal);
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        // Prefer closing the top-most visible modal first
+        if (applicationModal && !applicationModal.classList.contains('hidden')) {
+          closeApplicationModal();
+        } else if (document.getElementById('jobDetailsModal') &&
+          !document.getElementById('jobDetailsModal').classList.contains('hidden')) {
+          closeJobDetailsModal();
+        }
+      }
+    });
+
+    // Form submit
+    document.getElementById('applicationForm').addEventListener('submit', submitApplication);
+
+    // ==========================================
+    // 11. INIT
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log('Career page initialized. API URL:', API_BASE_URL);
+      fetchJobs();
+    });
+
+    // Make functions globally accessible
+    window.fetchJobs = fetchJobs;
+    window.openApplicationModal = openApplicationModal;
+    window.openGeneralApplication = openGeneralApplication;
+    window.closeApplicationModal = closeApplicationModal;
+    window.removeResume = removeResume;
+    window.openJobDetailsModal = openJobDetailsModal;
+    window.closeJobDetailsModal = closeJobDetailsModal;
+  </script>
 </body>
 
 </html>
