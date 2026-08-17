@@ -466,7 +466,7 @@
         submitBtn.disabled = true;
 
         try {
-          // ====== SEND TO BACKEND ======
+          // ✅ CORRECT URL - matches your backend
           const response = await fetch('http://localhost:8080/api/contact/submit', {
             method: 'POST',
             headers: {
@@ -474,6 +474,21 @@
             },
             body: JSON.stringify(formData)
           });
+          // Check if response is OK before parsing JSON
+          if (!response.ok) {
+            // Try to get error message from response
+            let errorMsg = 'Failed to send message. Please try again.';
+            try {
+              const errorData = await response.json();
+              if (errorData.message) {
+                errorMsg = errorData.message;
+              }
+            } catch (e) {
+              // If response is not JSON, use status text
+              errorMsg = response.statusText || errorMsg;
+            }
+            throw new Error(errorMsg);
+          }
 
           const result = await response.json();
 
@@ -486,7 +501,7 @@
           }
         } catch (error) {
           console.error("Error:", error);
-          showToast("Network error. Please check your connection and try again.", "error");
+          showToast(error.message || "Network error. Please check your connection and try again.", "error");
         } finally {
           // ====== RESET BUTTON STATE ======
           submitBtn.innerHTML = originalText;
@@ -500,9 +515,7 @@
       // Close any existing toast first
       const existingToasts = document.querySelectorAll('.toastify');
       existingToasts.forEach(toast => {
-        // Check if it has the toastify class
         if (toast.classList.contains('toastify')) {
-          // Remove the toast after a short delay
           toast.style.opacity = '0';
           toast.style.transform = 'translateY(-20px)';
           setTimeout(() => {
@@ -517,7 +530,6 @@
       setTimeout(() => {
         const isSuccess = type === "success";
 
-        // Create the toast with minimal styling
         Toastify({
           text: message,
           duration: 4000,
@@ -531,20 +543,17 @@
             fontFamily: "Montserrat, sans-serif",
             borderRadius: "0",
           },
-          onClick: function() {} // No action on click
+          onClick: function () { }
         }).showToast();
 
-        // Clean up any leftover toast styles
         setTimeout(() => {
           const toastContainer = document.querySelector('.toastify');
           if (toastContainer) {
-            // Make sure our styles are applied
             toastContainer.style.background = "transparent";
             toastContainer.style.boxShadow = "none";
           }
         }, 50);
 
-        // Remove toast after duration
         setTimeout(() => {
           const toast = document.querySelector('.toastify');
           if (toast) {
