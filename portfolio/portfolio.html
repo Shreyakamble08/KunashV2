@@ -1,207 +1,223 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Kunash Media | Our Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../images/favicon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../images/favicon.png"
+    />
 
     <!-- Apple devices -->
-    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/favicon.png" />
 
     <!-- favicon sizes -->
-    <link rel="shortcut icon" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../images/favicon.png" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: "Inter", sans-serif;
-            background-color: #010101;
-            overflow-x: hidden;
-            color: #e5e7eb;
-            position: relative;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #010101;
+        overflow-x: hidden;
+        color: #e5e7eb;
+        position: relative;
+      }
 
-        /* Full-page constant background image */
-        .page-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("../images/bgimg.jfif");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2;
-        }
+      /* Full-page constant background image */
+      .page-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../images/bgimg.jfif");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: -2;
+      }
 
-        /* Darker overlay for better content readability & premium feel */
-        .page-bg::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.441);
-            backdrop-filter: blur(2px);
-            z-index: -1;
-        }
+      /* Darker overlay for better content readability & premium feel */
+      .page-bg::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.441);
+        backdrop-filter: blur(2px);
+        z-index: -1;
+      }
 
-        /* Ensures all content appears above background */
-        .content-layer {
-            position: relative;
-            z-index: 5;
-        }
+      /* Ensures all content appears above background */
+      .content-layer {
+        position: relative;
+        z-index: 5;
+      }
 
-        .orange-gradient-text {
-            background: linear-gradient(125deg, #f97316, #ffb86b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+      .orange-gradient-text {
+        background: linear-gradient(125deg, #f97316, #ffb86b);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
 
-        .filter-btn {
-            transition: all 0.25s ease;
-            position: relative;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
+      .filter-btn {
+        transition: all 0.25s ease;
+        position: relative;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
 
-        .filter-btn.active {
-            background: #f97316;
-            color: #000000;
-            font-weight: 600;
-            box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
-            border-color: #f97316;
-        }
+      .filter-btn.active {
+        background: #f97316;
+        color: #000000;
+        font-weight: 600;
+        box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+        border-color: #f97316;
+      }
 
-        .filter-btn i {
-            margin-right: 6px;
-            font-size: 0.85rem;
-        }
+      .filter-btn i {
+        margin-right: 6px;
+        font-size: 0.85rem;
+      }
 
-        .project-card {
-            background: rgba(12, 12, 20, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            /* cursor pointer removed - no longer interactive as a whole card */
-        }
+      .project-card {
+        background: rgba(12, 12, 20, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        /* cursor pointer removed - no longer interactive as a whole card */
+      }
 
-        .project-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(249, 115, 22, 0.6);
-            box-shadow:
-                0 25px 40px -15px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(249, 115, 22, 0.3);
-            background: rgba(12, 12, 24, 0.9);
-        }
+      .project-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(249, 115, 22, 0.6);
+        box-shadow:
+          0 25px 40px -15px rgba(0, 0, 0, 0.8),
+          0 0 0 1px rgba(249, 115, 22, 0.3);
+        background: rgba(12, 12, 24, 0.9);
+      }
 
-        .category-badge {
-            background: rgba(249, 115, 22, 0.2);
-            border: 1px solid rgba(249, 115, 22, 0.45);
-            color: #f97316;
-            font-weight: 500;
-            font-size: 0.7rem;
-            letter-spacing: 0.3px;
-            backdrop-filter: blur(4px);
-        }
+      .category-badge {
+        background: rgba(249, 115, 22, 0.2);
+        border: 1px solid rgba(249, 115, 22, 0.45);
+        color: #f97316;
+        font-weight: 500;
+        font-size: 0.7rem;
+        letter-spacing: 0.3px;
+        backdrop-filter: blur(4px);
+      }
 
-        /* custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
+      /* custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
 
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
+      ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+      }
 
-        ::-webkit-scrollbar-thumb {
-            background: #f97316;
-            border-radius: 10px;
-        }
+      ::-webkit-scrollbar-thumb {
+        background: #f97316;
+        border-radius: 10px;
+      }
 
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
 
-        /* All detail page styles removed - no overlay/detail views */
+      /* All detail page styles removed - no overlay/detail views */
 
-        /* Header transparency adjustment for bg image */
-        header {
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
+      /* Header transparency adjustment for bg image */
+      header {
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
 
-        footer {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
+      footer {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
 
-        /* Preserve button styling but make it non-functional placeholder */
-        .project-detail-btn {
-            cursor: default;
-            opacity: 0.8;
-            transition: none;
-        }
+      /* Preserve button styling but make it non-functional placeholder */
+      .project-detail-btn {
+        cursor: default;
+        opacity: 0.8;
+        transition: none;
+      }
 
-        .project-detail-btn:hover {
-            gap: 0.25rem !important;
-            cursor: default;
-        }
+      .project-detail-btn:hover {
+        gap: 0.25rem !important;
+        cursor: default;
+      }
     </style>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        alan: ['"Alan Sans"', "sans-serif"],
-                        dmserif: ['"DM Serif Text"', "serif"],
-                        montserrat: ["Montserrat", "sans-serif"],
-                        notoSans: ['"Noto Sans"', "sans-serif"],
-                        notoSerif: ['"Noto Serif"', "serif"],
-                        poiret: ['"Poiret One"', "cursive"],
-                        quicksand: ["Quicksand", "sans-serif"],
-                        raleway: ["Raleway", "sans-serif"],
-                    },
-                },
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              alan: ['"Alan Sans"', "sans-serif"],
+              dmserif: ['"DM Serif Text"', "serif"],
+              montserrat: ["Montserrat", "sans-serif"],
+              notoSans: ['"Noto Sans"', "sans-serif"],
+              notoSerif: ['"Noto Serif"', "serif"],
+              poiret: ['"Poiret One"', "cursive"],
+              quicksand: ["Quicksand", "sans-serif"],
+              raleway: ["Raleway", "sans-serif"],
             },
-        };
+          },
+        },
+      };
     </script>
-</head>
+  </head>
 
-<body class="bg-black">
+  <body class="bg-black">
     <!-- FULL PAGE CONSTANT BACKGROUND IMAGE -->
     <div class="page-bg"></div>
 
     <!-- All content wrapped in content-layer -->
     <div class="content-layer">
-        <div id="header"></div>
+      <div id="header"></div>
 
-        <!-- MAIN APP - Simplified to only show project cards grid (no detail routing) -->
-        <main id="appRoot" class="pt-28 pb-20 px-4 md:px-8 min-h-screen"></main>
+      <!-- MAIN APP - Simplified to only show project cards grid (no detail routing) -->
+      <main id="appRoot" class="pt-28 pb-20 px-4 md:px-8 min-h-screen"></main>
     </div>
 
     <div id="footer"></div>
@@ -210,140 +226,144 @@
     <script src="../header/header.js"></script>
 
     <script>
-        // ---------- PROJECT DATABASE (simplified: keep only fields needed for cards) ----------
-        const projects = [
-            {
-                id: "ojal-finance-dashboard",
-                numericId: 1,
-                title: "Finance Dashboard",
-                category: "software",
-                categoryLabel: "Software Development",
-                shortDesc: "Manage collections, loans, and repayments in one system.",
-                thumbnail: "../images/ojal-thumbnail.png",
-                websiteUrl: "https://ojalfinance.com",
-                projectUrl: "Ojalfinance.html"
-            },
-            {
-                id: "HRMS",
-                numericId: 2,
-                title: "HRMS",
-                category: "software",
-                categoryLabel: "Software Development",
-                shortDesc: "Enterprise recruitment automation software with AI-powered candidate screening.",
-                thumbnail: "../images/hrms-thumbnail.png",
-                websiteUrl: "https://hrms.kunashshowcase.online/index.html",
-                projectUrl: "Hrms.html"
-            },
-            {
-                id: "School Management System",
-                numericId: 3,
-                title: "School Management System",
-                category: "software",
-                categoryLabel: "Software Development",
-                shortDesc: "Comprehensive solution for managing school operations and student data.",
-                thumbnail: "../images/school.png",
-                websiteUrl: null,
-                projectUrl: "School.html"
-            },
-            {
-                id: "Hospital Management System",
-                numericId: 4,
-                title: "Kunash MediCore",
-                category: "software",
-                categoryLabel: "Software Development",
-                shortDesc: "Complete Hospital Management Solution for Modern Healthcare.",
-                thumbnail: "../images/hospital management.png",
-                websiteUrl: "https://growthpulse.example.com",
-                projectUrl: "Hospital.html"
-            },
-            {
-                id: "Warehouse Management System",
-                numericId: 5,
-                title: "Warehouse Management System",
-                category: "software",
-                categoryLabel: "Software Development",
-                shortDesc: "A Unified Platform for Warehouse Operations and Business Growth.",
-                thumbnail: "../images/WMS5.png",
-                websiteUrl: "https://ecoshop.example.com",
-                projectUrl: "Warehouse.html"
-            },
-            // {
-            //     id: "taskflow-pro",
-            //     numericId: 6,
-            //     title: "TaskFlow Pro",
-            //     category: "software",
-            //     categoryLabel: "Software Development",
-            //     shortDesc: "Cross-platform project management desktop app with real-time sync.",
-            //     thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=TaskFlow+Pro",
-            //     websiteUrl: "https://taskflow.example.com",
-            //     projectUrl: "../comingsoon.html"
-            // },
-            // {
-            //     id: "cyberpunk-poster-series",
-            //     numericId: 7,
-            //     title: "Cyberpunk Poster Series",
-            //     category: "graphics",
-            //     categoryLabel: "Graphic Design",
-            //     shortDesc: "Illustration & 3D motion poster series for gaming festival.",
-            //     thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=Cyberpunk+Art",
-            //     websiteUrl: null,
-            //     projectUrl: "../comingsoon.html"
-            // },
-            // {
-            //     id: "viral-clout-tiktok",
-            //     numericId: 8,
-            //     title: "Viral Clout TikTok Growth",
-            //     category: "marketing",
-            //     categoryLabel: "Digital Marketing",
-            //     shortDesc: "TikTok viral strategy + influencer campaign gaining 500k+ followers.",
-            //     thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=TikTok+Growth",
-            //     websiteUrl: "https://viralclout.example.com",
-            //     projectUrl: "../comingsoon.html"
-            // },
-        ];
+      // ---------- PROJECT DATABASE (simplified: keep only fields needed for cards) ----------
+      const projects = [
+        {
+          id: "ojal-finance-dashboard",
+          numericId: 1,
+          title: "Finance Dashboard",
+          category: "software",
+          categoryLabel: "Software Development",
+          shortDesc: "Manage collections, loans, and repayments in one system.",
+          thumbnail: "../images/ojal-thumbnail.png",
+          websiteUrl: "https://ojalfinance.com",
+          projectUrl: "Ojalfinance.html",
+        },
+        {
+          id: "HRMS",
+          numericId: 2,
+          title: "HRMS",
+          category: "software",
+          categoryLabel: "Software Development",
+          shortDesc:
+            "Enterprise recruitment automation software with AI-powered candidate screening.",
+          thumbnail: "../images/hrms-thumbnail.png",
+          websiteUrl: "https://hrms.kunashshowcase.online/index.html",
+          projectUrl: "Hrms.html",
+        },
+        {
+          id: "School Management System",
+          numericId: 3,
+          title: "School Management System",
+          category: "software",
+          categoryLabel: "Software Development",
+          shortDesc:
+            "Comprehensive solution for managing school operations and student data.",
+          thumbnail: "../images/school.png",
+          websiteUrl: null,
+          projectUrl: "School.html",
+        },
+        {
+          id: "Hospital Management System",
+          numericId: 4,
+          title: "Kunash MediCore",
+          category: "software",
+          categoryLabel: "Software Development",
+          shortDesc:
+            "Complete Hospital Management Solution for Modern Healthcare.",
+          thumbnail: "../images/hospital management.png",
+          websiteUrl: "https://growthpulse.example.com",
+          projectUrl: "Hospital.html",
+        },
+        {
+          id: "Warehouse Management System",
+          numericId: 5,
+          title: "Warehouse Management System",
+          category: "software",
+          categoryLabel: "Software Development",
+          shortDesc:
+            "A Unified Platform for Warehouse Operations and Business Growth.",
+          thumbnail: "../images/WMS5.png",
+          websiteUrl: "https://ecoshop.example.com",
+          projectUrl: "Warehouse.html",
+        },
+        {
+            id: "POS-Inventory-Management-System",
+            numericId: 6,
+            title: "POS Inventory Management System",
+            category: "software",
+            categoryLabel: "Software Development",
+            shortDesc: "Comprehensive solution for managing point-of-sale and inventory operations.",
+            thumbnail: "../images/pos6.png",
+            websiteUrl: "https://posinventory.example.com",
+            projectUrl: "POS.html"
+        },
+        // {
+        //     id: "cyberpunk-poster-series",
+        //     numericId: 7,
+        //     title: "Cyberpunk Poster Series",
+        //     category: "graphics",
+        //     categoryLabel: "Graphic Design",
+        //     shortDesc: "Illustration & 3D motion poster series for gaming festival.",
+        //     thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=Cyberpunk+Art",
+        //     websiteUrl: null,
+        //     projectUrl: "../comingsoon.html"
+        // },
+        // {
+        //     id: "viral-clout-tiktok",
+        //     numericId: 8,
+        //     title: "Viral Clout TikTok Growth",
+        //     category: "marketing",
+        //     categoryLabel: "Digital Marketing",
+        //     shortDesc: "TikTok viral strategy + influencer campaign gaining 500k+ followers.",
+        //     thumbnail: "https://placehold.co/600x400/1a1a2e/f97316?text=TikTok+Growth",
+        //     websiteUrl: "https://viralclout.example.com",
+        //     projectUrl: "../comingsoon.html"
+        // },
+      ];
 
-        // Helper: safely check if value exists
-        function hasValue(value) {
-            return value !== null && value !== undefined && value !== "";
+      // Helper: safely check if value exists
+      function hasValue(value) {
+        return value !== null && value !== undefined && value !== "";
+      }
+
+      // Helper: truncate description
+      function truncateText(text, maxLength = 80) {
+        if (text.length <= maxLength) return text;
+        return text.substring(0, maxLength) + "...";
+      }
+
+      // Function to handle project navigation
+      function handleProjectNavigation(projectUrl, websiteUrl, projectTitle) {
+        if (projectUrl && projectUrl !== "#" && projectUrl !== "") {
+          // Check if it's an external URL or internal page
+          if (projectUrl.startsWith("http") || projectUrl.startsWith("www")) {
+            window.open(projectUrl, "_blank");
+          } else {
+            // For internal pages, navigate to the page
+            window.location.href = projectUrl;
+          }
+        } else if (websiteUrl && websiteUrl !== "#") {
+          // If no project page but has website URL, open live demo
+          window.open(websiteUrl, "_blank");
+        } else {
+          // Fallback: show alert that page is coming soon
+          alert(`${projectTitle} - Project details page coming soon!`);
         }
+      }
 
-        // Helper: truncate description
-        function truncateText(text, maxLength = 80) {
-            if (text.length <= maxLength) return text;
-            return text.substring(0, maxLength) + "...";
-        }
+      // ----- SIMPLIFIED RENDERING: ONLY GRID WITH NO ROUTING OR DETAIL LOGIC -----
+      let currentFilter = "all";
 
-        // Function to handle project navigation
-        function handleProjectNavigation(projectUrl, websiteUrl, projectTitle) {
-            if (projectUrl && projectUrl !== "#" && projectUrl !== "") {
-                // Check if it's an external URL or internal page
-                if (projectUrl.startsWith("http") || projectUrl.startsWith("www")) {
-                    window.open(projectUrl, "_blank");
-                } else {
-                    // For internal pages, navigate to the page
-                    window.location.href = projectUrl;
-                }
-            } else if (websiteUrl && websiteUrl !== "#") {
-                // If no project page but has website URL, open live demo
-                window.open(websiteUrl, "_blank");
-            } else {
-                // Fallback: show alert that page is coming soon
-                alert(`${projectTitle} - Project details page coming soon!`);
-            }
-        }
+      function renderPortfolioGrid(filter = "all") {
+        const filteredProjects =
+          filter === "all"
+            ? projects
+            : projects.filter((p) => p.category === filter);
 
-        // ----- SIMPLIFIED RENDERING: ONLY GRID WITH NO ROUTING OR DETAIL LOGIC -----
-        let currentFilter = "all";
-
-        function renderPortfolioGrid(filter = "all") {
-            const filteredProjects =
-                filter === "all"
-                    ? projects
-                    : projects.filter((p) => p.category === filter);
-
-            const projectsGridHtml = filteredProjects
-                .map(
-                    (project) => `
+        const projectsGridHtml = filteredProjects
+          .map(
+            (project) => `
 <div class="project-card rounded-2xl overflow-hidden group flex flex-col bg-[#0f0f17] border border-white/10 shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-orange-500/30">
     <!-- MacBook-style Frame Container -->
     <div class="relative bg-gradient-to-b from-[#1a1a24] to-[#0f0f17]">
@@ -370,8 +390,9 @@
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-7"></div>
             
             <!-- Live Demo button on hover -->
-            ${project.websiteUrl && project.websiteUrl !== "#"
-                            ? `
+            ${
+              project.websiteUrl && project.websiteUrl !== "#"
+                ? `
             <!-- <button 
                data-website-url="${project.websiteUrl}"
                data-project-title="${project.title}"
@@ -379,8 +400,8 @@
                 <i class="fa-solid fa-arrow-up-right-from-music"></i> Live Demo
             </button>-->
             `
-                            : ""
-                        }
+                : ""
+            }
         </div>
         
         <!-- Bottom keyboard area hint -->
@@ -417,15 +438,15 @@
     </div>
 </div>
             `,
-                )
-                .join("");
+          )
+          .join("");
 
-            const emptyState =
-                filteredProjects.length === 0
-                    ? `<div class="col-span-full text-center py-20"><i class="fa-regular fa-folder-open text-5xl text-gray-500 mb-4"></i><p class="text-gray-400 text-base">No projects match this category.</p></div>`
-                    : "";
+        const emptyState =
+          filteredProjects.length === 0
+            ? `<div class="col-span-full text-center py-20"><i class="fa-regular fa-folder-open text-5xl text-gray-500 mb-4"></i><p class="text-gray-400 text-base">No projects match this category.</p></div>`
+            : "";
 
-            return `
+        return `
                 <div class="max-w-7xl mx-auto">
                     <!-- Hero Section -->
                     <div class="text-center mb-12 md:mb-16">
@@ -454,115 +475,114 @@
                     </div>
                 </div>
             `;
+      }
+
+      // Function to attach event listeners for buttons
+      function attachEventListeners() {
+        // Attach filter button listeners
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        filterBtns.forEach((btn) => {
+          btn.removeEventListener("click", handleFilterClick);
+          btn.addEventListener("click", handleFilterClick);
+        });
+
+        // Attach explore button listeners
+        const exploreBtns = document.querySelectorAll(".explore-btn");
+        exploreBtns.forEach((btn) => {
+          btn.removeEventListener("click", handleExploreClick);
+          btn.addEventListener("click", handleExploreClick);
+        });
+
+        // Attach live demo button listeners
+        const demoBtns = document.querySelectorAll(".live-demo-btn");
+        demoBtns.forEach((btn) => {
+          btn.removeEventListener("click", handleLiveDemoClick);
+          btn.addEventListener("click", handleLiveDemoClick);
+        });
+      }
+
+      function handleExploreClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const btn = e.currentTarget;
+        const projectUrl = btn.getAttribute("data-project-url");
+        const websiteUrl = btn.getAttribute("data-website-url");
+        const projectTitle = btn.getAttribute("data-project-title");
+
+        handleProjectNavigation(projectUrl, websiteUrl, projectTitle);
+      }
+
+      function handleLiveDemoClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const btn = e.currentTarget;
+        const websiteUrl = btn.getAttribute("data-website-url");
+        const projectTitle = btn.getAttribute("data-project-title");
+
+        if (websiteUrl && websiteUrl !== "#") {
+          window.open(websiteUrl, "_blank");
+        } else {
+          alert(`${projectTitle} - Live demo coming soon!`);
+        }
+      }
+
+      function handleFilterClick(e) {
+        const filterVal = this.getAttribute("data-filter");
+        if (filterVal === currentFilter) return;
+        currentFilter = filterVal;
+        const appRoot = document.getElementById("appRoot");
+        if (appRoot) {
+          appRoot.innerHTML = renderPortfolioGrid(currentFilter);
+          attachEventListeners();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+
+      // Handler for logo & navigation (just reset filter and re-render)
+      function resetToHome() {
+        currentFilter = "all";
+        const appRoot = document.getElementById("appRoot");
+        if (appRoot) {
+          appRoot.innerHTML = renderPortfolioGrid(currentFilter);
+          attachEventListeners();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+
+      // Initialize the page
+      function init() {
+        const appRoot = document.getElementById("appRoot");
+        if (appRoot) {
+          appRoot.innerHTML = renderPortfolioGrid("all");
+          attachEventListeners();
         }
 
-        // Function to attach event listeners for buttons
-        function attachEventListeners() {
-            // Attach filter button listeners
-            const filterBtns = document.querySelectorAll(".filter-btn");
-            filterBtns.forEach((btn) => {
-                btn.removeEventListener("click", handleFilterClick);
-                btn.addEventListener("click", handleFilterClick);
-            });
+        const logoLink = document.getElementById("logoHomeLink");
+        const navHomeLink = document.getElementById("navHomeLink");
+        const navPortfolioLink = document.getElementById("navPortfolioLink");
 
-            // Attach explore button listeners
-            const exploreBtns = document.querySelectorAll(".explore-btn");
-            exploreBtns.forEach((btn) => {
-                btn.removeEventListener("click", handleExploreClick);
-                btn.addEventListener("click", handleExploreClick);
-            });
-
-            // Attach live demo button listeners
-            const demoBtns = document.querySelectorAll(".live-demo-btn");
-            demoBtns.forEach((btn) => {
-                btn.removeEventListener("click", handleLiveDemoClick);
-                btn.addEventListener("click", handleLiveDemoClick);
-            });
-        }
-
-        function handleExploreClick(e) {
+        if (logoLink) {
+          logoLink.addEventListener("click", (e) => {
             e.preventDefault();
-            e.stopPropagation();
-            const btn = e.currentTarget;
-            const projectUrl = btn.getAttribute("data-project-url");
-            const websiteUrl = btn.getAttribute("data-website-url");
-            const projectTitle = btn.getAttribute("data-project-title");
-
-            handleProjectNavigation(projectUrl, websiteUrl, projectTitle);
+            resetToHome();
+          });
         }
-
-        function handleLiveDemoClick(e) {
+        if (navHomeLink) {
+          navHomeLink.addEventListener("click", (e) => {
             e.preventDefault();
-            e.stopPropagation();
-            const btn = e.currentTarget;
-            const websiteUrl = btn.getAttribute("data-website-url");
-            const projectTitle = btn.getAttribute("data-project-title");
-
-            if (websiteUrl && websiteUrl !== "#") {
-                window.open(websiteUrl, "_blank");
-            } else {
-                alert(`${projectTitle} - Live demo coming soon!`);
-            }
+            resetToHome();
+          });
         }
-
-        function handleFilterClick(e) {
-            const filterVal = this.getAttribute("data-filter");
-            if (filterVal === currentFilter) return;
-            currentFilter = filterVal;
-            const appRoot = document.getElementById("appRoot");
-            if (appRoot) {
-                appRoot.innerHTML = renderPortfolioGrid(currentFilter);
-                attachEventListeners();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            }
+        if (navPortfolioLink) {
+          navPortfolioLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            resetToHome();
+          });
         }
+      }
 
-        // Handler for logo & navigation (just reset filter and re-render)
-        function resetToHome() {
-            currentFilter = "all";
-            const appRoot = document.getElementById("appRoot");
-            if (appRoot) {
-                appRoot.innerHTML = renderPortfolioGrid(currentFilter);
-                attachEventListeners();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-        }
-
-        // Initialize the page
-        function init() {
-            const appRoot = document.getElementById("appRoot");
-            if (appRoot) {
-                appRoot.innerHTML = renderPortfolioGrid("all");
-                attachEventListeners();
-            }
-
-            const logoLink = document.getElementById("logoHomeLink");
-            const navHomeLink = document.getElementById("navHomeLink");
-            const navPortfolioLink = document.getElementById("navPortfolioLink");
-
-            if (logoLink) {
-                logoLink.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    resetToHome();
-                });
-            }
-            if (navHomeLink) {
-                navHomeLink.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    resetToHome();
-                });
-            }
-            if (navPortfolioLink) {
-                navPortfolioLink.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    resetToHome();
-                });
-            }
-        }
-
-        // Start the application
-        init();
+      // Start the application
+      init();
     </script>
-</body>
-
+  </body>
 </html>

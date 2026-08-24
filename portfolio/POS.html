@@ -1,0 +1,1487 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kunash POS</title>
+    <meta name="description"
+        content="A modern point-of-sale system built for fast billing, order management, Cash & UPI payments, stock visibility and connected operations." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@400;500;600;700&family=DM+Serif+Text:ital@0;1&family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@400;500;600;700&family=Poiret+One&family=Quicksand:wght@400;500;600;700&family=Raleway:wght@400;500;600;700;800&family=Rubik+Doodle+Shadow&display=swap"
+        rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png" />
+    <link rel="apple-touch-icon" href="./images/favicon.png" />
+    <link rel="shortcut icon" href="./images/favicon.png" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: {
+                            950: "#050505",
+                            900: "#0A0A0A",
+                            850: "#0F0F0F",
+                            800: "#111111",
+                            750: "#151515",
+                            700: "#1A1A1A",
+                        },
+                        orange: {
+                            500: "#FF6B00",
+                            600: "#D94F00",
+                            400: "#FF8533",
+                        },
+                    },
+                    fontFamily: {
+                        alan: ['"Alan Sans"', "sans-serif"],
+                        dmserif: ['"DM Serif Text"', "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                        notoSans: ['"Noto Sans"', "sans-serif"],
+                        notoSerif: ['"Noto Serif"', "serif"],
+                        poiret: ['"Poiret One"', "cursive"],
+                        quicksand: ["Quicksand", "sans-serif"],
+                        raleway: ["Raleway", "sans-serif"],
+                        rubikDoodle: ['"Rubik Doodle Shadow"', "system-ui"],
+                    },
+
+                    animation: {
+                        "fade-up": "fadeUp 0.7s ease-out forwards",
+                        "pulse-soft": "pulseSoft 3s ease-in-out infinite",
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            "0%": { opacity: "0", transform: "translateY(24px)" },
+                            "100%": { opacity: "1", transform: "translateY(0)" },
+                        },
+                        pulseSoft: {
+                            "0%, 100%": { opacity: "0.4" },
+                            "50%": { opacity: "0.8" },
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* Custom utilities that Tailwind can't easily cover */
+        :root {
+            --orange-glow: rgba(255, 107, 0, 0.15);
+        }
+
+        body {
+            background-color: #050505;
+            color: #f5f5f5;
+        }
+
+        /* Subtle technical grid background */
+        .bg-grid {
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+
+        .bg-grid-fine {
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* Soft radial orange glows */
+        .glow-orange {
+            background: radial-gradient(ellipse 80% 50% at 50% 0%,
+                    rgba(255, 106, 0, 0.331),
+                    transparent 70%);
+        }
+
+        .glow-orange-center {
+            background: radial-gradient(ellipse 60% 40% at 50% 50%,
+                    rgba(255, 107, 0, 0.1),
+                    transparent 70%);
+        }
+
+        .glow-orange-bottom {
+            background: radial-gradient(ellipse 70% 40% at 50% 100%,
+                    rgba(255, 107, 0, 0.08),
+                    transparent 70%);
+        }
+
+        /* Scroll reveal base */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Workflow connector animation */
+        .workflow-step {
+            position: relative;
+            min-height: 145px;
+            padding: 24px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            background: linear-gradient(145deg,
+                    rgba(255, 255, 255, 0.025),
+                    rgba(0, 0, 0, 0.25));
+
+            transition:
+                background 0.35s ease,
+                transform 0.35s ease,
+                border-color 0.35s ease;
+        }
+
+        /* Orange vertical indicator */
+        .workflow-step::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 20%;
+            height: 60%;
+            width: 2px;
+
+            background: linear-gradient(to bottom,
+                    transparent,
+                    #f97316,
+                    transparent);
+
+            opacity: 0.5;
+        }
+
+        /* Hover */
+        .workflow-step:hover {
+            background: radial-gradient(circle at center,
+                    rgba(249, 115, 22, 0.14),
+                    rgba(0, 0, 0, 0.35) 70%);
+
+            border-color: rgba(249, 115, 22, 0.25);
+
+            transform: translateY(-3px);
+            z-index: 2;
+        }
+
+        .step-number {
+            display: block;
+            margin-bottom: 9px;
+
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+
+            color: #f97316;
+        }
+
+        .step-title {
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.35;
+            color: #f5f5f5;
+        }
+
+        .step-subtitle {
+            margin-top: 5px;
+
+            font-size: 11px;
+            color: #777;
+
+            text-transform: lowercase;
+        }
+
+        /* ================================
+   TABLET
+================================ */
+
+        @media (max-width: 1023px) {
+            .workflow-step:nth-child(2n) {
+                border-right: none;
+            }
+
+            .workflow-step:nth-last-child(-n + 2) {
+                border-bottom: none;
+            }
+        }
+
+        /* ================================
+   MOBILE
+================================ */
+
+        @media (max-width: 639px) {
+            .workflow-step {
+                min-height: 120px;
+                padding: 20px 12px;
+            }
+
+            .workflow-step:nth-child(n) {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .workflow-step:last-child {
+                border-bottom: none;
+            }
+
+            .step-title {
+                font-size: 11px;
+            }
+
+            .step-subtitle {
+                font-size: 10px;
+            }
+
+            .step-number {
+                font-size: 10px;
+                margin-bottom: 7px;
+            }
+        }
+
+        /* ================================
+   VERY SMALL DEVICES
+================================ */
+
+        @media (max-width: 380px) {
+            .workflow-step {
+                min-height: 110px;
+                padding: 18px 10px;
+            }
+
+            .step-title {
+                font-size: 10px;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff6b00;
+        }
+
+        /* Focus styles for accessibility */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #ff6b00;
+            outline-offset: 3px;
+        }
+
+        /* Screenshot mockup frame */
+        .mockup-frame {
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.08),
+                0 25px 50px -12px rgba(0, 0, 0, 0.8),
+                0 0 80px -20px rgba(255, 107, 0, 0.25);
+        }
+
+        /* Reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            .workflow-line {
+                animation: none;
+            }
+
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* POS UI internal styles for realistic mockups */
+        .pos-ui {
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 640px) {
+            .pos-ui {
+                font-size: 12px;
+            }
+        }
+
+        .step-line {
+            position: relative;
+        }
+
+        .step-line::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            width: 2px;
+            height: 48px;
+            background: linear-gradient(to bottom,
+                    rgba(255, 107, 0, 0.3),
+                    transparent);
+            transform: translateX(-50%);
+        }
+
+        .step-line:last-child::after {
+            display: none;
+        }
+
+        @media (max-width: 640px) {
+            .step-line::after {
+                left: 20px;
+                height: 32px;
+            }
+        }
+
+        /* Elevate the whole header on this page */
+        #header {
+            position: relative;
+            z-index: 9999;
+        }
+
+        #header>header,
+        header.fixed {
+            z-index: 9999 !important;
+        }
+
+        /* Target the REAL Services dropdown <ul> */
+        header li.group>ul,
+        header li.relative.group>ul,
+        header nav ul ul {
+            z-index: 10000 !important;
+            background-color: #0a0a0a !important;
+            /* fully opaque */
+            background: #0a0a0a !important;
+        }
+
+        /* Keep hero/main from competing */
+        #hero,
+        #hero .relative,
+        main {
+            z-index: auto !important;
+        }
+
+        /*shared img rotation*/
+        /* ==========================================
+   SHARED ROTATING IMAGE
+========================================== */
+
+        .shared-rotating-image {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            animation: sharedRotate 14s linear infinite;
+        }
+
+        /* Smooth continuous rotation */
+
+        @keyframes sharedRotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ==========================================
+   RESPONSIVE POSITIONING
+========================================== */
+
+        @media (max-width: 767px) {
+            .shared-rotating-image img {
+                width: 110px;
+                height: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-black-950 text-gray-100 antialiased overflow-x-hidden">
+    <!-- ========== HEADER ========== -->
+    <div id="header"></div>
+
+    <main>
+        <!-- ========== 1. HERO ========== -->
+        <section id="hero" class="relative min-h-screen flex flex-col justify-center pt-24 pb-6">
+            <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
+            <div class="absolute inset-0 glow-orange pointer-events-none"></div>
+
+            <div class="relative max-w-7xl mx-auto px-5 sm:px-8 w-full">
+                <!-- Eyebrow -->
+                <div class="reveal flex items-center gap-3 mb-6">
+                    <span class="text-xs font-semibold tracking-[0.2em] text-orange-500 uppercase">
+                        Powering Smarter Sales
+                    </span>
+                    <span class="w-10 h-px bg-orange-500/50"></span>
+                    <span class="text-xs text-gray-500 tracking-[0.15em] uppercase">
+                        Point of Sale System
+                    </span>
+                </div>
+
+                <!-- Heading -->
+                <h1
+                    class="reveal font-rubikDoodle text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-[1.15] max-w-4xl">
+                    Fast billing.<br />
+                    Smarter operations.<br />
+                    Everything <span class="text-orange-500">connected</span>.
+                </h1>
+
+                <p class="reveal mt-6 sm:mt-8 text-base sm:text-lg text-gray-400 max-w-xl leading-relaxed">
+                    A modern point-of-sale system built to streamline product selection,
+                    order management, customer details, payments, stock visibility, and
+                    daily business operations from one connected workspace.
+                </p>
+
+                <!-- CTAs -->
+                <div class="reveal mt-8 sm:mt-10 flex flex-wrap gap-4">
+                    <a href="#overview"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-orange-500 hover:bg-orange-400 text-black font-semibold text-sm transition-all">
+                        Explore the System
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                    </a>
+                    <a href="#live"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/10 hover:border-orange-500/50 text-gray-200 font-medium text-sm transition-all">
+                        View Live Project
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Hero Visual - POS Mockup -->
+                <div class="reveal relative mt-8 sm:mt-10 lg:mt-12">
+                    <!-- Browser Mockup -->
+                    <div class="relative mx-auto max-w-5xl">
+                        <div class="absolute -inset-4 sm:-inset-8 glow-orange-center rounded-3xl pointer-events-none">
+                        </div>
+                        <div class="mockup-frame rounded-xl overflow-hidden bg-black-800 border border-white/10">
+                            <!-- Browser chrome -->
+                            <div class="flex items-center gap-2 px-3 py-1.5 bg-black-850 border-b border-white/5">
+                                <!-- Window Controls -->
+                                <div class="flex gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-red-500/60"></span>
+                                    <span class="w-2 h-2 rounded-full bg-yellow-500/60"></span>
+                                    <span class="w-2 h-2 rounded-full bg-green-500/60"></span>
+                                </div>
+
+                                <!-- Address Bar -->
+                                <div class="flex-1 mx-3">
+                                    <div
+                                        class="h-5 max-w-xs mx-auto rounded bg-black-750 border border-white/5 flex items-center justify-between px-3 text-[9px] text-gray-500">
+                                        <span>🔒</span>
+                                        <span>kunash-pos.app</span>
+                                        <span>⬡</span>
+                                    </div>
+                                </div>
+
+                                <!-- Browser Actions -->
+                                <div class="flex items-center gap-1.5 text-[10px] text-gray-600">
+                                    <span>⏺</span>
+                                    <span>⬡</span>
+                                    <span>✕</span>
+                                </div>
+                            </div>
+
+                            <!-- POS Interface Mockup -->
+
+                            <div class="relative bg-[#0f0f0f]">
+                                <!-- Dashboard Image -->
+                                <div class="relative overflow-hidden">
+                                    <img src="/images/pos1.png" alt="Kunash POS Dashboard"
+                                        class="w-full h-auto object-cover object-top transition-transform duration-500 hover:scale-[1.02]"
+                                        loading="lazy" />
+
+                                    <!-- Dark gradient for premium look -->
+                                    <div
+                                        class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0f0f0f] via-transparent to-transparent pointer-events-none">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROJECT OVERVIEW + SOLUTION ========== -->
+        <div class="relative overflow-hidden">
+            <!-- ==================================================
+            COMMON ORANGE + BLACK BACKGROUND
+            Covers both sections continuously
+         =================================================== -->
+
+            <!-- Base gradient -->
+            <div class="absolute inset-0 -z-20" style="
+            background:
+              radial-gradient(
+                circle at 12% 18%,
+                rgba(249, 115, 22, 0.18),
+                transparent 30%
+              ),
+              radial-gradient(
+                circle at 88% 70%,
+                rgba(234, 88, 12, 0.14),
+                transparent 32%
+              ),
+              linear-gradient(
+                135deg,
+                #030303 0%,
+                #080808 35%,
+                #100804 65%,
+                #030303 100%
+              );
+          "></div>
+
+            <!-- Common orange grid -->
+            <div class="absolute inset-0 -z-10 opacity-[0.07] pointer-events-none" style="
+            background-image:
+              linear-gradient(rgba(249, 115, 22, 0.35) 1px, transparent 1px),
+              linear-gradient(
+                90deg,
+                rgba(249, 115, 22, 0.35) 1px,
+                transparent 1px
+              );
+
+            background-size: 45px 45px;
+
+            mask-image: linear-gradient(
+              to bottom,
+              transparent 0%,
+              black 8%,
+              black 92%,
+              transparent 100%
+            );
+
+            -webkit-mask-image: linear-gradient(
+              to bottom,
+              transparent 0%,
+              black 8%,
+              black 92%,
+              transparent 100%
+            );
+          "></div>
+
+            <!-- Large ambient orange glow - top -->
+            <div
+                class="absolute -top-48 -left-48 w-[34rem] h-[34rem] bg-orange-500/10 rounded-full blur-[140px] pointer-events-none -z-10">
+            </div>
+
+            <!-- Large ambient orange glow - middle -->
+            <div
+                class="absolute top-[45%] -right-48 w-[34rem] h-[34rem] bg-orange-600/10 rounded-full blur-[150px] pointer-events-none -z-10">
+            </div>
+
+            <!-- Bottom glow -->
+            <div
+                class="absolute -bottom-48 left-[30%] w-[30rem] h-[30rem] bg-orange-500/5 rounded-full blur-[150px] pointer-events-none -z-10">
+            </div>
+
+            <!-- ==================================================
+                SHARED ROTATING IMAGE
+                Positioned between Overview & Workflow
+            ================================================== -->
+
+            <div
+                class="absolute right-[4%] lg:right-[7%] top-[55%] -translate-y-1/2 z-20 pointer-events-none hidden sm:block">
+                <div class="shared-rotating-image">
+                    <div class="absolute inset-[-25px] rounded-full bg-orange-500/20 blur-3xl"></div>
+
+                    <img src="/images/shape4.png" alt="POS interface visualization"
+                        class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-52 lg:h-52 object-contain drop-shadow-[0_0_35px_rgba(249,115,22,0.4)]" />
+                </div>
+            </div>
+
+            <!-- ==================================================
+                    1. PROJECT OVERVIEW
+                =================================================== -->
+
+            <section id="overview" class="relative py-20 sm:py-28 border-t border-white/5">
+                <div class="max-w-7xl mx-auto px-5 sm:px-8">
+                    <div class="reveal">
+                        <span class="text-xs font-medium tracking-widest text-orange-500 uppercase">
+                            The Project
+                        </span>
+
+                        <h2
+                            class="mt-3 text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold tracking-tight max-w-2xl">
+                            Built for the speed of everyday business.
+                        </h2>
+
+                        <p class="mt-5 text-gray-400 max-w-2xl leading-relaxed">
+                            Kunash POS brings essential sales and operational workflows into
+                            one focused interface, helping users move from product selection
+                            to completed payment with clarity and fewer steps.
+                        </p>
+                    </div>
+
+                    <!-- Overview Information -->
+
+                    <div class="reveal mt-14 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                        <div class="border-l border-orange-500/20 pl-4 sm:pl-5">
+                            <div class="text-xs text-gray-500 mb-1.5">Project Type</div>
+
+                            <div class="font-semibold text-sm sm:text-base">
+                                Point of Sale System
+                            </div>
+                        </div>
+
+                        <div class="border-l border-orange-500/20 pl-4 sm:pl-5">
+                            <div class="text-xs text-gray-500 mb-1.5">Primary Use</div>
+
+                            <div class="font-semibold text-sm sm:text-base">
+                                Retail & Service Ops
+                            </div>
+                        </div>
+
+                        <div class="border-l border-orange-500/20 pl-4 sm:pl-5">
+                            <div class="text-xs text-gray-500 mb-1.5">Core Workflow</div>
+
+                            <div class="font-semibold text-sm sm:text-base">
+                                Orders, Payments & Stock
+                            </div>
+                        </div>
+
+                        <div class="border-l border-orange-500/20 pl-4 sm:pl-5">
+                            <div class="text-xs text-gray-500 mb-1.5">User Experience</div>
+
+                            <div class="font-semibold text-sm sm:text-base">
+                                Cashier-Focused Interface
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================================================
+                SECTION DIVIDER
+            =================================================== -->
+
+            <div class="max-w-7xl mx-auto px-5 sm:px-8">
+                <div class="h-px w-full bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"></div>
+            </div>
+
+            <!-- ==================================================
+                2. SOLUTION WORKFLOW
+            =================================================== -->
+
+            <section id="workflow" class="section-reveal relative py-20 sm:py-24 lg:py-28 px-5 sm:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Heading -->
+
+                    <div class="max-w-4xl">
+                        <div
+                            class="text-xs sm:text-sm uppercase tracking-[0.18em] sm:tracking-[0.2em] text-orange-500 font-semibold">
+                            THE SOLUTION
+                        </div>
+
+                        <h2
+                            class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-raleway tracking-tight leading-[1.05] mt-3 mb-12 sm:mb-14 lg:mb-16">
+                            One connected workflow
+
+                            <span
+                                class="block bg-gradient-to-r from-orange-500 via-orange-400 to-amber-200 bg-clip-text text-transparent">
+                                from product to payment.
+                            </span>
+                        </h2>
+                    </div>
+
+                    <!-- Workflow -->
+
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-0 border border-white/10 rounded-2xl overflow-hidden bg-black/30 backdrop-blur-xl">
+                        <!-- 01 -->
+                        <div class="workflow-step">
+                            <span class="step-number">01</span>
+
+                            <div class="step-title">PRODUCT DATA</div>
+
+                            <div class="step-subtitle">source</div>
+                        </div>
+
+                        <!-- 02 -->
+                        <div class="workflow-step">
+                            <span class="step-number">02</span>
+
+                            <div class="step-title">SEARCH & SELECT</div>
+
+                            <div class="step-subtitle">find</div>
+                        </div>
+
+                        <!-- 03 -->
+                        <div class="workflow-step">
+                            <span class="step-number">03</span>
+
+                            <div class="step-title">BUILD ORDER</div>
+
+                            <div class="step-subtitle">cart</div>
+                        </div>
+
+                        <!-- 04 -->
+                        <div class="workflow-step">
+                            <span class="step-number">04</span>
+
+                            <div class="step-title">CUSTOMER / TABLE</div>
+
+                            <div class="step-subtitle">details</div>
+                        </div>
+
+                        <!-- 05 -->
+                        <div class="workflow-step">
+                            <span class="step-number">05</span>
+
+                            <div class="step-title">DISCOUNT</div>
+
+                            <div class="step-subtitle">adjust</div>
+                        </div>
+
+                        <!-- 06 -->
+                        <div class="workflow-step">
+                            <span class="step-number">06</span>
+
+                            <div class="step-title">PAYMENT</div>
+
+                            <div class="step-subtitle">cash / upi</div>
+                        </div>
+
+                        <!-- 07 -->
+                        <div class="workflow-step">
+                            <span class="step-number">07</span>
+
+                            <div class="step-title">COMPLETE</div>
+
+                            <div class="step-subtitle">confirm</div>
+                        </div>
+
+                        <!-- 08 -->
+                        <div class="workflow-step">
+                            <span class="step-number">08</span>
+
+                            <div class="step-title">RECEIPT</div>
+
+                            <div class="step-subtitle">done</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- =========================================================
+            CHALLENGE + CORE FEATURES
+            SHARED BLACK / ORANGE TEXTURED BACKGROUND
+        ========================================================= -->
+
+        <div class="relative overflow-hidden">
+            <!-- =====================================================
+                SHARED BACKGROUND
+            ====================================================== -->
+
+            <!-- Deep Black + Orange Gradient -->
+            <div class="absolute inset-0 -z-20 pointer-events-none" style="
+            background:
+              radial-gradient(
+                circle at 8% 18%,
+                rgba(249, 115, 22, 0.12),
+                transparent 30%
+              ),
+              radial-gradient(
+                circle at 92% 72%,
+                rgba(249, 115, 22, 0.08),
+                transparent 32%
+              ),
+              linear-gradient(
+                145deg,
+                #020202 0%,
+                #070707 32%,
+                #0d0a08 60%,
+                #040404 100%
+              );
+          "></div>
+
+            <!-- Technical Grid Texture -->
+            <div class="absolute inset-0 -z-10 opacity-[0.045] pointer-events-none" style="
+            background-image:
+              linear-gradient(rgba(249, 115, 22, 0.35) 1px, transparent 1px),
+              linear-gradient(
+                90deg,
+                rgba(249, 115, 22, 0.35) 1px,
+                transparent 1px
+              );
+            background-size: 55px 55px;
+            mask-image: linear-gradient(
+              to bottom,
+              transparent 0%,
+              black 8%,
+              black 92%,
+              transparent 100%
+            );
+            -webkit-mask-image: linear-gradient(
+              to bottom,
+              transparent 0%,
+              black 8%,
+              black 92%,
+              transparent 100%
+            );
+          "></div>
+
+            <!-- Fine Diagonal Texture -->
+            <div class="absolute inset-0 -z-10 opacity-[0.025] pointer-events-none" style="
+            background-image: repeating-linear-gradient(
+              135deg,
+              rgba(255, 255, 255, 0.5) 0,
+              rgba(255, 255, 255, 0.5) 1px,
+              transparent 1px,
+              transparent 7px
+            );
+          "></div>
+
+            <!-- Top-left Orange Glow -->
+            <div
+                class="absolute -top-48 -left-48 w-[32rem] h-[32rem] rounded-full bg-orange-500/10 blur-[140px] pointer-events-none -z-10">
+            </div>
+
+            <!-- Right-side Orange Glow -->
+            <div
+                class="absolute top-[42%] -right-52 w-[34rem] h-[34rem] rounded-full bg-orange-600/10 blur-[150px] pointer-events-none -z-10">
+            </div>
+
+            <!-- Bottom Ambient Glow -->
+            <div
+                class="absolute -bottom-48 left-[30%] w-[30rem] h-[30rem] rounded-full bg-orange-500/5 blur-[150px] pointer-events-none -z-10">
+            </div>
+
+            <!-- =====================================================
+                3. THE CHALLENGE
+            ====================================================== -->
+
+            <section id="challenge" class="relative py-12 sm:py-14 lg:py-14 border-t border-white/5">
+                <div class="max-w-7xl mx-auto px-5 sm:px-8">
+                    <div class="reveal grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                        <!-- ================= LEFT CONTENT ================= -->
+
+                        <div>
+                            <h2
+                                class="text-3xl sm:text-4xl md:text-5xl font-bold font-raleway tracking-tight leading-tight">
+                                Daily operations become complicated when everything is
+                                disconnected.
+                            </h2>
+
+                            <p class="mt-6 text-xl sm:text-2xl text-gray-400 font-medium leading-snug">
+                                Products. Orders. Payments. Stock.<br />
+
+                                <span class="text-orange-500"> Too many moving parts. </span>
+                            </p>
+                        </div>
+
+                        <!-- ================= RIGHT CONTENT ================= -->
+
+                        <div class="space-y-0">
+                            <!-- 01 -->
+                            <div
+                                class="reveal group flex gap-4 py-4 border-b border-white/5 hover:border-orange-500/20 transition-colors">
+                                <span class="text-orange-500 font-mono text-sm w-8 shrink-0">
+                                    01
+                                </span>
+
+                                <span class="text-gray-300 group-hover:text-white transition-colors">
+                                    Manual and slow order handling
+                                </span>
+                            </div>
+
+                            <!-- 02 -->
+                            <div
+                                class="reveal group flex gap-4 py-4 border-b border-white/5 hover:border-orange-500/20 transition-colors">
+                                <span class="text-orange-500 font-mono text-sm w-8 shrink-0">
+                                    02
+                                </span>
+
+                                <span class="text-gray-300 group-hover:text-white transition-colors">
+                                    Difficulty tracking product availability
+                                </span>
+                            </div>
+
+                            <!-- 03 -->
+                            <div
+                                class="reveal group flex gap-4 py-4 border-b border-white/5 hover:border-orange-500/20 transition-colors">
+                                <span class="text-orange-500 font-mono text-sm w-8 shrink-0">
+                                    03
+                                </span>
+
+                                <span class="text-gray-300 group-hover:text-white transition-colors">
+                                    Discounts and calculations handled separately
+                                </span>
+                            </div>
+
+                            <!-- 04 -->
+                            <div
+                                class="reveal group flex gap-4 py-4 border-b border-white/5 hover:border-orange-500/20 transition-colors">
+                                <span class="text-orange-500 font-mono text-sm w-8 shrink-0">
+                                    04
+                                </span>
+
+                                <span class="text-gray-300 group-hover:text-white transition-colors">
+                                    Customer and order information scattered
+                                </span>
+                            </div>
+
+                            <!-- 05 -->
+                            <div
+                                class="reveal group flex gap-4 py-4 border-b border-white/5 hover:border-orange-500/20 transition-colors">
+                                <span class="text-orange-500 font-mono text-sm w-8 shrink-0">
+                                    05
+                                </span>
+
+                                <span class="text-gray-300 group-hover:text-white transition-colors">
+                                    Payment records difficult to organize
+                                </span>
+                            </div>
+
+                            <!-- 06 -->
+                            <div
+                                class="reveal group flex gap-4 py-4 border-b border-white/5 hover:border-orange-500/20 transition-colors">
+                                <span class="text-orange-500 font-mono text-sm w-8 shrink-0">
+                                    06
+                                </span>
+
+                                <span class="text-gray-300 group-hover:text-white transition-colors">
+                                    Limited visibility into stock status
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =====================================================
+                SECTION DIVIDER
+            ====================================================== -->
+
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 relative">
+                <div class="h-px w-full bg-gradient-to-r from-transparent via-orange-500/25 to-transparent"></div>
+            </div>
+
+            <!-- =====================================================
+            4. CORE FEATURES
+        ====================================================== -->
+
+            <section id="features" class="relative py-14 sm:py-14 lg:py-12">
+                <div class="max-w-7xl mx-auto px-5 sm:px-8">
+                    <!-- ================= SECTION HEADING ================= -->
+
+                    <div class="reveal mb-14">
+                        <span class="text-xs font-medium tracking-widest text-orange-500 uppercase">
+                            Core Capabilities
+                        </span>
+
+                        <h2 class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight max-w-xl">
+                            Everything needed to complete a sale.
+                        </h2>
+                    </div>
+
+                    <!-- ================= FEATURE GRID ================= -->
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                        <!-- =================================================
+             FEATURE 01
+        ================================================== -->
+
+                        <div
+                            class="reveal sm:col-span-2 lg:col-span-1 group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="M21 21l-4.35-4.35" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">Fast Product Search</h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Quickly find and select products during order creation with
+                                instant search and category browsing.
+                            </p>
+                        </div>
+
+                        <!-- =================================================
+             FEATURE 02
+        ================================================== -->
+
+                        <div
+                            class="reveal group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a3 3 0 006 0M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">
+                                Smart Order Management
+                            </h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Build and review orders from a dedicated workspace with clear
+                                totals and item control.
+                            </p>
+                        </div>
+
+                        <!-- =================================================
+             FEATURE 03
+        ================================================== -->
+
+                        <div
+                            class="reveal group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">Customer Details</h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Capture customer information when needed without slowing down
+                                the checkout flow.
+                            </p>
+                        </div>
+
+                        <!-- =================================================
+             FEATURE 04
+        ================================================== -->
+
+                        <div
+                            class="reveal group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">Table Number Support</h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Associate orders with table information for service and
+                                dine-in operations.
+                            </p>
+                        </div>
+
+                        <!-- =================================================
+             FEATURE 05
+        ================================================== -->
+
+                        <div
+                            class="reveal group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">Flexible Discounts</h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Apply discounts directly during checkout with immediate total
+                                updates.
+                            </p>
+                        </div>
+
+                        <!-- =================================================
+             FEATURE 06
+        ================================================== -->
+
+                        <div
+                            class="reveal group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">Cash & UPI Payments</h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Support simple payment selection based on the transaction
+                                preference.
+                            </p>
+                        </div>
+
+                        <!-- =================================================
+             FEATURE 07
+        ================================================== -->
+
+                        <div
+                            class="reveal group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">QR-Based UPI Flow</h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Provide a clean scan-and-pay experience for digital
+                                transactions.
+                            </p>
+                        </div>
+
+                        <!-- =================================================
+             FEATURE 08
+        ================================================== -->
+
+                        <div
+                            class="reveal group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">Stock Visibility</h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                View product availability and stock information while creating
+                                orders.
+                            </p>
+                        </div>
+
+                        <!-- =================================================
+             FEATURE 09
+        ================================================== -->
+
+                        <div
+                            class="reveal group p-6 rounded-2xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 1.732z" />
+                                </svg>
+                            </div>
+
+                            <h3 class="font-semibold text-lg mb-2">Alerts</h3>
+
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Highlight stock-related information that requires attention
+                                during operations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ========== 5. ORDER WORKFLOW ========== -->
+        <section
+            class="relative py-12 sm:py-16 overflow-hidden
+         bg-[radial-gradient(circle_at_15%_20%,rgba(249,115,22,0.16),transparent_32%),radial-gradient(circle_at_85%_75%,rgba(234,88,12,0.12),transparent_30%),linear-gradient(135deg,#050505_0%,#120904_38%,#050505_65%,#160a04_100%)]">
+            <!-- Subtle orange glow -->
+            <div class="absolute -top-32 -left-32 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div
+                class="absolute -bottom-32 -right-32 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 relative z-10">
+
+                <div class="reveal text-center mb-10 sm:mb-12">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-raleway tracking-tight">
+                        From selection to completed transaction.
+                    </h2>
+                </div>
+
+                <div class="space-y-10 sm:space-y-14">
+                    <!-- Step 01 -->
+                    <div class="reveal grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                        <div>
+                            <div class="text-6xl sm:text-7xl font-extrabold text-white/5 leading-none mb-2">
+                                01
+                            </div>
+                            <h3 class="text-3xl font-bold font-quicksand mb-3">Find Products</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Search or browse the product catalog. Instant results and
+                                stock status help cashiers select the right items without
+                                hesitation.
+                            </p>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-white/10 bg-black-800">
+                            <img src="/images/pos2.png" alt="POS product search screen"
+                                class="w-full h-auto object-cover" />
+                        </div>
+                    </div>
+
+                    <!-- Step 02 -->
+                    <div class="reveal grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                        <div class="lg:order-2">
+                            <div class="text-6xl sm:text-7xl font-extrabold text-white/5 leading-none mb-2">
+                                02
+                            </div>
+                            <h3 class="text-3xl font-bold font-quicksand mb-3">Add to Order</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Select products and quantities. The order panel updates
+                                instantly so the current sale remains always visible.
+                            </p>
+                        </div>
+                        <div
+                            class="lg:order-1 rounded-2xl overflow-hidden border border-white/10 bg-black-900 shadow-2xl shadow-orange-500/10">
+                            <img src="/images/pos3.png" alt="POS current order screen"
+                                class="w-full h-auto object-cover transition-transform duration-500 hover:scale-[1.02]" />
+                        </div>
+                    </div>
+
+                    <!-- Step 03 -->
+                    <div class="reveal grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                        <div>
+                            <div class="text-6xl sm:text-7xl font-extrabold text-white/5 leading-none mb-2">
+                                03
+                            </div>
+                            <h3 class="text-3xl font-bold font-quicksand mb-3">Review Items</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Check quantities, remove items, or adjust the order before
+                                proceeding. Clear line items keep the transaction transparent.
+                            </p>
+                        </div>
+                        <div
+                            class="rounded-2xl overflow-hidden border border-white/10 bg-black-900 shadow-2xl shadow-orange-500/10 h-[180px] sm:h-[200px] lg:h-[220px] flex items-center justify-center">
+                            <img src="/images/pos4.png" alt="POS order review screen"
+                                class="w-full h-full object-contain p-2" />
+                        </div>
+                    </div>
+
+                    <!-- Step 04 -->
+                    <div class="reveal grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                        <div class="lg:order-2">
+                            <div class="text-6xl sm:text-7xl font-extrabold text-white/5 leading-none mb-2">
+                                04
+                            </div>
+                            <h3 class="text-3xl font-bold font-quicksand mb-3">Add Details</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Include customer name or table number when the operation
+                                requires it. Optional fields keep the flow fast for walk-in
+                                sales.
+                            </p>
+                        </div>
+                        <div
+                            class="lg:order-1 rounded-2xl overflow-hidden border border-white/10 bg-black-900 shadow-2xl shadow-orange-500/10 h-[180px] sm:h-[200px] lg:h-[220px] flex items-center justify-center">
+                            <img src="/images/pos5.png" alt="POS customer details screen"
+                                class="w-full h-full object-contain p-2" />
+                        </div>
+                    </div>
+
+                    <!-- Step 05 -->
+                    <div class="reveal grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                        <div>
+                            <div class="text-6xl sm:text-7xl font-extrabold text-white/5 leading-none mb-2">
+                                05
+                            </div>
+                            <h3 class="text-3xl font-bold font-quicksand mb-3">Apply Discount</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Adjust the order with available discount options. The total
+                                recalculates immediately so the final amount is always clear.
+                            </p>
+                        </div>
+                        <div class="rounded-xl border border-white/10 bg-black-800 p-5">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Subtotal</span><span>₹235</span>
+                            </div>
+                            <div class="flex justify-between text-sm mb-3">
+                                <span class="text-emerald-400">Discount (₹20)</span><span
+                                    class="text-emerald-400">−₹20</span>
+                            </div>
+                            <div class="border-t border-white/10 pt-3 flex justify-between text-lg font-bold">
+                                <span>Total</span><span class="text-orange-500">₹215</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 06 -->
+                    <div class="reveal grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                        <div class="lg:order-2">
+                            <div class="text-6xl sm:text-7xl font-extrabold text-white/5 leading-none mb-2">
+                                06
+                            </div>
+                            <h3 class="text-3xl font-bold font-quicksand mb-3">Choose Payment</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Select Cash or UPI based on the customer’s preference. The
+                                interface keeps both options equally accessible.
+                            </p>
+                        </div>
+                        <div class="lg:order-1 grid grid-cols-2 gap-3">
+                            <div class="rounded-xl border border-white/10 bg-black-800 p-5 text-center">
+                                <div class="text-2xl mb-2">💵</div>
+                                <div class="font-semibold">Cash</div>
+                                <div class="text-xs text-gray-500 mt-1">Physical payment</div>
+                            </div>
+                            <div class="rounded-xl border border-orange-500/40 bg-orange-500/10 p-5 text-center">
+                                <div class="text-2xl mb-2">📱</div>
+                                <div class="font-semibold text-orange-400">UPI</div>
+                                <div class="text-xs text-gray-500 mt-1">Scan & pay</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 07 -->
+                    <div class="reveal grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                        <div>
+                            <div class="text-6xl sm:text-7xl font-extrabold text-white/5 leading-none mb-2">
+                                07
+                            </div>
+                            <h3 class="text-3xl font-bold font-quicksand mb-3">Complete Order</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Confirm the transaction and finish the receipt workflow. The
+                                sale is recorded and the interface is ready for the next
+                                customer.
+                            </p>
+                        </div>
+                        <div class="rounded-xl border border-white/10 bg-black-800 p-6 text-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div class="font-semibold text-lg">Order Completed</div>
+                            <div class="text-sm text-gray-500 mt-1">Receipt #ORD-2847</div>
+                            <div class="mt-4 text-2xl font-bold text-orange-500">₹215</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <div id="footer"></div>
+
+    <!-- ===== EXTERNAL HEADER & FOOTER SCRIPTS ===== -->
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // Header scroll effect
+        const header = document.getElementById("header");
+        const onScroll = () => {
+            if (window.scrollY > 40) {
+                header.classList.add("header-scrolled");
+            } else {
+                header.classList.remove("header-scrolled");
+            }
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        // Mobile menu
+        const menuBtn = document.getElementById("menu-btn");
+        const menuClose = document.getElementById("menu-close");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        function openMenu() {
+            if (mobileMenu) {
+                mobileMenu.classList.add("open");
+                document.body.style.overflow = "hidden";
+            }
+        }
+        function closeMenu() {
+            if (mobileMenu) {
+                mobileMenu.classList.remove("open");
+                document.body.style.overflow = "";
+            }
+        }
+
+        if (menuBtn) menuBtn.addEventListener("click", openMenu);
+        if (menuClose) menuClose.addEventListener("click", closeMenu);
+        if (mobileLinks.length) {
+            mobileLinks.forEach((link) =>
+                link.addEventListener("click", closeMenu),
+            );
+        }
+
+        // Scroll reveal
+        const reveals = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            },
+            {
+                threshold: 0.08,
+                rootMargin: "0px 0px -40px 0px",
+            },
+        );
+
+        reveals.forEach((el) => observer.observe(el));
+
+        // Respect reduced motion
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            reveals.forEach((el) => el.classList.add("visible"));
+        }
+    </script>
+</body>
+
+</html>
